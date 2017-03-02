@@ -1,4 +1,4 @@
-### Time ++ ![icon banner](https://i.imgur.com/9YeawvE.png)
+# Time ++ ![icon banner](https://i.imgur.com/9YeawvE.png)
 
 A timer, stopwatch, pomodoro, and alarms applet for
 [cinnamon](https://github.com/linuxmint/Cinnamon/tree/master/js/ui).
