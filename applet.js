@@ -1,11 +1,8 @@
-// Util.spawnCommandLine('notify-send '' + + ''');
-
 // global imports
 const Applet    = imports.ui.applet;
 const St        = imports.gi.St;
 const Lang      = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
-const Util      = imports.misc.util;
 const Settings  = imports.ui.settings;
 const GLib      = imports.gi.GLib;
 const Signals   = imports.signals;

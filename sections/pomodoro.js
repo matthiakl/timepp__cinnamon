@@ -1,5 +1,3 @@
-// Util.spawnCommandLine('notify-send '' + 'asdf' + ''');
-
 // global imports
 const St          = imports.gi.St;
 const Clutter     = imports.gi.Clutter;
@@ -8,7 +6,6 @@ const PopupMenu   = imports.ui.popupMenu;
 const GLib        = imports.gi.GLib;
 const Gio         = imports.gi.Gio
 const MessageTray = imports.ui.messageTray;
-const Util        = imports.misc.util;
 const Mainloop    = imports.mainloop;
 const Main        = imports.ui.main;
 const CheckBox    = imports.ui.checkBox;
