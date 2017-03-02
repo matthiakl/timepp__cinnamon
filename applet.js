@@ -207,8 +207,8 @@ MyApplet.prototype = {
         else if (insensitive_item) insensitive_item.setSensitive(true);
     },
 
-    // We remove/add a section from the enabled sections and call a method in
-    // the section to handle the rest.
+    // We enable/disable a sectin and hide/show it's panel item, and then we call
+    // a method of the corresponding section to handle the rest.
     // If only one enabled section remains, the corresponding item in the
     // context menu is disabled.
     _section_toggled: function (item, state) {
