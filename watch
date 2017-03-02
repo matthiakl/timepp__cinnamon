@@ -9,7 +9,7 @@ type='APPLET'
 
 watch_dirs=(
     '.'
-    'icons'
+    'img'
 )
 
 
