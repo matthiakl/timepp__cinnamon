@@ -1,0 +1,205 @@
+{
+    "general": {
+        "type": "header",
+        "description": "General"
+    },
+
+    "unicon_mode": {
+        "type": "checkbox",
+        "description": "Show single icon in panel",
+        "default": false
+    },
+
+    "unicon": {
+        "dependency": "unicon_mode",
+        "type": "iconfilechooser",
+        "indent": true,
+        "description": "Icon when using one panel item",
+        "default": "/img/unicon-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
+
+
+
+    "sep1": { "type": "separator" },
+
+
+
+    "timer": {
+        "type": "header",
+        "description": "Timer"
+    },
+
+    "timer_icon": {
+        "type": "iconfilechooser",
+        "description": "Timer Panel Icon",
+        "default": "/img/timer-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
+
+    "timer_separate_menu": {
+        "type": "checkbox",
+        "description": "Show in separate menu",
+        "default": false
+    },
+
+    "timer_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 2,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
+
+    "timer_show_secs": {
+        "type": "checkbox",
+        "description": "Show seconds",
+        "default": false,
+        "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
+    },
+
+    "timer_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
+
+
+
+    "sep2": { "type": "separator" },
+
+
+
+    "stopwatch": {
+        "type": "header",
+        "description": "Stopwatch"
+    },
+
+    "stopwatch_icon": {
+        "type": "iconfilechooser",
+        "description": "Stopwatch Panel Icon",
+        "default": "/img/stopwatch-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
+
+    "stopwatch_separate_menu": {
+        "type": "checkbox",
+        "description": "Show in separate menu",
+        "default": false
+    },
+
+    "stopwatch_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 2,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
+
+    "stopwatch_show_secs": {
+        "type": "checkbox",
+        "description": "Show seconds",
+        "default": false,
+        "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
+    },
+
+    "stopwatch_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
+
+
+
+    "sep3": { "type": "separator" },
+
+
+
+    "pomodoro": {
+        "type": "header",
+        "description": "Pomodoro"
+    },
+
+    "pomo_icon": {
+        "type": "iconfilechooser",
+        "description": "Pomodoro Panel Icon",
+        "default": "/img/pomodoro-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
+
+    "pomo_separate_menu": {
+        "type": "checkbox",
+        "description": "Show in separate menu",
+        "default": false
+    },
+
+    "pomo_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 2,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
+
+    "pomo_show_secs": {
+        "type": "checkbox",
+        "description": "Show seconds",
+        "default": false,
+        "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
+    },
+
+    "pomo_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
+
+
+
+    "sep4": { "type": "separator" },
+
+
+
+    "alarms": {
+        "type": "header",
+        "description": "Alarms"
+    },
+
+    "alarm_icon": {
+        "type": "iconfilechooser",
+        "description": "Alarms Panel Icon",
+        "default": "/img/alarms-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
+
+    "alarm_separate_menu": {
+        "type": "checkbox",
+        "description": "Show in separate menu",
+        "default": false
+    },
+
+    "alarm_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
+
+    "alarm_snooze_duration": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 1,
+        "max": 81420,
+        "units": "sec",
+        "step": 1,
+        "description": "Snooze duration"
+    }
+}

@@ -1,0 +1,237 @@
+/* ======================================
+ * ! panel items
+ * ====================================== */
+.timepp-panel-box .timer-panel-item { }
+.timepp-panel-box .stopwatch-panel-item { }
+.timepp-panel-box .pomo-panel-item { }
+.timepp-panel-box .alarm-panel-item { }
+.timepp-panel-box .unicon-panel-item { }
+
+.timepp-panel-box .applet-box.off StLabel,
+.timepp-panel-box .applet-box.off StIcon {
+    color: #7a7a7a;
+}
+
+
+
+/* ======================================
+ * ! general
+ * ====================================== */
+
+/* use this selector to override .popup-menu */
+.timepp-menu { }
+
+.timepp-menu .button,
+.timepp-menu .notification-icon-button,
+.timepp-menu .menu-dialog-button {
+    padding-left: 1px;
+    padding-right: 1px;
+    min-width: 0;
+}
+
+.timepp-menu StIcon {
+    icon-size: 16px;
+}
+
+.timepp-content-box {
+    min-width: 22em;
+}
+
+.timepp-menu .section {}
+
+.timepp-separator {
+    min-height: 2em;
+}
+
+.multiline-entry-scrollbox {}
+
+.multiline-entry-scrollbar {
+    max-height: 5em;
+}
+
+.timepp-menu .numpicker {
+    padding: 4px 6px 4px 12px;
+    spacing: 4px;
+    min-height: 32px; /* two 16px icons stacked on top of each other */
+}
+
+.numpicker-counter {
+    padding-left: 4px 2px 4px 8px;
+}
+.numpicker-arrow-box {
+    padding-left: 4px 8px 4px 2px;
+}
+
+.numpicker-arrow {}
+
+.numpicker-arrow:focus StIcon,
+.numpicker-arrow:hover StIcon {
+    color: #5a94dc;
+}
+
+.timepp-menu .settings-icon:focus,
+.timepp-menu .settings-icon:hover {
+    color: #5a94dc;
+}
+
+
+/* ======================================
+ * ! timer pane
+ * ====================================== */
+.timepp-menu .timer-section {}
+.timepp-menu .timer-header {}
+
+.timepp-menu .timer-section .time-label {
+    font-weight: bold;
+}
+
+.timepp-menu .toggle-switch-us:focus,
+.timepp-menu .toggle-switch-intl:focus {
+    outline: 2px #5a94dc;
+}
+
+.timepp-menu .timer-option-box {
+    spacing: 4px;
+}
+
+
+
+/* ======================================
+ * ! stopwatch pane
+ * ====================================== */
+.timepp-menu .stopwatch-section {}
+
+.timepp-menu .stopwatch-section .btn-box {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.timepp-menu .stopwatch-section .btn-reset {}
+.timepp-menu .stopwatch-section .btn-lap {}
+.timepp-menu .stopwatch-section .btn-start {}
+.timepp-menu .stopwatch-section .btn-stop {}
+
+.timepp-menu .stopwatch-section .laps-scrollview {
+    padding: .3em 1.3em 0 1.3em;
+    max-height: 150px;
+}
+
+.timepp-menu .stopwatch-section .time-label {
+    font-weight: bold;
+}
+
+.timepp-menu .stopwatch-section .laps-item {
+    padding: .4em;
+}
+
+.timepp-menu .stopwatch-section .laps-item-counter {
+    font-weight: bold;
+}
+
+.timepp-menu .stopwatch-section .laps-item-time {
+}
+
+
+
+/* ======================================
+ * ! pomodoro pane
+ * ====================================== */
+.timepp-menu .pomo-section {}
+
+.timepp-menu .pomo-section .btn-box {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.timepp-menu .pomo-section .btn-new {}
+.timepp-menu .pomo-section .btn-break {}
+.timepp-menu .pomo-section .btn-start {}
+.timepp-menu .pomo-section .btn-stop {}
+
+.timepp-menu .pomo-section .time-label {
+    font-weight: bold;
+}
+.timepp-menu .pomo-section .pomo-counter {
+    color: #38ae72;
+    font-weight: bold;
+}
+.timepp-menu .pomo-section .settings { }
+.timepp-menu .pomo-section .settings-content { }
+.timepp-menu .pomo-section .settings-item { }
+
+
+/* ======================================
+ * ! alarms pane
+ * ====================================== */
+.timepp-menu .alarm-section {}
+.timepp-menu .alarms-container {}
+
+.timepp-menu .alarm-section .alarms-content-box {
+    spacing: .4em;
+}
+
+.timepp-menu .alarm-section .settings {}
+
+.timepp-menu .alarm-section .settings .btn-box {}
+.timepp-menu .alarm-section .btn-delete {}
+.timepp-menu .alarm-section .btn-dismiss {}
+.timepp-menu .alarm-section .btn-ok {}
+
+.timepp-menu .alarm-section .settings-content-box {}
+
+.timepp-menu .alarm-section .numpicker-box {}
+.timepp-menu .alarm-section .numpicker-box {}
+
+/* Virtually no themes have a frickin checked pseudo-class on buttons. WTF */
+.timepp-menu .alarm-section .day:checked {
+    color: #5a94dc;
+    font-weight: bold;
+}
+
+.timepp-menu .alarm-section .day:focus {
+    outline: 2px #5a94dc;
+}
+
+.timepp-menu .alarm-section .entry-container {}
+
+.timepp-menu .alarm-section .alarm-item {
+    max-width: 220px;
+    padding: .8em;
+}
+.timepp-menu .alarm-section .alarm-item .settings {
+    padding: 0;
+}
+
+.timepp-menu .alarm-section .alarm-item .settings .popup-menu-item {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.timepp-menu .alarm-section .alarm-item .settings-content-box {
+    padding: 0;
+    border-image: none;
+    background-image: none;
+    border: 0;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0);
+}
+
+.timepp-menu .alarm-section .alarm-item-content {}
+.timepp-menu .alarm-section .alarm-item-header {}
+
+.timepp-menu .alarm-section .alarm-item-message {
+    padding-top: .4em;
+}
+
+.timepp-menu .alarm-section .alarm-item-time {
+    font-weight: bold;
+}
+
+.timepp-menu .alarm-section .alarm-item-option-box {
+    spacing: 4px;
+}
+
+.timepp-menu .alarm-item-option-box .toggle-switch-us:focus,
+.timepp-menu .alarm-item-option-box .toggle-switch-intl:focus {
+    outline: 2px #5a94dc;
+}

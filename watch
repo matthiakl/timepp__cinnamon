@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# ======================================
+#  Constants
+# ======================================
+uuid='timepp@zagortenay333'
+
+type='APPLET'
+
+watch_dirs=(
+    '.'
+    'icons'
+)
+
+
+# ======================================
+#  Functions
+# ======================================
+reload_applet() {
+    dbus-send --session                                           \
+              --dest=org.Cinnamon.LookingGlass --type=method_call \
+              /org/Cinnamon/LookingGlass                          \
+              org.Cinnamon.LookingGlass.ReloadExtension           \
+              string:"$uuid"                                      \
+              string:"$type"
+}
+
+# useful for opening the menu automatically too
+toggle_menu() {
+    xdotool mousemove 0 0
+    xdotool click 1
+}
+
+
+# ======================================
+#  Watch loop
+# ======================================
+while
+    reload_applet
+    # toggle_menu
+
+    # test
+    inotifywait --format '%e %w%f' -qre modify "${watch_dirs[@]}"
+do :; done

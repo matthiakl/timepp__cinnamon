@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-28 17:10+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: sections/alarms.js:101
+msgid "Add New Alarm..."
+msgstr ""
+
+#: sections/alarms.js:355
+msgid "Snooze"
+msgstr ""
+
+#: sections/alarms.js:505
+msgid "Alarm Message..."
+msgstr ""
+
+#: sections/alarms.js:542 sections/pomodoro.js:558
+msgid "Dismiss"
+msgstr ""
+
+#: sections/alarms.js:543 sections/pomodoro.js:557
+msgid "Ok"
+msgstr ""
+
+#: sections/pomodoro.js:74 sections/pomodoro.js:104
+msgid "Pomodoro"
+msgstr ""
+
+#: sections/pomodoro.js:131
+msgid "New"
+msgstr ""
+
+#: sections/pomodoro.js:132
+msgid "Break"
+msgstr ""
+
+#: sections/pomodoro.js:133 sections/stopwatch.js:100
+msgid "Start"
+msgstr ""
+
+#: sections/pomodoro.js:134
+msgid "Stop"
+msgstr ""
+
+#: sections/pomodoro.js:382
+msgid "Start working!"
+msgstr ""
+
+#: sections/pomodoro.js:383
+msgid "Take a short break!"
+msgstr ""
+
+#: sections/pomodoro.js:384
+msgid "Take long break!"
+msgstr ""
+
+#: sections/pomodoro.js:481
+msgid "Clear all pomodoros?"
+msgstr ""
+
+#: sections/pomodoro.js:497
+msgid "Pomodoro (min):"
+msgstr ""
+
+#: sections/pomodoro.js:512
+msgid "Short break (min):"
+msgstr ""
+
+#: sections/pomodoro.js:527
+msgid "Long break (min):"
+msgstr ""
+
+#: sections/pomodoro.js:542
+msgid "Num of pomos until long break:"
+msgstr ""
+
+#: sections/stopwatch.js:66 sections/stopwatch.js:88
+msgid "Stopwatch"
+msgstr ""
+
+#: sections/stopwatch.js:98
+msgid "Reset"
+msgstr ""
+
+#: sections/stopwatch.js:99
+msgid "Lap"
+msgstr ""
+
+#: sections/stopwatch.js:101
+msgid "Pause"
+msgstr ""
+
+#: sections/timer.js:63 sections/timer.js:88
+msgid "Timer"
+msgstr ""
+
+#: sections/timer.js:318
+msgid "Timer expired!"
+msgstr ""
