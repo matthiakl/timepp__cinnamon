@@ -207,7 +207,8 @@ Stopwatch.prototype = {
         this.cache.time = 0;
         this._store_cache();
         this.lap_count = 0;
-        this.panel_item._set_label(this.show_secs ? '00:00:00' : '00:00');
+        if (this.panel_item.label.visible)
+            this.panel_item._set_label(this.show_secs ? '00:00:00' : '00:00');
 
         this._toggle_buttons();
         this._panel_item_UI_update();
