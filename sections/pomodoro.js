@@ -393,7 +393,6 @@ Pomodoro.prototype = {
 
         this.notif = new MessageTray.Notification(this._source, msg, null, { icon: alarm_icon });
         this.notif.setUrgency(MessageTray.Urgency.HIGH);
-        this.notif.setTransient(true);
 
         // fire notif
         this._source.notify(this.notif);

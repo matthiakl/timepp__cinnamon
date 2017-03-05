@@ -345,7 +345,6 @@ Alarms.prototype = {
 
         this.notif = new AlarmNotif(this._source, alarm.time_str, null, { body: alarm.msg, customContent: true, icon: icon });
         this.notif.setUrgency(MessageTray.Urgency.CRITICAL);
-        this.notif.setTransient(true);
 
         this.notif.addButton('snooze', _('Snooze'));
 

@@ -329,8 +329,8 @@ Timer.prototype = {
         ICON_FROM_URI.icon_from_uri(icon, this.timer_icon, this.metadata);
 
         this.notif = new MessageTray.Notification(this._source, msg, null, { icon: icon });
-        this.notif.setUrgency(MessageTray.Urgency.HIGH);
-        this.notif.setTransient(true);
+        this.notif.setUrgency(MessageTray.Urgency.CRITICAL);
+
 
         // fire notif
         this._source.notify(this.notif);
