@@ -43,11 +43,7 @@
     min-height: 2em;
 }
 
-.multiline-entry-scrollbox {}
-
-.multiline-entry-scrollbar {
-    max-height: 5em;
-}
+.multiline-entry-scrollbox { }
 
 .timepp-menu .numpicker {
     padding: 4px 6px 4px 12px;
@@ -158,6 +154,7 @@
 .timepp-menu .pomo-section .settings { }
 .timepp-menu .pomo-section .settings-content { }
 .timepp-menu .pomo-section .settings-item { }
+
 
 
 /* ======================================

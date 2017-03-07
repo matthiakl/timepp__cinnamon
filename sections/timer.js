@@ -5,9 +5,11 @@ const Lang        = imports.lang;
 const PopupMenu   = imports.ui.popupMenu;
 const GLib        = imports.gi.GLib;
 const Gio         = imports.gi.Gio
+const Pango       = imports.gi.Pango;
 const MessageTray = imports.ui.messageTray;
 const Mainloop    = imports.mainloop;
 const Main        = imports.ui.main;
+const Meta        = imports.gi.Meta;
 const Settings    = imports.ui.settings;
 const Signals     = imports.signals;
 
@@ -16,6 +18,7 @@ const Signals     = imports.signals;
 const PANEL_ITEM    = imports.applet.lib.panel_item;
 const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
 const NUM_PICKER    = imports.applet.lib.num_picker;
+const MULTIL_ENTRY  = imports.applet.lib.multiline_entry;
 const LPAD          = imports.applet.lib.leftpad;
 
 
@@ -110,7 +113,7 @@ Timer.prototype = {
 
 
             //
-            // time picker window container
+            // settings window
             //
             this.timepicker_container = new St.Bin({x_fill: true});
             this.timer_pane.addActor(this.timepicker_container);
@@ -124,7 +127,7 @@ Timer.prototype = {
             }));
             this.panel_item.connect('middle-click', Lang.bind(this, this._timer_toggle));
             this.toggle_bin.connect('clicked', Lang.bind(this, this._timer_toggle));
-            this.settings_bin.connect('clicked', Lang.bind(this, this._show_timepicker));
+            this.settings_bin.connect('clicked', Lang.bind(this, this._show_settings));
             this.timer_slider_item.connect('value-changed', Lang.bind(this, this._slider_changed));
             this.timer_slider_item.connect('drag-end', Lang.bind(this, this._slider_released));
             this.timer_slider_item.actor.connect('scroll-event', Lang.bind(this, this._slider_released));
@@ -150,6 +153,7 @@ Timer.prototype = {
         } else {
             this.cache = {
                 enabled: true,
+                notif_msg: '',
             };
         }
 
@@ -312,8 +316,6 @@ Timer.prototype = {
     },
 
     _send_notif: function () {
-        msg = _('Timer expired!');
-
         // The source gets destroyed every time, so rebuild it.
         if (!this._source) {
             this._source = new MessageTray.Source();
@@ -328,7 +330,7 @@ Timer.prototype = {
         let icon = new St.Icon({icon_size: 32});
         ICON_FROM_URI.icon_from_uri(icon, this.timer_icon, this.metadata);
 
-        this.notif = new MessageTray.Notification(this._source, msg, null, { icon: icon });
+        this.notif = new TimerNotif(this._source, 'Timer expired!', null, { body: this.cache.notif_msg, customContent: true, icon: icon });
         this.notif.setUrgency(MessageTray.Urgency.CRITICAL);
 
 
@@ -336,19 +338,23 @@ Timer.prototype = {
         this._source.notify(this.notif);
     },
 
-    _show_timepicker: function () {
-        let timepickers = new TimePickerWindow(this.show_secs);
+    _show_settings: function () {
+        let timepickers = new SettingsWindow(this.applet, this.show_secs, this.cache.notif_msg);
         this.timepicker_container.add_actor(timepickers.actor);
         timepickers.button_dismiss.grab_key_focus();
 
         this.header.hide();
         this.timer_slider_item.actor.hide();
 
-        timepickers.connect('ok', Lang.bind(this, function (actor, time) {
+        timepickers.connect('ok', Lang.bind(this, function (actor, time, notif_msg) {
             this.actor.grab_key_focus();
             timepickers.actor.destroy();
             this.header.show();
             this.timer_slider_item.actor.show();
+
+            this.cache.notif_msg = notif_msg;
+            this._store_cache();
+
             this.timer_duration = time;
             this._slider_update();
             this._start();
@@ -408,17 +414,18 @@ Signals.addSignalMethods(Timer.prototype);
 
 
 /*
- * Time Picker Window
+ * Settings window
  *
- * returns time in seconds
- *
+ * @applet: actual applet obj
+ * @show_secs: bool
+ * @notif_msg: string
  * signals: 'ok', 'dismiss'
  */
-function TimePickerWindow(show_secs) {
-    this._init(show_secs);
+function SettingsWindow(applet, show_secs, notif_msg) {
+    this._init(applet, show_secs, notif_msg);
 }
-TimePickerWindow.prototype = {
-    _init: function(show_secs) {
+SettingsWindow.prototype = {
+    _init: function(applet, show_secs, notif_msg) {
         try {
             this.actor = new St.Bin({ x_fill: true, style_class: 'settings popup-menu-item' });
 
@@ -451,6 +458,30 @@ TimePickerWindow.prototype = {
 
 
             //
+            // entry
+            //
+            this.entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
+            this.content_box.add_actor(this.entry_container);
+
+            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Timer message...'), true);
+            this.entry_container.add_actor(this.entry.actor);
+
+            // Enable scrolling the entry by grabbing handle with mouse.
+            let vscroll = this.entry.scroll_box.get_vscroll_bar();
+            vscroll.connect('scroll-start', Lang.bind(this, function () { applet.menu.passEvents = true; }));
+            vscroll.connect('scroll-stop', Lang.bind(this, function () { applet.menu.passEvents = false; }));
+
+            // fill entry with notif_msg
+            Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function() {
+                this.entry.entry.set_text(notif_msg);
+            }));
+
+            Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function() {
+                this.entry._resize_entry();
+            }));
+
+
+            //
             // buttons
             //
             let alarms_settings_btn_box = new St.Widget({ style_class: 'popup-menu-item btn-box', layout_manager: new Clutter.BoxLayout ({ homogeneous:true }) });
@@ -466,7 +497,7 @@ TimePickerWindow.prototype = {
             // listen
             //
             this.button_ok.connect('clicked', Lang.bind(this, function () {
-                this.emit('ok', this._get_time() );
+                this.emit('ok', this._get_time(), this.entry.entry.get_text());
             }));
 
             this.button_dismiss.connect('clicked', Lang.bind(this, function () {
@@ -485,4 +516,35 @@ TimePickerWindow.prototype = {
         return hr + min + sec;
     },
 }
-Signals.addSignalMethods(TimePickerWindow.prototype);
+Signals.addSignalMethods(SettingsWindow.prototype);
+
+
+
+/*
+ * Alarm Notification
+ *
+ * We need to override the addBody method in order to have full pango markup.
+ */
+function TimerNotif (source, title, banner, params) {
+   this._init(source, title, banner, params);
+};
+TimerNotif.prototype = {
+    __proto__: MessageTray.Notification.prototype,
+
+   _init: function(source, title, banner, params) {
+      MessageTray.Notification.prototype._init.call(this, source, title, banner, params);
+   },
+
+    // override the default addBody to allow for full pango markup
+    addBody: function(text, markup, style) {
+        let label = new St.Label({text: text});
+        this.addActor(label);
+
+        label.clutter_text.set_single_line_mode(false);
+        label.clutter_text.set_line_wrap(true);
+        label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        label.clutter_text.use_markup = true;
+
+        return label;
+    }
+}

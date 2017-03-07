@@ -179,7 +179,7 @@ Alarms.prototype = {
         // Hiding will remove the focus from the item as well as the menu, and
         // as a result, the menu will close. Make sure an actor grabs focus
         // before that happens.
-        this.settings = new AlarmSettings(this.applet);
+        this.settings = new AlarmSettings(this.applet, null, true);
         this.add_new_alarm_container.add_actor(this.settings.actor);
         this.settings.button_dismiss.grab_key_focus();
         this.add_alarm_item.actor.hide();
@@ -496,7 +496,7 @@ AlarmSettings.prototype = {
             //
             this.alarm_entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
             this.content_box.add_actor(this.alarm_entry_container);
-            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Alarm Message...'), (scrollable_entry ? true : false) );
+            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Alarm Message...'), scrollable_entry);
 
             // Enable scrolling the multiline entry by grabbing handle with
             // mouse.
@@ -671,7 +671,7 @@ AlarmItem.prototype = {
         this.actor.grab_key_focus();
         this.alarm_item_content.hide();
 
-        let alarm_settings = new AlarmSettings(this.applet, this.alarm, true);
+        let alarm_settings = new AlarmSettings(this.applet, this.alarm, false);
         this.actor.add_actor(alarm_settings.actor);
         alarm_settings.button_dismiss.grab_key_focus();
 
