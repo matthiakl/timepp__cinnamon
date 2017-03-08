@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-28 17:10+0100\n"
+"POT-Creation-Date: 2017-03-08 21:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,91 +17,91 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: sections/alarms.js:101
+#: sections/alarms.js:92
 msgid "Add New Alarm..."
 msgstr ""
 
-#: sections/alarms.js:355
+#: sections/alarms.js:349
 msgid "Snooze"
 msgstr ""
 
-#: sections/alarms.js:505
+#: sections/alarms.js:499
 msgid "Alarm Message..."
 msgstr ""
 
-#: sections/alarms.js:542 sections/pomodoro.js:558
+#: sections/alarms.js:536 sections/pomodoro.js:551
 msgid "Dismiss"
 msgstr ""
 
-#: sections/alarms.js:543 sections/pomodoro.js:557
+#: sections/alarms.js:537 sections/pomodoro.js:550
 msgid "Ok"
 msgstr ""
 
-#: sections/pomodoro.js:74 sections/pomodoro.js:104
+#: sections/pomodoro.js:65 sections/pomodoro.js:95
 msgid "Pomodoro"
 msgstr ""
 
-#: sections/pomodoro.js:131
+#: sections/pomodoro.js:122
 msgid "New"
 msgstr ""
 
-#: sections/pomodoro.js:132
+#: sections/pomodoro.js:123
 msgid "Break"
 msgstr ""
 
-#: sections/pomodoro.js:133 sections/stopwatch.js:100
+#: sections/pomodoro.js:124 sections/stopwatch.js:91
 msgid "Start"
 msgstr ""
 
-#: sections/pomodoro.js:134
+#: sections/pomodoro.js:125
 msgid "Stop"
 msgstr ""
 
-#: sections/pomodoro.js:382
+#: sections/pomodoro.js:374
 msgid "Start working!"
 msgstr ""
 
-#: sections/pomodoro.js:383
+#: sections/pomodoro.js:375
 msgid "Take a short break!"
 msgstr ""
 
-#: sections/pomodoro.js:384
+#: sections/pomodoro.js:376
 msgid "Take long break!"
 msgstr ""
 
-#: sections/pomodoro.js:481
+#: sections/pomodoro.js:474
 msgid "Clear all pomodoros?"
 msgstr ""
 
-#: sections/pomodoro.js:497
+#: sections/pomodoro.js:490
 msgid "Pomodoro (min):"
 msgstr ""
 
-#: sections/pomodoro.js:512
+#: sections/pomodoro.js:505
 msgid "Short break (min):"
 msgstr ""
 
-#: sections/pomodoro.js:527
+#: sections/pomodoro.js:520
 msgid "Long break (min):"
 msgstr ""
 
-#: sections/pomodoro.js:542
+#: sections/pomodoro.js:535
 msgid "Num of pomos until long break:"
 msgstr ""
 
-#: sections/stopwatch.js:66 sections/stopwatch.js:88
+#: sections/stopwatch.js:57 sections/stopwatch.js:79
 msgid "Stopwatch"
 msgstr ""
 
-#: sections/stopwatch.js:98
+#: sections/stopwatch.js:89
 msgid "Reset"
 msgstr ""
 
-#: sections/stopwatch.js:99
+#: sections/stopwatch.js:90
 msgid "Lap"
 msgstr ""
 
-#: sections/stopwatch.js:101
+#: sections/stopwatch.js:92
 msgid "Pause"
 msgstr ""
 
@@ -109,6 +109,6 @@ msgstr ""
 msgid "Timer"
 msgstr ""
 
-#: sections/timer.js:318
-msgid "Timer expired!"
+#: sections/timer.js:466
+msgid "Timer message..."
 msgstr ""
