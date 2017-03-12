@@ -481,7 +481,7 @@ AlarmSettings.prototype = {
             //
             // choose day
             //
-            this.day_chooser = new DAY_CHOOSER.DayChooser(true);
+            this.day_chooser = new DAY_CHOOSER.DayChooser(alarm ? false : true);
             this.content_box.add_actor(this.day_chooser.actor);
 
             if (alarm)
@@ -491,6 +491,7 @@ AlarmSettings.prototype = {
                 }
 
 
+
             //
             // entry
             //
@@ -498,9 +499,7 @@ AlarmSettings.prototype = {
             this.content_box.add_actor(this.alarm_entry_container);
             this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Alarm Message...'), scrollable_entry);
 
-            // Enable scrolling the multiline entry by grabbing handle with
-            // mouse.
-            // Requires that the 'passEvent' bool inside the top menu is disabled
+            // Enable scrolling the entry by grabbing handle with mouse.
             let vscroll = this.entry.scroll_box.get_vscroll_bar();
             vscroll.connect('scroll-start', Lang.bind(this, function () { applet.menu.passEvents = true; }));
             vscroll.connect('scroll-stop', Lang.bind(this, function () { applet.menu.passEvents = false; }));
