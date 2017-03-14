@@ -21,7 +21,7 @@ cinnamon version `3.2`.
 
 ### Pango markup
 
-The alarm message supports [pango markup](https://developer.gnome.org/pango/stable/PangoMarkupFormat.html).
+The timer and alarm message supports [pango markup](https://developer.gnome.org/pango/stable/PangoMarkupFormat.html).
 
 ---
 
