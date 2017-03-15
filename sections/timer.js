@@ -355,9 +355,11 @@ Timer.prototype = {
             this.cache.notif_msg = notif_msg;
             this._store_cache();
 
-            this.timer_duration = time;
-            this._slider_update();
-            this._start();
+            if (time) {
+                this.timer_duration = time;
+                this._slider_update();
+                this._start();
+            }
         }));
 
         timepickers.connect('dismiss', Lang.bind(this, function () {
