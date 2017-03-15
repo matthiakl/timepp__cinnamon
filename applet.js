@@ -246,7 +246,7 @@ MyApplet.prototype = {
     // A menu won't be shown if it's not enabled.
     _open_menu: function (section) {
         if (this.menu.isOpen) {
-            this.menu.close();
+            this.menu.toggle();
             return;
         }
 
