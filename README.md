@@ -32,7 +32,6 @@ when a change occurs.
 The xdotool command can be enabled to open the applet on change.
 
 > **Script dependencies:**
-
 > * inotifywait
 > * xdotools _(if enabled in the script)_
 
