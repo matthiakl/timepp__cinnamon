@@ -493,7 +493,7 @@ PomodoroSettings.prototype = {
             this.pomo_dur_mm_picker = new NUM_PICKER.NumPicker(1, null);
             this.pomo_duration.add_actor(this.pomo_dur_mm_picker.actor);
 
-            this.pomo_dur_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.pomo_duration % 3600 / 60), 2);
+            this.pomo_dur_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.pomo_duration / 60), 2);
 
 
             //
@@ -508,7 +508,7 @@ PomodoroSettings.prototype = {
             this.short_break_mm_picker = new NUM_PICKER.NumPicker(1, null);
             this.short_break.add_actor(this.short_break_mm_picker.actor);
 
-            this.short_break_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.short_break % 3600 / 60), 2);
+            this.short_break_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.short_break / 60), 2);
 
 
             //
@@ -523,7 +523,7 @@ PomodoroSettings.prototype = {
             this.long_break_mm_picker = new NUM_PICKER.NumPicker(1, null);
             this.long_break.add_actor(this.long_break_mm_picker.actor);
 
-            this.long_break_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.long_break % 3600 / 60), 2);
+            this.long_break_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.long_break / 60), 2);
 
 
             //
