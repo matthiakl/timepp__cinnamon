@@ -1,11 +1,71 @@
 {
-    "general": {
-        "type": "header",
-        "description": "General"
+    "layout1": {
+        "type": "layout",
+        "pages": ["page1", "page2", "page3", "page4", "page5"],
+
+        "page1": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section1"]
+        },
+
+        "page2": {
+            "type": "page",
+            "title": "Timer",
+            "sections": ["section2"]
+        },
+
+        "page3": {
+            "type": "page",
+            "title": "Stopwatch",
+            "sections": ["section3"]
+        },
+
+        "page4": {
+            "type": "page",
+            "title": "Pomodoro",
+            "sections": ["section4"]
+        },
+
+        "page5": {
+            "type": "page",
+            "title": "Alarms",
+            "sections": ["section5"]
+        },
+
+        "section1": {
+            "type": "section",
+            "title": "General Settings",
+            "keys": ["unicon_mode", "unicon"]
+        },
+
+        "section2": {
+            "type": "section",
+            "title": "Timer Settings",
+            "keys": ["timer_icon", "timer_separate_menu", "timer_panel_mode", "timer_show_secs", "timer_key_open"]
+        },
+
+        "section3": {
+            "type": "section",
+            "title": "Stopwatch Settings",
+            "keys": ["stopwatch_icon", "stopwatch_separate_menu", "stopwatch_panel_mode", "stopwatch_show_secs", "stopwatch_key_open"]
+        },
+
+        "section4": {
+            "type": "section",
+            "title": "Pomodoro Settings",
+            "keys": ["pomo_icon", "pomo_separate_menu", "pomo_panel_mode", "pomo_show_secs", "pomo_key_open"]
+        },
+
+        "section5": {
+            "type": "section",
+            "title": "Alarms Settings",
+            "keys": ["alarm_icon", "alarm_separate_menu", "alarm_key_open", "alarm_snooze_duration"]
+        }
     },
 
     "unicon_mode": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show single icon in panel",
         "default": false
     },
@@ -21,14 +81,9 @@
 
 
 
-    "sep1": { "type": "separator" },
 
 
 
-    "timer": {
-        "type": "header",
-        "description": "Timer"
-    },
 
     "timer_icon": {
         "type": "iconfilechooser",
@@ -38,7 +93,7 @@
     },
 
     "timer_separate_menu": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show in separate menu",
         "default": false
     },
@@ -55,7 +110,7 @@
     },
 
     "timer_show_secs": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show seconds",
         "default": false,
         "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
@@ -69,14 +124,10 @@
 
 
 
-    "sep2": { "type": "separator" },
 
 
 
-    "stopwatch": {
-        "type": "header",
-        "description": "Stopwatch"
-    },
+
 
     "stopwatch_icon": {
         "type": "iconfilechooser",
@@ -86,7 +137,7 @@
     },
 
     "stopwatch_separate_menu": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show in separate menu",
         "default": false
     },
@@ -103,7 +154,7 @@
     },
 
     "stopwatch_show_secs": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show seconds",
         "default": false,
         "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
@@ -117,14 +168,10 @@
 
 
 
-    "sep3": { "type": "separator" },
 
 
 
-    "pomodoro": {
-        "type": "header",
-        "description": "Pomodoro"
-    },
+
 
     "pomo_icon": {
         "type": "iconfilechooser",
@@ -134,7 +181,7 @@
     },
 
     "pomo_separate_menu": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show in separate menu",
         "default": false
     },
@@ -151,7 +198,7 @@
     },
 
     "pomo_show_secs": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show seconds",
         "default": false,
         "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
@@ -165,14 +212,10 @@
 
 
 
-    "sep4": { "type": "separator" },
 
 
 
-    "alarms": {
-        "type": "header",
-        "description": "Alarms"
-    },
+
 
     "alarm_icon": {
         "type": "iconfilechooser",
@@ -182,7 +225,7 @@
     },
 
     "alarm_separate_menu": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show in separate menu",
         "default": false
     },
