@@ -85,7 +85,7 @@ MyApplet.prototype = {
             //
             this.unicon_panel_item = new PANEL_ITEM.PanelItem(this, metadata, orientation, 'Time ++');
 
-            this.unicon_panel_item.label.hide();
+            this.unicon_panel_item._set_mode('icon');
             this.unicon_panel_item.actor.add_style_class_name('unicon-panel-item');
             this._update_unicon_name();
 
@@ -334,7 +334,7 @@ MyApplet.prototype = {
 
             for (let i = 0, len = this.section_register.length; i < len; i++) {
                 let section = this.section_register[i];
-                if (sectin.cache.enabled)
+                if (section.cache.enabled)
                     this.section_register[i].panel_item.actor.show();
             }
         }
