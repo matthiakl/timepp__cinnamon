@@ -97,7 +97,7 @@ MyApplet.prototype = {
             //
             // timer section
             //
-            this.timer_section = new Timer.Timer(this, this.settings, metadata, orientation);
+            this.timer_section = new Timer.Timer(this, this.settings, metadata, instance_id, orientation);
             this.mainBox.add_actor(this.timer_section.actor);
             this.section_register.push(this.timer_section);
             //
@@ -121,7 +121,7 @@ MyApplet.prototype = {
             //
             // pomodoro section
             //
-            this.pomodoro_section = new Pomodoro.Pomodoro(this, this.settings, metadata, instance_id, orientation, panel_height);
+            this.pomodoro_section = new Pomodoro.Pomodoro(this, this.settings, metadata, instance_id, orientation);
             this.mainBox.add_actor(this.pomodoro_section.actor);
             this.section_register.push(this.pomodoro_section);
             //

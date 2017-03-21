@@ -54,8 +54,8 @@ Alarms.prototype = {
         try {
             this.section_name = 'Alarms';
 
-            this.applet        = applet;
-            this.metadata      = metadata
+            this.applet   = applet;
+            this.metadata = metadata;
 
             // NOTE:
             // If the value in the setting is an array/obj, then each time we

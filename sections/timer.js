@@ -28,17 +28,17 @@ const TIMER_MAX_DURATION = 86400; // max num of seconds
 
 
 
-function Timer(applet, settings, metadata, orientation) {
-    this._init(applet, settings, metadata, orientation);
+function Timer(applet, settings, metadata, instance_id, orientation) {
+    this._init(applet, settings, metadata, instance_id, orientation);
 }
 
 Timer.prototype = {
-    _init: function (applet, settings, metadata, orientation) {
+    _init: function (applet, settings, metadata, instance_id, orientation) {
         try {
             this.section_name = 'Timer';
 
-            this.applet        = applet;
-            this.metadata      = metadata;
+            this.applet   = applet;
+            this.metadata = metadata;
 
 
             // NOTE:
