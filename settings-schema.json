@@ -1,7 +1,7 @@
 {
     "layout1": {
         "type": "layout",
-        "pages": ["page1", "page2", "page3", "page4", "page5"],
+        "pages": ["page1", "page2", "page3", "page4", "page5", "page6"],
 
         "page1": {
             "type": "page",
@@ -33,6 +33,12 @@
             "sections": ["section5"]
         },
 
+        "page6": {
+            "type": "page",
+            "title": "Todo/Time Tracker",
+            "sections": ["section6", "section7", "section8"]
+        },
+
         "section1": {
             "type": "section",
             "title": "General Settings",
@@ -61,6 +67,24 @@
             "type": "section",
             "title": "Alarms Settings",
             "keys": ["alarm_icon", "alarm_separate_menu", "alarm_key_open", "alarm_snooze_duration"]
+        },
+
+        "section6": {
+            "type": "section",
+            "title": "Misc",
+            "keys": ["todo_icon", "todo_separate_menu", "todo_panel_mode", "todo_task_width"]
+        },
+
+        "section7": {
+            "type": "section",
+            "title": "File paths",
+            "keys": ["todo_txt_file_path", "time_tracker_csv_dir"]
+        },
+
+        "section8": {
+            "type": "section",
+            "title": "Keybindings",
+            "keys": ["todo_key_open", "todo_key_open_to_add", "todo_key_open_to_search"]
         }
     },
 
@@ -78,12 +102,6 @@
         "default": "/img/unicon-symbolic.svg",
         "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
     },
-
-
-
-
-
-
 
     "timer_icon": {
         "type": "iconfilechooser",
@@ -112,8 +130,7 @@
     "timer_show_secs": {
         "type": "switch",
         "description": "Show seconds",
-        "default": false,
-        "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
+        "default": false
     },
 
     "timer_key_open": {
@@ -121,13 +138,6 @@
         "description": "Menu shortcut key",
         "default": ""
     },
-
-
-
-
-
-
-
 
     "stopwatch_icon": {
         "type": "iconfilechooser",
@@ -156,8 +166,7 @@
     "stopwatch_show_secs": {
         "type": "switch",
         "description": "Show seconds",
-        "default": false,
-        "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
+        "default": false
     },
 
     "stopwatch_key_open": {
@@ -165,13 +174,6 @@
         "description": "Menu shortcut key",
         "default": ""
     },
-
-
-
-
-
-
-
 
     "pomo_icon": {
         "type": "iconfilechooser",
@@ -200,8 +202,7 @@
     "pomo_show_secs": {
         "type": "switch",
         "description": "Show seconds",
-        "default": false,
-        "tooltip": "Not showing seconds improves performance slightly and removes frequent\nvisual updates from the panel."
+        "default": false
     },
 
     "pomo_key_open": {
@@ -209,13 +210,6 @@
         "description": "Menu shortcut key",
         "default": ""
     },
-
-
-
-
-
-
-
 
     "alarm_icon": {
         "type": "iconfilechooser",
@@ -244,5 +238,71 @@
         "units": "sec",
         "step": 1,
         "description": "Snooze duration"
+    },
+
+    "todo_icon": {
+        "type": "iconfilechooser",
+        "description": "Todo Panel Icon",
+        "default": "/img/todo-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
+
+    "todo_separate_menu": {
+        "type": "checkbox",
+        "description": "Show in separate menu",
+        "default": true
+    },
+
+    "todo_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 0,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
+
+    "todo_task_width": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 100,
+        "max": 81420,
+        "units": "px",
+        "step": 1,
+        "description": "Task width"
+    },
+
+    "todo_key_open": {
+        "type": "keybinding",
+        "description": "Open this section.",
+        "default": ""
+    },
+
+    "todo_key_open_to_add": {
+        "type": "keybinding",
+        "description": "Open this section and add task.",
+        "default": ""
+    },
+
+    "todo_key_open_to_search": {
+        "type": "keybinding",
+        "description": "Open this section and search tasks.",
+        "default": ""
+    },
+
+    "todo_txt_file_path": {
+        "type": "filechooser",
+        "description": "Path to todo.txt file",
+        "select-dir": false,
+        "default": ""
+    },
+
+    "time_tracker_csv_dir": {
+        "type": "filechooser",
+        "description": "Dir in which to store the time-tracker csv files",
+        "select-dir": true,
+        "default": ""
     }
 }

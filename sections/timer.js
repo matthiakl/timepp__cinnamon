@@ -23,11 +23,14 @@ const LPAD          = imports.applet.lib.leftpad;
 
 
 
-const TIMER_CACHE_FILE = GLib.get_home_dir()+'/.cache/timepp_timer.json';
+const CACHE_FILE = GLib.get_home_dir()+'/.cache/timepp_timer.json';
 const TIMER_MAX_DURATION = 86400; // max num of seconds
 
 
 
+// =====================================================================
+// @@@ Main
+// =====================================================================
 function Timer(applet, settings, metadata, instance_id, orientation) {
     this._init(applet, settings, metadata, instance_id, orientation);
 }
@@ -62,8 +65,8 @@ Timer.prototype = {
             //
             this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Timer'));
 
-            this.panel_item._set_label(this.show_secs ? '00:00:00' : '00:00');
-            this.panel_item.actor.add_style_class_name('timer-panel-item off');
+            this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
+            this.panel_item.actor.add_style_class_name('timer-panel-item');
             this._update_panel_icon_name();
             this._toggle_panel_mode();
 
@@ -84,25 +87,24 @@ Timer.prototype = {
             this.header = new St.BoxLayout({style_class: 'timer-header popup-menu-item'});
             this.timer_pane.addActor(this.header);
 
-
             this.time_label = new St.Label({ text: _('Timer'), y_align: St.Align.END, x_align: St.Align.START, style_class: 'time-label' });
             this.header.add(this.time_label, {expand: true});
 
-            this.option_box = new St.BoxLayout({y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER, style_class: 'timer-option-box'});
+            this.option_box = new St.BoxLayout({y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER, style_class: 'option-box'});
             this.header.add_actor(this.option_box);
 
-            this.settings_icon = new St.Icon({icon_name: 'open-menu'});
-            this.settings_bin  = new St.Button({ can_focus: true, y_align: St.Align.MIDDLE, x_align: St.Align.END, style_class: 'settings-icon'});
-            this.settings_bin.add_actor(this.settings_icon);
-            this.option_box.add(this.settings_bin);
-
-            this.toggle     = new PopupMenu.Switch('');
-            this.toggle_bin = new St.Button({y_align: St.Align.START, x_align: St.Align.END });
+            this.toggle = new PopupMenu.Switch('');
+            this.toggle_bin = new St.Button({ y_align: St.Align.MIDDLE });
             this.toggle_bin.add_actor(this.toggle.actor);
             this.option_box.add(this.toggle_bin);
 
             this.toggle.actor.can_focus = false;
             this.toggle_bin.hide();
+
+            this.settings_icon = new St.Icon({icon_name: 'open-menu'});
+            this.settings_bin  = new St.Button({ can_focus: true, y_align: St.Align.MIDDLE, x_align: St.Align.END, style_class: 'settings-icon'});
+            this.settings_bin.add_actor(this.settings_icon);
+            this.option_box.add(this.settings_bin);
 
 
             //
@@ -123,7 +125,7 @@ Timer.prototype = {
             // listen
             //
             this.panel_item.connect('click', Lang.bind(this, function () {
-                this.emit('open-menu');
+                this.emit('toggle-menu');
             }));
             this.panel_item.connect('middle-click', Lang.bind(this, this._timer_toggle));
             this.toggle_bin.connect('clicked', Lang.bind(this, this._timer_toggle));
@@ -145,7 +147,7 @@ Timer.prototype = {
     _load: function () {
         // Using the built-in settings to cache various things seems to be rather
         // unreliable, so we store certain things manually into separate files.
-        this.cache_file = Gio.file_new_for_path(TIMER_CACHE_FILE);
+        this.cache_file = Gio.file_new_for_path(CACHE_FILE);
 
         if ( this.cache_file.query_exists(null) ) {
             let [a, contents, b] = this.cache_file.load_contents(null);
@@ -210,9 +212,9 @@ Timer.prototype = {
 
     _panel_item_UI_update: function () {
         if (this.timer_state === 'running')
-            this.panel_item.actor.remove_style_class_name('off');
+            this.panel_item.actor.add_style_class_name('on');
         else
-            this.panel_item.actor.add_style_class_name('off');
+            this.panel_item.actor.remove_style_class_name('on');
     },
 
     _tic: function () {
@@ -312,7 +314,7 @@ Timer.prototype = {
         }
 
         this.time_label.text = str;
-        if (this.panel_item.label.visible) this.panel_item._set_label(str);
+        if (this.panel_item.label.visible) this.panel_item.set_label(str);
     },
 
     _send_notif: function () {
@@ -341,7 +343,7 @@ Timer.prototype = {
     _show_settings: function () {
         let timepickers = new SettingsWindow(this.applet, this.show_secs, this.cache.notif_msg);
         this.timepicker_container.add_actor(timepickers.actor);
-        timepickers.button_dismiss.grab_key_focus();
+        timepickers.button_cancel.grab_key_focus();
 
         this.header.hide();
         this.timer_slider_item.actor.hide();
@@ -362,7 +364,7 @@ Timer.prototype = {
             }
         }));
 
-        timepickers.connect('dismiss', Lang.bind(this, function () {
+        timepickers.connect('cancel', Lang.bind(this, function () {
             this.actor.grab_key_focus();
             timepickers.actor.destroy();
             this.header.show();
@@ -379,14 +381,14 @@ Timer.prototype = {
     },
 
     _toggle_panel_mode: function () {
-        if (this.panel_mode === 0) this.panel_item._set_mode('icon');
-        else if (this.panel_mode === 1) this.panel_item._set_mode('text');
-        else this.panel_item._set_mode('icon_text');
+        if (this.panel_mode === 0) this.panel_item.set_mode('icon');
+        else if (this.panel_mode === 1) this.panel_item.set_mode('text');
+        else this.panel_item.set_mode('icon_text');
     },
 
     // This method will be called by applet.js after the section has been enabled
     // or disabled.
-    _toggle_section: function () {
+    toggle_section: function () {
         this._store_cache();
         if (! this.cache.enabled) this._stop();
         this._toggle_keybinding();
@@ -399,7 +401,7 @@ Timer.prototype = {
             if (this.open_key !== '') {
                 this.key_id = this.section_name;
                 Main.keybindingManager.addHotKey(this.key_id, this.key_open, Lang.bind(this, function () {
-                    this.applet._open_menu(this);
+                    this.applet.open_menu(this);
                 }));
             }
         }
@@ -407,7 +409,7 @@ Timer.prototype = {
             if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
 
-    _on_applet_removed_from_panel: function () {
+    on_applet_removed_from_panel: function () {
         this._stop();
         if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
@@ -415,23 +417,26 @@ Timer.prototype = {
 Signals.addSignalMethods(Timer.prototype);
 
 
-/*
- * Settings window
- *
- * @applet: actual applet obj
- * @show_secs: bool
- * @notif_msg: string
- * signals: 'ok', 'dismiss'
- */
+
+// =====================================================================
+// @@@ Settings window
+//
+// @applet:    obj (actual applet)
+// @show_secs: bool
+// @notif_msg: string
+//
+// signals: 'ok', 'cancel'
+// =====================================================================
 function SettingsWindow(applet, show_secs, notif_msg) {
     this._init(applet, show_secs, notif_msg);
 }
+
 SettingsWindow.prototype = {
     _init: function(applet, show_secs, notif_msg) {
         try {
-            this.actor = new St.Bin({ x_fill: true, style_class: 'settings popup-menu-item' });
+            this.actor = new St.Bin({ x_fill: true, style_class: 'view-box popup-menu-item' });
 
-            this.content_box = new St.BoxLayout({ x_expand: true, vertical: true, style_class: 'settings-content-box menu-favorites-box' });
+            this.content_box = new St.BoxLayout({ x_expand: true, vertical: true, style_class: 'view-box-content menu-favorites-box' });
             this.actor.add_actor(this.content_box);
 
 
@@ -486,13 +491,13 @@ SettingsWindow.prototype = {
             //
             // buttons
             //
-            let alarms_settings_btn_box = new St.Widget({ style_class: 'popup-menu-item btn-box', layout_manager: new Clutter.BoxLayout ({ homogeneous:true }) });
+            let alarms_settings_btn_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
             this.content_box.add_actor(alarms_settings_btn_box);
 
-            this.button_dismiss = new St.Button({ can_focus: true, label: 'Dismiss', style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
-            this.button_ok      = new St.Button({ can_focus: true, label: 'Ok', style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
-            alarms_settings_btn_box.add_actor(this.button_dismiss);
-            alarms_settings_btn_box.add_actor(this.button_ok);
+            this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_ok      = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
+            alarms_settings_btn_box.add(this.button_cancel, {expand: true});
+            alarms_settings_btn_box.add(this.button_ok, {expand: true});
 
 
             //
@@ -502,8 +507,8 @@ SettingsWindow.prototype = {
                 this.emit('ok', this._get_time(), this.entry.entry.get_text());
             }));
 
-            this.button_dismiss.connect('clicked', Lang.bind(this, function () {
-                this.emit('dismiss');
+            this.button_cancel.connect('clicked', Lang.bind(this, function () {
+                this.emit('cancel');
             }));
         } catch(e) {
             global.logError(e);
@@ -511,9 +516,9 @@ SettingsWindow.prototype = {
     },
 
     _get_time: function () {
-        let hr  = parseInt(this.hr.counter.text) * 3600;
-        let min = parseInt(this.min.counter.text) * 60;
-        let sec = this.sec ? parseInt(this.sec.counter.text) : 0;
+        let hr  = this.hr.counter * 3600;
+        let min = this.min.counter * 60;
+        let sec = this.sec ? this.sec.counter : 0;
 
         return hr + min + sec;
     },
@@ -522,14 +527,16 @@ Signals.addSignalMethods(SettingsWindow.prototype);
 
 
 
-/*
- * Alarm Notification
- *
- * We need to override the addBody method in order to have full pango markup.
- */
+// =====================================================================
+// @@@ Alarm Notification
+//
+// We need to override the addBody method in order to have full pango
+// markup.
+// =====================================================================
 function TimerNotif (source, title, banner, params) {
    this._init(source, title, banner, params);
 };
+
 TimerNotif.prototype = {
     __proto__: MessageTray.Notification.prototype,
 

@@ -17,7 +17,7 @@ const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
 const LPAD          = imports.applet.lib.leftpad;
 
 
-const STOPWATCH_CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_stopwatch.json';
+const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_stopwatch.json';
 
 
 // 'cache.state' is one of:
@@ -26,9 +26,12 @@ const STOPWATCH_CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_stopwatch.jso
 //   - 'reset'
 
 
+// =====================================================================
+// @@@ Main
+// =====================================================================
 function Stopwatch(applet, settings, metadata, instance_id, orientation) {
     this._init(applet, settings, metadata, instance_id, orientation);
-}
+};
 
 Stopwatch.prototype = {
     _init: function (applet, settings, metadata, instance_id, orientation) {
@@ -56,8 +59,8 @@ Stopwatch.prototype = {
             //
             this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Stopwatch'));
 
-            this.panel_item._set_label(this.show_secs ? '00:00:00' : '00:00');
-            this.panel_item.actor.add_style_class_name('stopwatch-panel-item off');
+            this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
+            this.panel_item.actor.add_style_class_name('stopwatch-panel-item');
             this._update_panel_icon_name();
             this._toggle_panel_mode();
 
@@ -83,17 +86,17 @@ Stopwatch.prototype = {
             //
             // buttons
             //
-            this.stopwatch_button_box = new St.Widget({ style_class: 'popup-menu-item btn-box', layout_manager: new Clutter.BoxLayout ({ homogeneous: true }) });
+            this.stopwatch_button_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
             this.stopwatch_pane.addActor(this.stopwatch_button_box);
 
             this.button_reset = new St.Button({ can_focus: true, label: _('Reset'), style_class: 'button notification-icon-button modal-dialog-button btn-reset', x_expand: true, visible: false });
             this.button_lap   = new St.Button({ can_focus: true, label: _('Lap'),   style_class: 'button notification-icon-button modal-dialog-button btn-lap',   x_expand: true, visible: false });
             this.button_start = new St.Button({ can_focus: true, label: _('Start'), style_class: 'button notification-icon-button modal-dialog-button btn-start', x_expand: true });
             this.button_pause = new St.Button({ can_focus: true, label: _('Pause'), style_class: 'button notification-icon-button modal-dialog-button btn-stop',  x_expand: true, visible: false });
-            this.stopwatch_button_box.add_actor(this.button_reset);
-            this.stopwatch_button_box.add_actor(this.button_lap);
-            this.stopwatch_button_box.add_actor(this.button_start);
-            this.stopwatch_button_box.add_actor(this.button_pause);
+            this.stopwatch_button_box.add(this.button_reset, {expand: true});
+            this.stopwatch_button_box.add(this.button_lap, {expand: true});
+            this.stopwatch_button_box.add(this.button_start, {expand: true});
+            this.stopwatch_button_box.add(this.button_pause, {expand: true});
 
 
 
@@ -118,7 +121,7 @@ Stopwatch.prototype = {
             // listen
             //
             this.panel_item.connect('click', Lang.bind(this, function () {
-                this.emit('open-menu');
+                this.emit('toggle-menu');
             }));
             this.panel_item.connect('middle-click', Lang.bind(this, this._stopwatch_toggle));
             this.button_start.connect('clicked', Lang.bind(this, this._start));
@@ -141,7 +144,7 @@ Stopwatch.prototype = {
         // unreliable, so we store certain things manually into separate files.
         this.lap_count = 0;
 
-        this.cache_file = Gio.file_new_for_path(STOPWATCH_CACHE_FILE);
+        this.cache_file = Gio.file_new_for_path(CACHE_FILE);
 
         if ( this.cache_file.query_exists(null) ) {
             let [a, contents, b] = this.cache_file.load_contents(null);
@@ -161,7 +164,7 @@ Stopwatch.prototype = {
         if (this.cache.state === 'reset') return;
 
 
-        for (i = 0; i < this.cache.laps.length; i++)
+        for (var i = 0; i < this.cache.laps.length; i++)
             this._lap(this.cache.laps[i]);
 
         this._update_time_display();
@@ -208,7 +211,7 @@ Stopwatch.prototype = {
         this._store_cache();
         this.lap_count = 0;
         if (this.panel_item.label.visible)
-            this.panel_item._set_label(this.show_secs ? '00:00:00' : '00:00');
+            this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
 
         this._toggle_buttons();
         this._panel_item_UI_update();
@@ -231,14 +234,14 @@ Stopwatch.prototype = {
         let str =  hr + ':' + min + (this.show_secs ? (':' + sec) : '');
 
         this.time_display.label.text = str;
-        if (this.panel_item.label.visible) this.panel_item._set_label(str);
+        if (this.panel_item.label.visible) this.panel_item.set_label(str);
     },
 
     _panel_item_UI_update: function () {
         if (this.cache.state === 'running')
-            this.panel_item.actor.remove_style_class_name('off');
+            this.panel_item.actor.add_style_class_name('on');
         else
-            this.panel_item.actor.add_style_class_name('off');
+            this.panel_item.actor.remove_style_class_name('on');
     },
 
     _lap: function (lap_time) {
@@ -348,14 +351,14 @@ Stopwatch.prototype = {
     },
 
     _toggle_panel_mode: function () {
-        if (this.panel_mode === 0) this.panel_item._set_mode('icon');
-        else if (this.panel_mode === 1) this.panel_item._set_mode('text');
-        else this.panel_item._set_mode('icon_text');
+        if (this.panel_mode === 0) this.panel_item.set_mode('icon');
+        else if (this.panel_mode === 1) this.panel_item.set_mode('text');
+        else this.panel_item.set_mode('icon_text');
     },
 
     // This method will be called by applet.js when the section is enabled
     // or disabled.
-    _toggle_section: function () {
+    toggle_section: function () {
         if (! this.cache.enabled) {
             this.cache.state = 'paused';
             this._panel_item_UI_update();
@@ -373,7 +376,7 @@ Stopwatch.prototype = {
             if (this.open_key !== '') {
                 this.key_id = this.section_name;
                 Main.keybindingManager.addHotKey(this.key_id, this.key_open, Lang.bind(this, function () {
-                    this.applet._open_menu(this);
+                    this.applet.open_menu(this);
                 }));
             }
         }
@@ -381,7 +384,7 @@ Stopwatch.prototype = {
             if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
 
-    _on_applet_removed_from_panel: function () {
+    on_applet_removed_from_panel: function () {
         this.cache.time = this.cache.time;
         this._store_cache();
         this.cache.state = 'paused';

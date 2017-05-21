@@ -22,33 +22,34 @@ const NUM_PICKER    = imports.applet.lib.num_picker;
 const DAY_CHOOSER   = imports.applet.lib.day_chooser;
 
 
-const ALARMS_CACHE_FILE = GLib.get_home_dir()+'/.cache/timepp_alarms.json';
+const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_alarms.json';
+
 const gen_ID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
 
 /*
- * Data defs:
- *
- * time_str: string that represents time in hr:min 24h format. E.g., '12:44'.
- *
- * days:     array of ints corresponding to days of the week. Sunday is 0.
- *
- * ID:       string computed as: '_' + Math.random().toString(36).substr(2, 9);
- *
- * alarm:   { time_str: time_str,
- *            msg:      string,
- *            days:     days,
- *            toggle:   bool,
- *            ID:       ID, }
+ * @DATA_DEFS:
+ * -----------------------
+ * time_str: (string) Time in hr:min 24h format. E.g., '12:44'.
+ * days:     (array)  Ints corresponding to days of the week. Sunday is 0.
+ * ID:       (string) Return value of gen_ID.
+ * alarm:    (obj)    { time_str : time_str,
+ *                      msg      : string,
+ *                      days     : days,
+ *                      toggle   : bool,
+ *                      ID       : ID, }
  */
 
 
-
+// =====================================================================
+// @@@ Main
+// =====================================================================
 function Alarms(applet, settings, metadata, instance_id, orientation) {
     this._init(applet, settings, metadata, instance_id, orientation);
-}
+};
+
 Alarms.prototype = {
     _init: function(applet, settings, metadata, instance_id, orientation) {
         try {
@@ -73,7 +74,7 @@ Alarms.prototype = {
             this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, 'Alarms');
 
             this.panel_item.actor.add_style_class_name('alarm-panel-item');
-            this.panel_item._set_mode('icon');
+            this.panel_item.set_mode('icon');
 
             applet.actor.add_actor(this.panel_item.actor);
 
@@ -89,7 +90,7 @@ Alarms.prototype = {
             //
             // add new alarm item
             //
-            this.add_alarm_item = new PopupMenu.PopupIconMenuItem(_('Add New Alarm...'), 'list-add', St.IconType.SYMBOLIC);
+            this.add_alarm_item = new PopupMenu.PopupIconMenuItem(_('Add New Alarm...'), 'list-add', St.IconType.SYMBOLIC, {style_class: 'add-alarm'});
             this.alarms_pane.addMenuItem(this.add_alarm_item);
 
 
@@ -117,7 +118,7 @@ Alarms.prototype = {
             // listen
             //
             this.panel_item.connect('click', Lang.bind(this, function () {
-                this.emit('open-menu');
+                this.emit('toggle-menu');
             }));
             this.add_alarm_item.connect('activate', Lang.bind(this, this._prompt_new_alarm));
 
@@ -143,7 +144,7 @@ Alarms.prototype = {
             // Using the built-in settings to cache various things seems to be
             // rather unreliable, so we store certain things manually into
             // separate files.
-            this.cache_file = Gio.file_new_for_path(ALARMS_CACHE_FILE);
+            this.cache_file = Gio.file_new_for_path(CACHE_FILE);
 
             if ( this.cache_file.query_exists(null) ) {
                 let [a, contents, b] = this.cache_file.load_contents(null);
@@ -181,7 +182,7 @@ Alarms.prototype = {
         // before that happens.
         this.settings = new AlarmSettings(this.applet, null, true);
         this.add_new_alarm_container.add_actor(this.settings.actor);
-        this.settings.button_dismiss.grab_key_focus();
+        this.settings.button_cancel.grab_key_focus();
         this.add_alarm_item.actor.hide();
 
         // listen
@@ -192,7 +193,7 @@ Alarms.prototype = {
             this.settings.actor.destroy();
         }));
 
-        this.settings.connect('dismiss', Lang.bind(this, function () {
+        this.settings.connect('cancel', Lang.bind(this, function () {
             this.actor.grab_key_focus();
             this.add_alarm_item.actor.show();
             this.settings.actor.destroy();
@@ -220,7 +221,6 @@ Alarms.prototype = {
             alarm = a;
         }
 
-
         this._schedule_alarm(alarm);
 
         this._update_panel_item_UI();
@@ -228,7 +228,6 @@ Alarms.prototype = {
         let alarm_item = new AlarmItem(this.applet, alarm);
         this.alarms_scroll_content.addActor(alarm_item.actor);
         this.alarms_scroll.show();
-
 
         //
         // listen
@@ -287,7 +286,7 @@ Alarms.prototype = {
     // future, and it will NOT be re-scheduled for the next 24h.
     // Otherwise, the alarm will be scheduled according to it's time_str.
     _schedule_alarm: function (alarm, time) {
-        let ID = alarm.ID; // don't use pointer, copy the string
+        let ID = alarm.ID;
 
         if (!time) {
             let [future_hr, future_min] = alarm.time_str.split(':');
@@ -362,11 +361,11 @@ Alarms.prototype = {
     },
 
     _update_panel_item_UI: function () {
-        this.panel_item.actor.add_style_class_name('off');
+        this.panel_item.actor.remove_style_class_name('on');
 
         for (let i = 0, len = this.cache.alarms.length; i < len; i++)
             if (this.cache.alarms[i].toggle) {
-                this.panel_item.actor.remove_style_class_name('off');
+                this.panel_item.actor.add_style_class_name('on');
                 break;
             }
     },
@@ -381,7 +380,7 @@ Alarms.prototype = {
 
     // This method will be called by applet.js when the section is enabled
     // or disabled.
-    _toggle_section: function () {
+    toggle_section: function () {
         if (this.cache.enabled) {
             this._load();
         } else {
@@ -404,7 +403,7 @@ Alarms.prototype = {
             if (this.open_key !== '') {
                 this.key_id = this.section_name;
                 Main.keybindingManager.addHotKey(this.key_id, this.key_open, Lang.bind(this, function () {
-                    this.applet._open_menu(this);
+                    this.applet.open_menu(this);
                 }));
             }
         }
@@ -412,31 +411,32 @@ Alarms.prototype = {
             if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
 
-    _on_applet_removed_from_panel: function () {
+    on_applet_removed_from_panel: function () {
         if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
-}
+};
 Signals.addSignalMethods(Alarms.prototype);
 
 
-/*
- * Alarm Settings
- *
- * @applet:           actual applet (needed for the multiline entry)
- * @alarm:            alarm object
- * @scrollable_entry: bool (make entry grow or use scroll)
- *
- * @signals:          'ok', 'dismiss', 'delete'.
- *
- * If @alarm is not given the 'delete' signal won't be emitted at all.
- *
- * If @alarm is given, it's time_str, days, and msg will be updated, and the
- * settings widget will be pre-populated with the alarms settings; otherwise,
- * a complete new alarm object will be returned with the 'ok' signal.
- */
+
+// =====================================================================
+// @@@ Alarm Settings
+//
+// @applet:           actual applet (needed for the multiline entry)
+// @alarm:            alarm object
+// @scrollable_entry: bool (make entry grow or use scroll)
+//
+// @signals: 'ok', 'cancel', 'delete'.
+//
+// If @alarm is not given the 'delete' signal won't be emitted at all.
+// If @alarm is given, it's time_str, days, and msg will be updated, and the
+// settings widget will be pre-populated with the alarms settings; otherwise,
+// a complete new alarm object will be returned with the 'ok' signal.
+// =====================================================================
 function AlarmSettings(applet, alarm, scrollable_entry) {
     this._init(applet, alarm, scrollable_entry);
-}
+};
+
 AlarmSettings.prototype = {
     _init: function(applet, alarm, scrollable_entry) {
         try {
@@ -447,10 +447,15 @@ AlarmSettings.prototype = {
             //
             // container
             //
-            this.actor = new St.Bin({ x_fill: true, style_class: 'settings popup-menu-item' });
+            this.actor = new St.Bin({ x_fill: true, style_class: 'view-box popup-menu-item' });
 
-            this.content_box = new St.BoxLayout({ x_expand: true, vertical: true, style_class: 'settings-content-box menu-favorites-box' });
+            this.content_box = new St.BoxLayout({ x_expand: true, vertical: true, style_class: 'view-box-content menu-favorites-box' });
             this.actor.add_actor(this.content_box);
+
+            if (alarm) {
+                this.actor.style_class = '';
+                this.content_box.style_class = '';
+            }
 
 
             //
@@ -473,8 +478,8 @@ AlarmSettings.prototype = {
 
             if (alarm) {
                 let [hr_str, min_str] = alarm.time_str.split(':');
-                this.hh.counter.set_text(hr_str);
-                this.mm.counter.set_text(min_str);
+                this.hh._set_counter(parseInt(hr_str));
+                this.mm._set_counter(parseInt(min_str));
             }
 
 
@@ -497,16 +502,11 @@ AlarmSettings.prototype = {
             //
             this.alarm_entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
             this.content_box.add_actor(this.alarm_entry_container);
-            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Alarm Message...'), scrollable_entry);
-
-            // Enable scrolling the entry by grabbing handle with mouse.
-            let vscroll = this.entry.scroll_box.get_vscroll_bar();
-            vscroll.connect('scroll-start', Lang.bind(this, function () { applet.menu.passEvents = true; }));
-            vscroll.connect('scroll-stop', Lang.bind(this, function () { applet.menu.passEvents = false; }));
+            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Alarm Message...'), scrollable_entry, false);
 
             this.alarm_entry_container.add_actor(this.entry.actor);
 
-            if(alarm) {
+            if (alarm) {
                 Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function() {
                     this.entry.entry.set_text(alarm.msg);
                 }));
@@ -520,22 +520,22 @@ AlarmSettings.prototype = {
             //
             // buttons
             //
-            let alarms_settings_btn_box = new St.Widget({ style_class: 'popup-menu-item btn-box', layout_manager: new Clutter.BoxLayout ({ homogeneous:true }) });
+            let alarms_settings_btn_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
             this.content_box.add_actor(alarms_settings_btn_box);
 
             if (alarm) {
-                this.button_delete = new St.Button({ can_focus: true, label: 'Delete', style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
-                alarms_settings_btn_box.add_actor(this.button_delete);
+                this.button_delete = new St.Button({ can_focus: true, label: _('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
+                alarms_settings_btn_box.add(this.button_delete, {expand: true});
 
                 this.button_delete.connect('clicked', Lang.bind(this, function () {
                     this.emit('delete');
                 }));
             };
 
-            this.button_dismiss = new St.Button({ can_focus: true, label: _('Dismiss'), style_class: 'btn-dismiss button notification-icon-button modal-dialog-button', x_expand: true });
-            this.button_ok      = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
-            alarms_settings_btn_box.add_actor(this.button_dismiss);
-            alarms_settings_btn_box.add_actor(this.button_ok);
+            this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_ok     = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
+            alarms_settings_btn_box.add(this.button_cancel, {expand: true });
+            alarms_settings_btn_box.add(this.button_ok, {expand: true });
 
 
             //
@@ -550,17 +550,20 @@ AlarmSettings.prototype = {
                     this.alarm.days     = this._get_days(),
 
                     this.emit('ok');
-                } else {
-                    this.emit('ok', { time_str: this._get_time_str(),
-                                      msg:      this.entry.entry.get_text(),
-                                      days:     this._get_days(),
-                                      toggle:   true,
-                                      ID:       gen_ID() });
+                }
+                else {
+                    this.emit('ok', {
+                        time_str: this._get_time_str(),
+                        msg:      this.entry.entry.get_text(),
+                        days:     this._get_days(),
+                        toggle:   true,
+                        ID:       gen_ID(),
+                    });
                 }
             }));
 
-            this.button_dismiss.connect('clicked', Lang.bind(this, function () {
-                this.emit('dismiss');
+            this.button_cancel.connect('clicked', Lang.bind(this, function () {
+                this.emit('cancel');
             }));
         } catch(e) {
             global.logError(e);
@@ -579,24 +582,29 @@ AlarmSettings.prototype = {
     },
 
     _get_time_str: function () {
-        return this.hh.counter.get_text() + ':' + this.mm.counter.get_text();
+        return this.hh.counter_label.get_text() + ':' + this.mm.counter_label.get_text();
     },
-}
+};
 Signals.addSignalMethods(AlarmSettings.prototype);
 
 
 
+// =====================================================================
+// @@@ Alarm Item
 //
-// Alarm Item
-//
+// signals: 'alarm-updated', 'alarm-deleted'
+// =====================================================================
 function AlarmItem(applet, alarm) {
     this._init(applet, alarm);
-}
+};
+
 AlarmItem.prototype = {
     _init: function(applet, alarm) {
         try {
             this.applet = applet;
-            this.alarm    = alarm;
+            this.alarm  = alarm;
+
+            this.msg_vert_padding = -1;
 
 
             //
@@ -618,20 +626,36 @@ AlarmItem.prototype = {
             this.time = new St.Label({ text: alarm.time_str, y_align: St.Align.END, x_align: St.Align.START, style_class: 'alarm-item-time' });
             this.header.add(this.time, {expand: true});
 
-            this.option_box = new St.BoxLayout({y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER, style_class: 'alarm-item-option-box'});
+            this.option_box = new St.BoxLayout({y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER, style_class: 'option-box'});
             this.header.add_actor(this.option_box);
-
-            this.settings_icon = new St.Icon({icon_name: 'open-menu'});
-            this.settings_bin  = new St.Button({ can_focus: true, y_align: St.Align.MIDDLE, x_align: St.Align.END, style_class: 'settings-icon'});
-            this.settings_bin.add_actor(this.settings_icon);
 
             this.toggle     = new PopupMenu.Switch(alarm.toggle);
             this.toggle_bin = new St.Button({y_align: St.Align.START, x_align: St.Align.END });
             this.toggle.actor.can_focus = true;
             this.toggle_bin.add_actor(this.toggle.actor);
 
-            this.option_box.add(this.settings_bin);
             this.option_box.add(this.toggle_bin);
+
+            this.settings_icon = new St.Icon({icon_name: 'open-menu'});
+            this.settings_bin  = new St.Button({ can_focus: true, y_align: St.Align.MIDDLE, x_align: St.Align.END, style_class: 'settings-icon'});
+            this.settings_bin.add_actor(this.settings_icon);
+
+            this.option_box.add(this.settings_bin);
+
+
+            //
+            // body
+            //
+            this.msg = new St.Label({ y_align: St.Align.END, x_align: St.Align.START, style_class: 'alarm-item-message'});
+            this.alarm_item_content.add_actor(this.msg);
+
+            if (!alarm.msg) this.msg.hide();
+            else this.msg.clutter_text.set_markup(alarm.msg);
+
+            this.msg.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
+            this.msg.clutter_text.set_single_line_mode(false);
+            this.msg.clutter_text.set_line_wrap(true);
+            this.msg.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
 
 
             //
@@ -639,22 +663,7 @@ AlarmItem.prototype = {
             //
             this.toggle_bin.connect('clicked', Lang.bind(this, this._on_toggle));
             this.settings_bin.connect('clicked', Lang.bind(this, this._on_settings));
-
-
-            //
-            // body
-            //
-            this.msg_vert_padding = -1;
-
-            this.msg = new St.Label({ text: alarm.msg, y_align: St.Align.END, x_align: St.Align.START, style_class: 'alarm-item-message'});
-            if (!alarm.msg) this.msg.hide();
-
-            this.msg.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
-            this.msg.clutter_text.set_single_line_mode(false);
-            this.msg.clutter_text.set_line_wrap(true);
-            this.msg.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-            this.msg.clutter_text.use_markup = true;
-            this.alarm_item_content.add_actor(this.msg);
+            this.actor.connect('queue-redraw', Lang.bind(this, this._resize_alarm_item));
         } catch(e) {
             global.logError(e);
         }
@@ -672,7 +681,7 @@ AlarmItem.prototype = {
 
         let alarm_settings = new AlarmSettings(this.applet, this.alarm, false);
         this.actor.add_actor(alarm_settings.actor);
-        alarm_settings.button_dismiss.grab_key_focus();
+        alarm_settings.button_cancel.grab_key_focus();
 
 
         //
@@ -681,17 +690,13 @@ AlarmItem.prototype = {
         alarm_settings.connect('ok', Lang.bind(this, function () {
             this.toggle.setToggleState(this.alarm.toggle);
             this.time.set_text(this.alarm.time_str);
-            this.msg.set_text(this.alarm.msg);
+            this.msg.clutter_text.set_markup(this.alarm.msg);
 
-            if (this.alarm.msg)
-                this.msg.show();
-            else
-                this.msg.hide();
+            if (this.alarm.msg) this.msg.show();
+            else this.msg.hide();
 
             this.actor.grab_key_focus();
             alarm_settings.actor.destroy();
-
-            this.msg.clutter_text.set_use_markup(true);
             this.alarm_item_content.show();
 
             this.emit('alarm-updated');
@@ -703,25 +708,49 @@ AlarmItem.prototype = {
             this.emit('alarm-deleted');
         }));
 
-        alarm_settings.connect('dismiss', Lang.bind(this, function () {
+        alarm_settings.connect('cancel', Lang.bind(this, function () {
             this.actor.grab_key_focus();
             alarm_settings.actor.destroy();
             this.alarm_item_content.show();
         }));
     },
-}
+
+    _resize_alarm_item: function () {
+        // Lookup St.ThemeNode and ClutterActor reference manuals for more info.
+        let theme_node = this.msg.get_theme_node();
+        let alloc_box  = this.msg.get_allocation_box();
+        let width      = alloc_box.x2 - alloc_box.x1; // gets the acutal width of the box
+        width          = theme_node.adjust_for_width(width); // removes paddings and borders
+
+        // nat_height is the minimum height needed to fit the multiline text
+        // **excluding** the vertical paddings/borders.
+        let [min_height, nat_height] = this.msg.clutter_text.get_preferred_height(width);
+
+        // The vertical padding can only be calculated once the box is painted.
+        // nat_height_adjusted is the minimum height needed to fit the multiline
+        // text **including** vertical padding/borders.
+        if (this.msg_vert_padding < 0) {
+            let [min_height_adjusted, nat_height_adjusted] = theme_node.adjust_preferred_height(min_height, nat_height);
+            this.msg_vert_padding = nat_height_adjusted - nat_height;
+        }
+
+        this.msg.set_height(nat_height + this.msg_vert_padding);
+    },
+};
 Signals.addSignalMethods(AlarmItem.prototype);
 
 
 
-/*
- * Alarm Notification
- *
- * We need to override the addBody method in order to have full pango markup.
- */
+// =====================================================================
+// @@@ Alarm Notification
+//
+// We need to override the addBody method in order to have full pango
+// markup.
+// =====================================================================
 function AlarmNotif (source, title, banner, params) {
    this._init(source, title, banner, params);
 };
+
 AlarmNotif.prototype = {
     __proto__: MessageTray.Notification.prototype,
 
@@ -731,7 +760,6 @@ AlarmNotif.prototype = {
 
     // override the default addBody to allow for full pango markup
     addBody: function(text, markup, style) {
-        try {
         let label = new St.Label({text: text});
         this.addActor(label);
 
@@ -741,9 +769,6 @@ AlarmNotif.prototype = {
         label.clutter_text.use_markup = true;
 
         return label;
-        } catch (e) {
-            global.logError(e);
-        }
     }
 }
 Signals.addSignalMethods(AlarmNotif.prototype);

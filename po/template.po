@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-08 21:53+0100\n"
+"POT-Creation-Date: 2017-05-20 16:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,98 +17,437 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: sections/alarms.js:92
+#: sections/alarms.js:93
 msgid "Add New Alarm..."
 msgstr ""
 
-#: sections/alarms.js:349
+#: sections/alarms.js:348
 msgid "Snooze"
 msgstr ""
 
-#: sections/alarms.js:499
+#: sections/alarms.js:505
 msgid "Alarm Message..."
 msgstr ""
 
-#: sections/alarms.js:536 sections/pomodoro.js:551
-msgid "Dismiss"
+#: sections/alarms.js:527 sections/todo.js:1492 sections/todo.js:2892
+msgid "Delete"
 msgstr ""
 
-#: sections/alarms.js:537 sections/pomodoro.js:550
+#: sections/alarms.js:535 sections/pomodoro.js:563 sections/timer.js:497
+#: sections/todo.js:1497 sections/todo.js:2889
+msgid "Cancel"
+msgstr ""
+
+#: sections/alarms.js:536 sections/pomodoro.js:562 sections/timer.js:498
+#: sections/todo.js:1500 sections/todo.js:2429 sections/todo.js:2776
 msgid "Ok"
 msgstr ""
 
-#: sections/pomodoro.js:65 sections/pomodoro.js:95
+#: sections/pomodoro.js:68 sections/pomodoro.js:196
 msgid "Pomodoro"
 msgstr ""
 
-#: sections/pomodoro.js:122
+#: sections/pomodoro.js:128
 msgid "New"
 msgstr ""
 
-#: sections/pomodoro.js:123
+#: sections/pomodoro.js:129
 msgid "Break"
 msgstr ""
 
-#: sections/pomodoro.js:124 sections/stopwatch.js:91
+#: sections/pomodoro.js:130 sections/stopwatch.js:94
 msgid "Start"
 msgstr ""
 
-#: sections/pomodoro.js:125
+#: sections/pomodoro.js:131
 msgid "Stop"
 msgstr ""
 
-#: sections/pomodoro.js:374
+#: sections/pomodoro.js:381
 msgid "Start working!"
 msgstr ""
 
-#: sections/pomodoro.js:375
+#: sections/pomodoro.js:382
 msgid "Take a short break!"
 msgstr ""
 
-#: sections/pomodoro.js:376
+#: sections/pomodoro.js:383
 msgid "Take long break!"
 msgstr ""
 
-#: sections/pomodoro.js:474
+#: sections/pomodoro.js:486
 msgid "Clear all pomodoros?"
 msgstr ""
 
-#: sections/pomodoro.js:490
+#: sections/pomodoro.js:502
 msgid "Pomodoro (min):"
 msgstr ""
 
-#: sections/pomodoro.js:505
+#: sections/pomodoro.js:517
 msgid "Short break (min):"
 msgstr ""
 
-#: sections/pomodoro.js:520
+#: sections/pomodoro.js:532
 msgid "Long break (min):"
 msgstr ""
 
-#: sections/pomodoro.js:535
+#: sections/pomodoro.js:547
 msgid "Num of pomos until long break:"
 msgstr ""
 
-#: sections/stopwatch.js:57 sections/stopwatch.js:79
+#: sections/stopwatch.js:60 sections/stopwatch.js:82
 msgid "Stopwatch"
 msgstr ""
 
-#: sections/stopwatch.js:89
+#: sections/stopwatch.js:92 sections/todo.js:2428
 msgid "Reset"
 msgstr ""
 
-#: sections/stopwatch.js:90
+#: sections/stopwatch.js:93
 msgid "Lap"
 msgstr ""
 
-#: sections/stopwatch.js:92
+#: sections/stopwatch.js:95
 msgid "Pause"
 msgstr ""
 
-#: sections/timer.js:63 sections/timer.js:88
+#: sections/timer.js:66 sections/timer.js:90
 msgid "Timer"
 msgstr ""
 
-#: sections/timer.js:466
+#: sections/timer.js:473
 msgid "Timer message..."
+msgstr ""
+
+#: sections/todo.js:258
+msgid "Todo"
+msgstr ""
+
+#: sections/todo.js:290
+msgid "Loading..."
+msgstr ""
+
+#: sections/todo.js:297
+msgid "Select todo file in settings..."
+msgstr ""
+
+#: sections/todo.js:317
+msgid "Add New Task..."
+msgstr ""
+
+#: sections/todo.js:1443
+msgid "The todo file has changed. Clicking \"Ok\" now will add a new task."
+msgstr ""
+
+#: sections/todo.js:1453
+msgid "Task..."
+msgstr ""
+
+#: sections/todo.js:1976
+msgid "completed:"
+msgstr ""
+
+#: sections/todo.js:1981 sections/todo.js:1997 sections/todo.js:2005
+msgid "created:"
+msgstr ""
+
+#: sections/todo.js:2035 sections/todo.js:2265
+msgid "due:"
+msgstr ""
+
+#: sections/todo.js:2259 sections/todo.js:2961
+msgid "today"
+msgstr ""
+
+#: sections/todo.js:2260
+#, javascript-format
+msgid "%d day ago"
+msgstr ""
+
+#: sections/todo.js:2261
+#, javascript-format
+msgid "%d days ago"
+msgstr ""
+
+#: sections/todo.js:2262
+#, javascript-format
+msgid "in %d day"
+msgstr ""
+
+#: sections/todo.js:2263
+#, javascript-format
+msgid "in %d days"
+msgstr ""
+
+#: sections/todo.js:2330
+msgid "No Priority"
+msgstr ""
+
+#: sections/todo.js:2331
+msgid "Completed"
+msgstr ""
+
+#: sections/todo.js:2362
+msgid "Add custom filter..."
+msgstr ""
+
+#: sections/todo.js:2396
+msgid "Show only hidden tasks"
+msgstr ""
+
+#: sections/todo.js:2412
+msgid "Invert filters"
+msgstr ""
+
+#: sections/todo.js:2701
+msgid "Sort by Priority"
+msgstr ""
+
+#: sections/todo.js:2702
+msgid "Sort by Creation Date"
+msgstr ""
+
+#: sections/todo.js:2703
+msgid "Sort by Completion Date"
+msgstr ""
+
+#: sections/todo.js:2704
+msgid "Sort by Due Date"
+msgstr ""
+
+#: sections/todo.js:2731
+msgid "Ascending"
+msgstr ""
+
+#: sections/todo.js:2744
+msgid "Descending"
+msgstr ""
+
+#: sections/todo.js:2879
+msgid "Are you sure you want to delete all completed tasks?"
+msgstr ""
+
+#: sections/todo.js:2946
+msgid "Nothing found..."
+msgstr ""
+
+#: sections/todo.js:2963
+msgid "last 3 days"
+msgstr ""
+
+#: sections/todo.js:2965
+msgid "this week"
+msgstr ""
+
+#: sections/todo.js:2967
+msgid "this month"
+msgstr ""
+
+#: sections/todo.js:2969
+msgid "this year"
+msgstr ""
+
+#: sections/todo.js:3362
+msgid "To track time, select a dir for csv files in the settings."
+msgstr ""
+
+#
+msgid ""
+msgstr ""
+
+#. timepp@zagortenay333->settings-
+#. schema.json->todo_key_open_to_search->description
+msgid "Open this section and search tasks."
+msgstr ""
+
+#. timepp@zagortenay333->settings-
+#. schema.json->todo_key_open_to_add->description
+msgid "Open this section and add task."
+msgstr ""
+
+#. timepp@zagortenay333->settings-
+#. schema.json->stopwatch_panel_mode->description
+#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->description
+#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->description
+#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->description
+msgid "Panel Item Mode"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->stopwatch_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->options
+msgid "Icon and label"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->stopwatch_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->options
+msgid "Label only"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->stopwatch_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->options
+#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->options
+msgid "Icon only"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->todo_txt_file_path->description
+msgid "Path to todo.txt file"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->alarm_icon->description
+msgid "Alarms Panel Icon"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->alarm_icon->tooltip
+#. timepp@zagortenay333->settings-schema.json->timer_icon->tooltip
+#. timepp@zagortenay333->settings-schema.json->pomo_icon->tooltip
+#. timepp@zagortenay333->settings-schema.json->stopwatch_icon->tooltip
+#. timepp@zagortenay333->settings-schema.json->todo_icon->tooltip
+#. timepp@zagortenay333->settings-schema.json->unicon->tooltip
+msgid ""
+"Icon name, absolute path, or path relative to this applet's dir.\n"
+"To use a symbolic icon, add '-symbolic' to it's name."
+msgstr ""
+
+#. timepp@zagortenay333->settings-
+#. schema.json->stopwatch_separate_menu->description
+#. timepp@zagortenay333->settings-schema.json->pomo_separate_menu->description
+#. timepp@zagortenay333->settings-
+#. schema.json->alarm_separate_menu->description
+#. timepp@zagortenay333->settings-schema.json->todo_separate_menu->description
+#. timepp@zagortenay333->settings-
+#. schema.json->timer_separate_menu->description
+msgid "Show in separate menu"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->timer_icon->description
+msgid "Timer Panel Icon"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->timer_key_open->description
+#. timepp@zagortenay333->settings-schema.json->alarm_key_open->description
+#. timepp@zagortenay333->settings-schema.json->stopwatch_key_open->description
+#. timepp@zagortenay333->settings-schema.json->pomo_key_open->description
+msgid "Menu shortcut key"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->pomo_show_secs->description
+#. timepp@zagortenay333->settings-
+#. schema.json->stopwatch_show_secs->description
+#. timepp@zagortenay333->settings-schema.json->timer_show_secs->description
+msgid "Show seconds"
+msgstr ""
+
+#. timepp@zagortenay333->settings-
+#. schema.json->time_tracker_csv_dir->description
+msgid "Dir in which to store the time-tracker csv files"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->pomo_icon->description
+msgid "Pomodoro Panel Icon"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->stopwatch_icon->description
+msgid "Stopwatch Panel Icon"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->todo_key_open->description
+msgid "Open this section."
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section4->title
+msgid "Pomodoro Settings"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section2->title
+msgid "Timer Settings"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section3->title
+msgid "Stopwatch Settings"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section5->title
+msgid "Alarms Settings"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section7->title
+msgid "File paths"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section8->title
+msgid "Keybindings"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->page6->title
+msgid "Todo/Time Tracker"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section6->title
+msgid "Misc"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->page4->title
+msgid "Pomodoro"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->page5->title
+msgid "Alarms"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->page2->title
+msgid "Timer"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->page3->title
+msgid "Stopwatch"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->page1->title
+msgid "General"
+msgstr ""
+
+#. timepp@zagortenay333->settings-
+#. schema.json->alarm_snooze_duration->description
+msgid "Snooze duration"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->alarm_snooze_duration->units
+msgid "sec"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->todo_icon->description
+msgid "Todo Panel Icon"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->unicon->description
+msgid "Icon when using one panel item"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->todo_task_width->description
+msgid "Task width"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->todo_task_width->units
+msgid "px"
+msgstr ""
+
+#. timepp@zagortenay333->settings-schema.json->unicon_mode->description
+msgid "Show single icon in panel"
+msgstr ""
+
+#. timepp@zagortenay333->metadata.json->description
+msgid "Timer, stopwatch, pomodoro, and alarms"
+msgstr ""
+
+#. timepp@zagortenay333->metadata.json->name
+msgid "Time ++"
 msgstr ""

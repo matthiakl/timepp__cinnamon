@@ -20,7 +20,7 @@ const NUM_PICKER    = imports.applet.lib.num_picker;
 const LPAD          = imports.applet.lib.leftpad;
 
 
-const POMODORO_CACHE_FILE = GLib.get_home_dir()+'/.cache/timepp_pomodoro.json';
+const CACHE_FILE = GLib.get_home_dir()+'/.cache/timepp_pomodoro.json';
 
 
 //
@@ -28,9 +28,12 @@ const POMODORO_CACHE_FILE = GLib.get_home_dir()+'/.cache/timepp_pomodoro.json';
 //
 
 
+// =====================================================================
+// @@@ Main
+// =====================================================================
 function Pomodoro(applet, settings, metadata, instance_id, orientation) {
     this._init(applet, settings, metadata, instance_id, orientation);
-}
+};
 
 Pomodoro.prototype = {
     _init: function(applet, settings, metadata, instance_id, orientation) {
@@ -64,8 +67,8 @@ Pomodoro.prototype = {
             //
             this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Pomodoro'));
 
-            this.panel_item._set_label(this.show_secs ? '00:00:00' : '00:00');
-            this.panel_item.actor.add_style_class_name('pomo-panel-item off');
+            this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
+            this.panel_item.actor.add_style_class_name('pomo-panel-item');
             this._update_panel_icon_name();
             this._update_time_display();
             this._toggle_panel_mode();
@@ -92,7 +95,10 @@ Pomodoro.prototype = {
             //
             // label/timer display
             //
-            this.label = new St.Label({text: _('Pomodoro'), y_align: Clutter.ActorAlign.CENTER, style_class: 'time-label'});
+
+            // We set the text of this.label in the load function after we
+            // update the panel.
+            this.label = new St.Label({ y_align: Clutter.ActorAlign.CENTER, style_class: 'time-label' });
             this.pomodoro_time_display_item.add_actor(this.label);
 
 
@@ -116,7 +122,7 @@ Pomodoro.prototype = {
             //
             // buttons
             //
-            this.button_box = new St.Widget({ style_class: 'popup-menu-item btn-box', layout_manager: new Clutter.BoxLayout ({ homogeneous: true }) });
+            this.button_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
             this.pomodoro_pane.addActor(this.button_box);
 
             this.button_new_pomo = new St.Button({can_focus:  true, label: _('New'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-new'});
@@ -124,10 +130,10 @@ Pomodoro.prototype = {
             this.button_start = new St.Button({can_focus: true, label: _('Start'), x_expand: true, style_class: 'button notification-icon-button modal-dialog-button btn-start'});
             this.button_stop = new St.Button({can_focus: true, label: _('Stop'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-stop'});
 
-            this.button_box.add_actor(this.button_new_pomo);
-            this.button_box.add_actor(this.button_take_break);
-            this.button_box.add_actor(this.button_start);
-            this.button_box.add_actor(this.button_stop);
+            this.button_box.add(this.button_new_pomo, {expand: true});
+            this.button_box.add(this.button_take_break, {expand: true});
+            this.button_box.add(this.button_start, {expand: true});
+            this.button_box.add(this.button_stop, {expand: true});
 
 
             //
@@ -141,7 +147,7 @@ Pomodoro.prototype = {
             // listen
             //
             this.panel_item.connect('click', Lang.bind(this, function () {
-                this.emit('open-menu');
+                this.emit('toggle-menu');
             }));
             this.panel_item.connect('middle-click', Lang.bind(this, this._timer_toggle));
             this.icon_bin.connect('clicked', Lang.bind(this, this._show_settings));
@@ -165,7 +171,7 @@ Pomodoro.prototype = {
         // unreliable, so we store certain things manually into separate files.
         this._lap_count = 0;
 
-        this.cache_file = Gio.file_new_for_path(POMODORO_CACHE_FILE);
+        this.cache_file = Gio.file_new_for_path(CACHE_FILE);
 
         if ( this.cache_file.query_exists(null) ) {
             let [a, contents, b] = this.cache_file.load_contents(null);
@@ -187,6 +193,7 @@ Pomodoro.prototype = {
 
         this._toggle_keybinding();
         this._update_time_display();
+        this.label.set_text(_('Pomodoro'));
     },
 
     _store_cache: function () {
@@ -199,7 +206,7 @@ Pomodoro.prototype = {
     _show_settings: function () {
         let settings = new PomodoroSettings(this.cache);
         this.settings_container.add_actor(settings.actor);
-        settings.button_dismiss.grab_key_focus();
+        settings.button_cancel.grab_key_focus();
 
         this.pomodoro_time_display_item.hide();
         this.button_box.hide();
@@ -223,7 +230,7 @@ Pomodoro.prototype = {
             this._update_time_display();
         }));
 
-        settings.connect('dismiss', Lang.bind(this, function () {
+        settings.connect('cancel', Lang.bind(this, function () {
             this.button_box.show();
             this.actor.grab_key_focus();
             settings.actor.destroy();
@@ -281,9 +288,9 @@ Pomodoro.prototype = {
 
     _panel_item_UI_update: function () {
         if (this.timer_state)
-            this.panel_item.actor.remove_style_class_name('off');
+            this.panel_item.actor.add_style_class_name('on');
         else
-            this.panel_item.actor.add_style_class_name('off');
+            this.panel_item.actor.remove_style_class_name('on');
     },
 
     _toggle_buttons: function () {
@@ -343,7 +350,7 @@ Pomodoro.prototype = {
         let str;
 
         // If the seconds are not shown, we need to make the timer '1-indexed'
-        // in respect to minutes. I.e., 00:00:34 becomes 00:01.
+        // with respect to minutes. I.e., 00:00:34 becomes 00:01.
         if (this.show_secs) {
             let time = this.timer_duration;
 
@@ -366,7 +373,7 @@ Pomodoro.prototype = {
         }
 
         if (this.label) this.label.text = str;
-        if (this.panel_item.label.visible) this.panel_item._set_label(str);
+        if (this.panel_item.label.visible) this.panel_item.set_label(str);
     },
 
     _send_notif: function () {
@@ -407,14 +414,14 @@ Pomodoro.prototype = {
     },
 
     _toggle_panel_mode: function () {
-        if (this.panel_mode === 0) this.panel_item._set_mode('icon');
-        else if (this.panel_mode === 1) this.panel_item._set_mode('text');
-        else this.panel_item._set_mode('icon_text');
+        if (this.panel_mode === 0) this.panel_item.set_mode('icon');
+        else if (this.panel_mode === 1) this.panel_item.set_mode('text');
+        else this.panel_item.set_mode('icon_text');
     },
 
     // This method will be called by applet.js when the section is enabled
     // or disabled.
-    _toggle_section: function () {
+    toggle_section: function () {
         this._store_cache();
 
         if (! this.cache.enabled) {
@@ -433,7 +440,7 @@ Pomodoro.prototype = {
             if (this.open_key !== '') {
                 this.key_id = this.section_name;
                 Main.keybindingManager.addHotKey(this.key_id, this.key_open, Lang.bind(this, function () {
-                    this.applet._open_menu(this);
+                    this.applet.open_menu(this);
                 }));
             }
         }
@@ -441,7 +448,7 @@ Pomodoro.prototype = {
             if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
 
-    _on_applet_removed_from_panel: function () {
+    on_applet_removed_from_panel: function () {
         this.timer_state = false;
         if (this.key_id) Main.keybindingManager.removeHotKey(this.key_id);
     },
@@ -450,18 +457,23 @@ Signals.addSignalMethods(Pomodoro.prototype);
 
 
 
+// =====================================================================
+// @@@ Pomodoro settings
 //
-// Pomodoro settings
-//
+// signals:
+//   - 'ok'
+//   - 'cancel'
+// =====================================================================
 function PomodoroSettings(pomo_cache) {
     this._init(pomo_cache);
-}
+};
+
 PomodoroSettings.prototype = {
     _init: function(pomo_cache) {
         try {
-            this.actor = new St.BoxLayout({style_class: 'settings popup-menu-item'});
+            this.actor = new St.BoxLayout({style_class: 'view-box popup-menu-item'});
 
-            this.content_box = new St.BoxLayout({vertical: true, style_class: 'settings-content menu-favorites-box'});
+            this.content_box = new St.BoxLayout({vertical: true, style_class: 'view-box-content menu-favorites-box'});
             this.actor.add(this.content_box, {expand: true});
 
 
@@ -493,7 +505,7 @@ PomodoroSettings.prototype = {
             this.pomo_dur_mm_picker = new NUM_PICKER.NumPicker(1, null);
             this.pomo_duration.add_actor(this.pomo_dur_mm_picker.actor);
 
-            this.pomo_dur_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.pomo_duration / 60), 2);
+            this.pomo_dur_mm_picker._set_counter(Math.floor(pomo_cache.pomo_duration / 60));
 
 
             //
@@ -508,7 +520,7 @@ PomodoroSettings.prototype = {
             this.short_break_mm_picker = new NUM_PICKER.NumPicker(1, null);
             this.short_break.add_actor(this.short_break_mm_picker.actor);
 
-            this.short_break_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.short_break / 60), 2);
+            this.short_break_mm_picker._set_counter(Math.floor(pomo_cache.short_break / 60));
 
 
             //
@@ -523,7 +535,7 @@ PomodoroSettings.prototype = {
             this.long_break_mm_picker = new NUM_PICKER.NumPicker(1, null);
             this.long_break.add_actor(this.long_break_mm_picker.actor);
 
-            this.long_break_mm_picker.counter.text = LPAD.lpad(Math.floor(pomo_cache.long_break / 60), 2);
+            this.long_break_mm_picker._set_counter(Math.floor(pomo_cache.long_break / 60));
 
 
             //
@@ -538,36 +550,36 @@ PomodoroSettings.prototype = {
             this.long_break_rate_picker = new NUM_PICKER.NumPicker(1, null);
             this.long_break_rate.add_actor(this.long_break_rate_picker.actor);
 
-            this.long_break_rate_picker.counter.text = LPAD.lpad(pomo_cache.long_break_rate, 2);
+            this.long_break_rate_picker._set_counter(pomo_cache.long_break_rate);
 
 
             //
             // buttons
             //
-            this.button_box = new St.Widget({ style_class: 'popup-menu-item settings-item', layout_manager: new Clutter.BoxLayout ({ homogeneous:true }) });
+            this.button_box = new St.BoxLayout({ style_class: 'popup-menu-item settings-item' });
             this.content_box.add(this.button_box, {expand: true});
 
             this.button_ok      = new St.Button({can_focus: true, label: _('Ok'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
-            this.button_dismiss = new St.Button({can_focus: true, label: _('Dismiss'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
+            this.button_cancel = new St.Button({can_focus: true, label: _('Cancel'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
 
-            this.button_box.add_actor(this.button_dismiss);
-            this.button_box.add_actor(this.button_ok);
+            this.button_box.add(this.button_cancel, {expand: true});
+            this.button_box.add(this.button_ok, {expand: true});
 
 
             //
             // listen
             //
             this.button_ok.connect('clicked', Lang.bind(this, function() {
-                pomo_cache.pomo_duration   =  parseInt(this.pomo_dur_mm_picker.counter.text) * 60;
-                pomo_cache.short_break     =  parseInt(this.short_break_mm_picker.counter.text) * 60;
-                pomo_cache.long_break      =  parseInt(this.long_break_mm_picker.counter.text) * 60;
-                pomo_cache.long_break_rate =  parseInt(this.long_break_rate_picker.counter.text);
+                pomo_cache.pomo_duration   = this.pomo_dur_mm_picker.counter * 60;
+                pomo_cache.short_break     = this.short_break_mm_picker.counter * 60;
+                pomo_cache.long_break      = this.long_break_mm_picker.counter * 60;
+                pomo_cache.long_break_rate = this.long_break_rate_picker.counter;
 
                 this.emit('ok', this.clear_item_checkbox.actor.checked);
             }));
 
-            this.button_dismiss.connect('clicked', Lang.bind(this, function () {
-                this.emit('dismiss');
+            this.button_cancel.connect('clicked', Lang.bind(this, function () {
+                this.emit('cancel');
             }));
         } catch(e) {
             global.logError(e);
