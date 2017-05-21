@@ -49,7 +49,7 @@ The todo.txt manager also supports the `h:1` extension for hiding a task and the
 ### Time Tracker
 
 The time tracker is built into the todo.txt manager and allows you to track the
-time spent on a particular task as well as the time spent on a particlar project.
+time spent on a particular task as well as the time spent on a particular project.
 
 When pressing the play button to track a task, all projects associated with that
 task will also be tracked.
@@ -82,7 +82,7 @@ date, time spent (hh:mm), type ('++' = project, '()' = task), task or project
 2017-02-05, 23:59, ++, "+protect_gotham"
 2017-02-05, 02:03, ++, "+protect_gotham"
 2017-02-05, 02:03, (), "(A) Watch the world burn."
-2017-02-05, 02:03, (), "(A) Catch Joker."
+2017-02-05, 02:03, (), "x 2017-02-05 Catch Joker."
 2017-02-05, 02:03, (), "(Z) Take the trash out."
 .
 .
