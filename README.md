@@ -72,18 +72,18 @@ The csv file has the form:
 ```csv
 date, time (hh:mm), type ('++' = project, '()' = task), task or project
 
-2017-02-04, 08:03, ++, +my_project
-2017-02-04, 23:59, ++, +protect_gotham
-2017-02-04, 02:03, ++, +protect_gotham
-2017-02-04, 02:03, (), (A) Watch the world burn.
-2017-02-04, 02:03, (), (A) Catch Joker.
-2017-02-04, 02:03, (), (Z) Take the trash out.
-2017-02-05, 08:03, ++, +my_project
-2017-02-05, 23:59, ++, +protect_gotham
-2017-02-05, 02:03, ++, +protect_gotham
-2017-02-05, 02:03, (), (A) Watch the world burn.
-2017-02-05, 02:03, (), (A) Catch Joker.
-2017-02-05, 02:03, (), (Z) Take the trash out.
+2017-02-04, 08:03, ++, "+my_project"
+2017-02-04, 23:59, ++, "+protect_gotham"
+2017-02-04, 02:03, ++, "+protect_gotham"
+2017-02-04, 02:03, (), "(A) Watch the world burn."
+2017-02-04, 02:03, (), "(A) Catch Joker."
+2017-02-04, 02:03, (), "(Z) Take the trash out."
+2017-02-05, 08:03, ++, "+my_project"
+2017-02-05, 23:59, ++, "+protect_gotham"
+2017-02-05, 02:03, ++, "+protect_gotham"
+2017-02-05, 02:03, (), "(A) Watch the world burn."
+2017-02-05, 02:03, (), "(A) Catch Joker."
+2017-02-05, 02:03, (), "(Z) Take the trash out."
 .
 .
 .
