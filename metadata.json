@@ -1,7 +1,7 @@
 {
     "dangerous": false,
     "uuid": "timepp@zagortenay333",
-    "description": "Timer, stopwatch, pomodoro, and alarms",
+    "description": "A todo.txt manager, time tracker, timer, stopwatch, pomodoro, and alarm applet",
     "website": "https://github.com/zagortenay333/timepp",
     "name": "Time ++",
     "icon": "alarm-clock"
