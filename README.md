@@ -38,4 +38,4 @@ The xdotool command can be enabled to open the applet on change.
 ---
 
 ![preview](https://i.imgur.com/CdXpUZr.png)
-<sup>**Preview info:** [Wallpaper](http://www.facets.la/2014/339), [Cinnamon theme](https://github.com/zagortenay333/ciliora-tertia-cinnamon)</sup>
+<sup>**Preview info:** [Cinnamon theme](https://github.com/zagortenay333/ciliora-tertia-cinnamon)</sup>
