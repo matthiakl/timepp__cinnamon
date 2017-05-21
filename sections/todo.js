@@ -1,5 +1,3 @@
-// }catch(e){global.logError(e);}
-
 const St          = imports.gi.St;
 const Gio         = imports.gi.Gio
 const Meta        = imports.gi.Meta;
