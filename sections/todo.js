@@ -3092,7 +3092,6 @@ TimeTracker.prototype = {
         // listen
         //
         this.delegate.connect('new-day', () => {
-            Main.notify("new-day-1 at " + date_yyyymmdd());
             this._archive_daily_csv_file();
         });
     },
