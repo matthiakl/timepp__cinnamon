@@ -676,13 +676,6 @@ Todo.prototype = {
         });
     },
 
-    // @task: obj
-    //
-    // Opens a gui for editing/creating a task.
-    // If @task is given, the editor will in 'edit-task' mode.
-    // If @task is not given, the editor will be in 'add-task' mode.
-    // If in the middle of editing a task the todo file changes, the editor will
-    // switch to 'add-task' mode.
     show_view__task_editor: function (task) {
         let editor = new TaskEditor(this.applet, this, task);
 
@@ -696,6 +689,7 @@ Todo.prototype = {
         if (task) this.time_tracker.stop_tracking(task);
 
         editor.connect('edit-task', (_, task_str) => {
+            let start = Date.now();
             let was_hidden   = task.hidden;
             let old_task_str = task.task_str;
             let old_priority = task.priority;
@@ -1406,10 +1400,7 @@ Signals.addSignalMethods(Todo.prototype);
 //   - 'delete-task'
 //   - 'cancel'
 //
-// If @task is provided, then the entry will be prepopulated with the task_str
-// of the @task object, and the 'edit-task' signal will be emitted.
-// If no @task is given or the todo.txt file changes during an edit, then the
-// 'add-task' signal will be emitted upon clicking the 'ok' button.
+// If @task is provided, then the entry will be prepopulated with the task_str.
 // =====================================================================
 function TaskEditor (applet, delegate, task) {
    this._init(applet, delegate, task);
@@ -1506,11 +1497,6 @@ TaskEditor.prototype = {
         //
         // listen
         //
-        this.delegate.connect('todo-file-changed', () => {
-            this.mode = 'add-task';
-            this.todo_changed_warning.show();
-            if (this.button_delete) this.button_delete.hide();
-        });
         this.button_ok.connect('clicked', () => {
             this.emit(this.mode, this._create_task_str());
         });
@@ -1850,7 +1836,7 @@ TaskItem.prototype = {
             if (this.current_keyword) global.set_cursor(Cinnamon.Cursor.POINTING_HAND);
             else global.unset_cursor();
         });
-        this.msg.connect_after('queue-redraw', () => {
+        this.msg.connect('queue-redraw', () => {
             this._resize_msg();
         });
         this.completion_checkbox.connect('clicked', () => {
@@ -2448,9 +2434,6 @@ TaskFiltersWindow.prototype = {
         //
         // listen
         //
-        this.delegate.connect('todo-file-changed', () => {
-            this._reload_filters();
-        });
         this.entry.entry.clutter_text.connect('key-focus-in', () => {
             SCROLL_TO_ITEM.scroll(this.filter_sectors_scroll,
                                   this.filter_sectors_scroll_box,
@@ -2550,21 +2533,6 @@ TaskFiltersWindow.prototype = {
         // hide the sections that don't have any items
         let arr = [this.priorities, this.contexts, this.projects];
         arr.forEach((it) => it.get_n_children() === 1 && it.hide());
-    },
-
-    _reload_filters: function () {
-        let arr = [this.custom_filters, this.priorities, this.contexts, this.projects];
-        arr.forEach((it) => it.remove_all_children());
-
-        this.filter_register = {
-            priorities : [],
-            contexts   : [],
-            projects   : [],
-            custom     : [],
-        };
-
-        this.custom_filters.add_child(this.entry.actor);
-        this._load_filters();
     },
 
     _reset_all: function () {
