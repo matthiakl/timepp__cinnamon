@@ -70,7 +70,7 @@ this month, this year, etc, or do the same for all projects in the current year.
 The csv file has the form:
 
 ```csv
-date, time (hh:mm), type ('++' = project, '()' = task), task or project
+date, time spent (hh:mm), type ('++' = project, '()' = task), task or project
 
 2017-02-04, 08:03, ++, "+my_project"
 2017-02-04, 23:59, ++, "+protect_gotham"
