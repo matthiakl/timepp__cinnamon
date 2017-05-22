@@ -189,6 +189,7 @@ MyApplet.prototype = {
         this.timer_section.connect('toggle-menu', Lang.bind(this, this.toggle_menu));
         this.stopwatch_section.connect('toggle-menu', Lang.bind(this, this.toggle_menu));
         this.pomodoro_section.connect('toggle-menu', Lang.bind(this, this.toggle_menu));
+        this.pomodoro_section.connect('stop-time-tracking', () => { this.emit('stop-time-tracking') });
         this.alarms_section.connect('toggle-menu', Lang.bind(this, this.toggle_menu));
         this.todo_section.connect('toggle-menu', Lang.bind(this, this.toggle_menu));
     },

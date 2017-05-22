@@ -60,7 +60,7 @@
         "section4": {
             "type": "section",
             "title": "Pomodoro Settings",
-            "keys": ["pomo_icon", "pomo_separate_menu", "pomo_panel_mode", "pomo_show_secs", "pomo_key_open", "pomo_script_path"]
+            "keys": ["pomo_icon", "pomo_separate_menu", "pomo_panel_mode", "pomo_show_secs", "pomo_key_open", "pomo_stop_time_tracking", "pomo_script_path"]
         },
 
         "section5": {
@@ -209,6 +209,12 @@
         "type": "keybinding",
         "description": "Menu shortcut key",
         "default": ""
+    },
+
+    "pomo_stop_time_tracking": {
+        "type": "switch",
+        "description": "Stop time tracking when pomo is paused",
+        "default": false
     },
 
     "pomo_script_path": {

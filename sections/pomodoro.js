@@ -60,6 +60,7 @@ Pomodoro.prototype = {
         settings.bindWithObject(this, 'pomo_separate_menu', 'separate_menu');
         settings.bindWithObject(this, 'pomo_panel_mode', 'panel_mode', this._toggle_panel_mode);
         settings.bindWithObject(this, 'pomo_show_secs', 'show_secs', this._update_time_display);
+        settings.bindWithObject(this, 'pomo_stop_time_tracking', 'stop_time_tracking');
         settings.bindWithObject(this, 'pomo_script_path', 'script_path');
 
 
@@ -261,6 +262,7 @@ Pomodoro.prototype = {
         this.timer_state = false;
         this._toggle_buttons();
         this._panel_item_UI_update();
+        if (this.stop_time_tracking) this.emit('stop-time-tracking');
     },
 
     _start_new_pomo: function () {
@@ -291,6 +293,7 @@ Pomodoro.prototype = {
         this._toggle_buttons();
         this._panel_item_UI_update();
         this._tic();
+        if (this.stop_time_tracking) this.emit('stop-time-tracking');
     },
 
     _timer_toggle: function () {

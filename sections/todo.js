@@ -3066,6 +3066,9 @@ TimeTracker.prototype = {
         this.delegate.connect('new-day', () => {
             this._archive_daily_csv_file();
         });
+        this.applet.connect('stop-time-tracking', () => {
+            this.stop_all_tracking();
+        });
     },
 
     _start_timers: function () {
@@ -3331,8 +3334,12 @@ TimeTracker.prototype = {
 
         this.number_of_tracked_tasks = 0;
 
-        for (let [, v] of this.daily_csv_map.entries())
-            v.tracking = false;
+        for (let [k, v] of this.daily_csv_map.entries()) {
+            if (v.tracking) {
+                v.tracking = false;
+                if (v.type === '()') v.task_ref.on_tracker_stopped();
+            }
+        }
     },
 
     toggle_tracking: function (task) {
@@ -3344,8 +3351,8 @@ TimeTracker.prototype = {
 
     start_tracking: function (task) {
         if (this.csv_dir === '') {
-            Main.notify(_('To track time, select a dir for csv ' +
-                          'files in the settings.'));
+            Main.notify(_('To track time, select a dir for csv files in the ' +
+                          'settings.'));
             return null;
         }
 
@@ -3355,6 +3362,7 @@ TimeTracker.prototype = {
 
         if (val) {
             val.tracking = true;
+            val.task_ref = task;
         }
         else {
             this.daily_csv_map.set(task.task_str, {
