@@ -1819,8 +1819,12 @@ TaskItem.prototype = {
         //
         // listen
         //
+        this.actor.connect('queue-redraw', () => {
+            this._resize_msg();
+        });
         this.actor.connect('event', (actor, event) => {
             this._on_event(actor, event);
+            return Clutter.EVENT_PROPAGATE;
         });
         this.prio_label.connect('leave-event', () => {
             global.unset_cursor();
@@ -1835,9 +1839,6 @@ TaskItem.prototype = {
             this.current_keyword = this._find_keyword(event);
             if (this.current_keyword) global.set_cursor(Cinnamon.Cursor.POINTING_HAND);
             else global.unset_cursor();
-        });
-        this.msg.connect('queue-redraw', () => {
-            this._resize_msg();
         });
         this.completion_checkbox.connect('clicked', () => {
             this._on_checkbox_clicked();
@@ -2130,10 +2131,13 @@ TaskItem.prototype = {
         let alloc_box  = this.msg.get_allocation_box();
         let width      = theme_node.adjust_for_width(alloc_box.x2 - alloc_box.x1);
 
-        let [min_height, nat_height] = this.msg.clutter_text.get_preferred_height(width);
+        let [min_height, nat_height] =
+            this.msg.clutter_text.get_preferred_height(width);
 
         if (this.msg_vert_padding < 0) {
-            let [min_height_adjusted, nat_height_adjusted] = theme_node.adjust_preferred_height(min_height, nat_height);
+            let [min_height_adjusted, nat_height_adjusted] =
+                theme_node.adjust_preferred_height(min_height, nat_height);
+
             this.msg_vert_padding = nat_height_adjusted - nat_height;
         }
 
@@ -3572,8 +3576,8 @@ ViewManager.prototype = {
     //   is the name of the new view. Only use the View enum here.
     //
     // @actors:
-    //   is an array of all the actors that need to be in the popup menu. These
-    //   are the actors that make up the particular view.
+    //   is an array of all the top-level actors that need to be in the popup
+    //   menu. These are the actors that make up the particular view.
     //
     // @focused_actor:
     //   is the actor that will be put into focus when the view is shown.
