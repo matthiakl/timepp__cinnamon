@@ -60,7 +60,7 @@
         "section4": {
             "type": "section",
             "title": "Pomodoro Settings",
-            "keys": ["pomo_icon", "pomo_separate_menu", "pomo_panel_mode", "pomo_show_secs", "pomo_key_open"]
+            "keys": ["pomo_icon", "pomo_separate_menu", "pomo_panel_mode", "pomo_show_secs", "pomo_key_open", "pomo_script_path"]
         },
 
         "section5": {
@@ -209,6 +209,14 @@
         "type": "keybinding",
         "description": "Menu shortcut key",
         "default": ""
+    },
+
+    "pomo_script_path": {
+        "type": "filechooser",
+        "description": "Execute custom script when pomo starts or pauses",
+        "select-dir": false,
+        "default": "",
+        "tooltip": ""
     },
 
     "alarm_icon": {
