@@ -64,6 +64,9 @@ start of each day.
 > When editing a task that has been time-tracked, only the corresponding entry
 in the daily csv file will be updated. The yearly csv file will not be changed.
 
+> **HINT:**  
+> There is an option to pause the time tracker when the pomodoro stops!
+
 You can also see how much time you spent working on a task today, this week, 
 this month, this year, etc, or do the same for all projects in the current year.
 
