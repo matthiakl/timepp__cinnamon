@@ -1224,9 +1224,6 @@ Todo.prototype = {
             //
             this.emit('new-day');
 
-            let t = new Date();
-            Main.criticalNotify("new day at: " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds());
-
 
             // Update all due dates.
             let i = this.tasks.length;
