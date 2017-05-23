@@ -2712,8 +2712,7 @@ Signals.addSignalMethods(TaskFiltersWindow.prototype);
 // @applet:   obj (The actual applet objects.)
 // @delegate: obj (The main object of this section.)
 //
-// @signals:
-//  - 'update-sort'
+// @signals: 'update-sort'
 // =====================================================================
 function TaskSortWindow(applet, delegate) {
     this._init(applet, delegate);
@@ -3053,7 +3052,7 @@ TimeTrackerStatView.prototype = {
     },
 
     _format: function (seconds) {
-        return '' + Math.round(seconds / 3600)      + 'h ' +
+        return '' + Math.floor(seconds / 3600)      + 'h ' +
                     Math.round(seconds % 3600 / 60) + 'm';
     },
 };
@@ -3087,12 +3086,6 @@ TimeTracker.prototype = {
         this.daily_csv_file_monitor_handler_block = false;
 
 
-        //
-        // init csv dir
-        //
-        this._init_tracker_dir();
-
-
         // We only read the yearly csv file for statistics lookup.
         // The daily csv file is appended to it each day.
         //
@@ -3119,7 +3112,6 @@ TimeTracker.prototype = {
         //     {date: string (in yyyy-mm-dd format), time: int (seconds)}
         //     E.g., {date: '3434-34-34', time: 324}
         this.yearly_csv_map = new Map();
-        this._init_yearly_csv_map();
 
 
         // The structure of the daily map is:
@@ -3149,7 +3141,12 @@ TimeTracker.prototype = {
         //     number of tasks that are part of this project and that are being
         //     tracked.
         this.daily_csv_map = new Map();
-        this._init_daily_csv_map();
+
+
+        //
+        // init csv dir
+        // we init the daily/yearly csv maps with the this func as well
+        this._init_tracker_dir();
 
 
         //
