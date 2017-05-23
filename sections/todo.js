@@ -118,6 +118,7 @@ Todo.prototype = {
         settings.bindWithObject(this, 'todo_task_width', 'task_width', this._update_task_width);
 
         settings.bindWithObject(this, 'todo_txt_file_path', 'todo_txt_file_path', this._on_todo_file_changed);
+        settings.bindWithObject(this, 'done_txt_file_path', 'done_txt_file_path');
 
         settings.bindWithObject(this, 'todo_key_open', 'key_open', this._toggle_keybinding);
         settings.bindWithObject(this, 'todo_key_open_to_add', 'key_open_to_add', this._toggle_keybinding);
@@ -575,7 +576,7 @@ Todo.prototype = {
             close_callback : () => { box.actor.destroy(); },
         });
 
-        box.connect('delete', () => {
+        box.connect('delete-all', () => {
             let res = [];
 
             for (let i = 0, len = this.tasks.length; i < len; i++)
@@ -584,9 +585,44 @@ Todo.prototype = {
 
             this.tasks = res;
             this.priorities.delete('(x)');
-
             this._update_clear_icon();
             this._write_tasks_to_file();
+            this._add_tasks_to_menu(true);
+
+            this.show_view__default();
+        });
+
+        box.connect('archive-all', () => {
+            let incomplete = [];
+            let complete   = [];
+
+            for (let i = 0, len = this.tasks.length; i < len; i++) {
+                if (this.tasks[i].priority !== '(x)')
+                    incomplete.push(this.tasks[i]);
+                else
+                    complete.push(this.tasks[i].task_str);
+            }
+
+            try {
+                let done_txt_file = Gio.file_new_for_path(
+                    this.done_txt_file_path.replace(/^.+?\/\//, ''));
+
+                if (! done_txt_file.query_exists(null))
+                    done_txt_file.create(Gio.FileCreateFlags.NONE, null);
+
+                let append_stream = done_txt_file.append_to(
+                    Gio.FileCreateFlags.NONE, null);
+
+                append_stream.write_all(complete.join('\n'), null);
+            }
+            catch (e) { global.logError(e); }
+
+            this.tasks = incomplete;
+            this.priorities.delete('(x)');
+            this._update_clear_icon();
+            this._write_tasks_to_file();
+            this._add_tasks_to_menu(true);
+
             this.show_view__default();
         });
 
@@ -772,7 +808,7 @@ Todo.prototype = {
             this.show_view__default();
         });
 
-        editor.connect('delete-task', () => {
+        editor.connect('delete-task', (_, do_archive) => {
             // Decrement number of tasks with this priority/context/project,
             // or remove the entry from the global vars if no other tasks
             // have them.
@@ -811,10 +847,26 @@ Todo.prototype = {
 
             // delete task object
             i = this.tasks.length;
-            while (i--)
+            while (i--) {
                 if (this.tasks[i].task_str === task.task_str)
-                    this.tasks.splice(i, 1),
+                    this.tasks.splice(i, 1);
+            }
 
+            if (do_archive && this.done_txt_file_path) {
+                try {
+                    let done_txt_file = Gio.file_new_for_path(
+                        this.done_txt_file_path.replace(/^.+?\/\//, ''));
+
+                    if (! done_txt_file.query_exists(null))
+                        done_txt_file.create(Gio.FileCreateFlags.NONE, null);
+
+                    let append_stream = done_txt_file.append_to(
+                        Gio.FileCreateFlags.NONE, null);
+
+                    append_stream.write_all(task.task_str, null);
+                }
+                catch (e) { global.logError(e); }
+            }
 
             this._update_filters();
             this._sort_tasks();
@@ -1428,13 +1480,6 @@ TaskEditor.prototype = {
 
 
         //
-        // todo file changed warning
-        //
-        this.todo_changed_warning = new St.Label({ text: _('The todo file has changed. Clicking "Ok" now will add a new task.'), visible: false, style_class: 'warning-label popup-menu-item' });
-        this.content_box.add_child(this.todo_changed_warning);
-
-
-        //
         // entry
         //
         this.entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
@@ -1475,20 +1520,26 @@ TaskEditor.prototype = {
         //
         // buttons
         //
-        this.btn_box = new St.Widget({ style_class: 'popup-menu-item btn-box', layout_manager: new Clutter.BoxLayout ({ homogeneous:true }) });
+        this.btn_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
         this.content_box.add_actor(this.btn_box);
 
         if (this.mode === 'edit-task') {
             this.button_delete = new St.Button({ can_focus: true, label: _('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
-            this.btn_box.add_actor(this.button_delete);
+            this.btn_box.add(this.button_delete, {expand: true});
             this.button_delete.connect('clicked', () => this.emit('delete-task'));
         }
 
+        if (this.mode === 'edit-task' && task.priority === '(x)') {
+            this.button_archive = new St.Button({ can_focus: true, label: _('Archive'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
+            this.btn_box.add(this.button_archive, {expand: true});
+            this.button_archive.connect('clicked', () => this.emit('delete-task', true));
+        }
+
         this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
-        this.btn_box.add_actor(this.button_cancel);
+        this.btn_box.add(this.button_cancel, {expand: true});
 
         this.button_ok = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
-        this.btn_box.add_actor(this.button_ok);
+        this.btn_box.add(this.button_ok, {expand: true});
 
 
         //
@@ -2832,7 +2883,10 @@ Signals.addSignalMethods(TaskSortWindow.prototype);
 // @applet:   obj (The actual applet objects.)
 // @delegate: obj (The main object of this section.)
 //
-// @signals: 'delete', 'cancel'
+// @signals:
+//   - 'delete-all'  (delete all completed tasks)
+//   - 'archive-all' (delete and write to done.txt all completed tasks)
+//   - 'cancel'
 // =====================================================================
 function ClearCompletedTasks(applet, delegate) {
     this._init(applet, delegate);
@@ -2852,8 +2906,38 @@ ClearCompletedTasks.prototype = {
         this.content_box = new St.BoxLayout({ x_expand: true, vertical: true, style_class: 'view-box-content menu-favorites-box' });
         this.actor.add_actor(this.content_box);
 
-        this.warning_label = new St.Label ({ text: _('Are you sure you want to delete all completed tasks?'), y_align: Clutter.ActorAlign.CENTER, style_class: 'warning-label popup-menu-item' });
-        this.content_box.add(this.warning_label, {expand: true});
+
+        //
+        // options
+        //
+        this.delete_all_item = new St.BoxLayout({ reactive: true, style_class: 'popup-menu-item' });
+        this.content_box.add_child(this.delete_all_item);
+
+        this.delete_all_label = new St.Label ({ text: _('Delete all completed tasks'), y_align: Clutter.ActorAlign.CENTER, style_class: 'delete-complete-tasks-label' });
+        this.delete_all_item.add(this.delete_all_label, {expand: true});
+
+        this.delete_all_radiobutton = new St.Button({ style_class: 'radiobutton', toggle_mode: true, can_focus: true, y_align: St.Align.MIDDLE });
+        this.delete_all_item.add_child(this.delete_all_radiobutton);
+
+        let delete_all_checkmark = new St.Bin();
+        this.delete_all_radiobutton.add_actor(delete_all_checkmark);
+
+
+        this.archive_all_item = new St.BoxLayout({ reactive: true, style_class: 'popup-menu-item' });
+        this.content_box.add_child(this.archive_all_item);
+
+        this.archive_all_label = new St.Label ({ text: _('Archive all complete tasks to done.txt and delete them'), y_align: Clutter.ActorAlign.CENTER, style_class: 'archive-all-complete-tasks-label' });
+        this.archive_all_item.add(this.archive_all_label, {expand: true});
+
+        this.archive_all_radiobutton = new St.Button({ style_class: 'radiobutton', checked: true, toggle_mode: true, can_focus: true, y_align: St.Align.MIDDLE });
+        this.archive_all_item.add_child(this.archive_all_radiobutton);
+
+        let archive_all_checkmark = new St.Bin();
+        this.archive_all_radiobutton.add_actor(archive_all_checkmark);
+
+        if (! this.delegate.done_txt_file_path) {
+            this.archive_all_item.hide();
+        }
 
 
         //
@@ -2865,14 +2949,25 @@ ClearCompletedTasks.prototype = {
         this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button' });
         this.btn_box.add(this.button_cancel, {expand: true});
 
-        this.button_delete = new St.Button({ can_focus: true, label: _('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button' });
-        this.btn_box.add(this.button_delete, {expand: true});
+        this.button_ok = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
+        this.btn_box.add(this.button_ok, {expand: true});
 
 
         //
         // listen
         //
-        this.button_delete.connect('clicked',  () => { this.emit('delete'); });
+        this.archive_all_radiobutton.connect('clicked', () => {
+            this.delete_all_radiobutton.checked = false;
+        });
+        this.delete_all_radiobutton.connect('clicked', () => {
+            this.archive_all_radiobutton.checked = false;
+        });
+        this.button_ok.connect('clicked',  () => {
+            if (this.delete_all_radiobutton.checked)
+                this.emit('delete-all');
+            else
+                this.emit('archive-all');
+        });
         this.button_cancel.connect('clicked', () => { this.emit('cancel'); });
     },
 };

@@ -39,6 +39,7 @@ Some of the features of the todo.txt manager are:
 * Sorting by priority, due date, completion date, creation date.
 * Fuzzy autocompletion for contexts and projects when inline editing a task.
 * Autoupdating when the todo.txt file changes.
+* Deleting all completed tasks and optionally storing them into a done.txt file.
 * Switching between different views via keyboard shortcuts.
 
 The todo.txt manager also supports the `h:1` extension for hiding a task and the

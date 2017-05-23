@@ -78,7 +78,7 @@
         "section7": {
             "type": "section",
             "title": "File paths",
-            "keys": ["todo_txt_file_path", "time_tracker_csv_dir"]
+            "keys": ["todo_txt_file_path", "done_txt_file_path", "time_tracker_csv_dir"]
         },
 
         "section8": {
@@ -309,6 +309,13 @@
     "todo_txt_file_path": {
         "type": "filechooser",
         "description": "Path to todo.txt file",
+        "select-dir": false,
+        "default": ""
+    },
+
+    "done_txt_file_path": {
+        "type": "filechooser",
+        "description": "Path to done.txt file",
         "select-dir": false,
         "default": ""
     },

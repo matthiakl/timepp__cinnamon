@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-22 20:52+0200\n"
+"POT-Creation-Date: 2017-05-23 13:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,49 +29,50 @@ msgstr ""
 msgid "Alarm Message..."
 msgstr ""
 
-#: sections/alarms.js:527 sections/todo.js:1485 sections/todo.js:2871
+#: sections/alarms.js:527 sections/todo.js:1527
 msgid "Delete"
 msgstr ""
 
 #: sections/alarms.js:535 sections/pomodoro.js:577 sections/timer.js:497
-#: sections/todo.js:1490 sections/todo.js:2868
+#: sections/todo.js:1538 sections/todo.js:2950
 msgid "Cancel"
 msgstr ""
 
 #: sections/alarms.js:536 sections/pomodoro.js:576 sections/timer.js:498
-#: sections/todo.js:1493 sections/todo.js:2426 sections/todo.js:2755
+#: sections/todo.js:1541 sections/todo.js:2474 sections/todo.js:2803
+#: sections/todo.js:2953
 msgid "Ok"
 msgstr ""
 
-#: sections/pomodoro.js:74 sections/pomodoro.js:197
+#: sections/pomodoro.js:75 sections/pomodoro.js:198
 msgid "Pomodoro"
 msgstr ""
 
-#: sections/pomodoro.js:131
+#: sections/pomodoro.js:132
 msgid "New Pomo"
 msgstr ""
 
-#: sections/pomodoro.js:132
+#: sections/pomodoro.js:133
 msgid "Take Break"
 msgstr ""
 
-#: sections/pomodoro.js:133 sections/stopwatch.js:94
+#: sections/pomodoro.js:134 sections/stopwatch.js:94
 msgid "Start"
 msgstr ""
 
-#: sections/pomodoro.js:134
+#: sections/pomodoro.js:135
 msgid "Stop"
 msgstr ""
 
-#: sections/pomodoro.js:395
+#: sections/pomodoro.js:398
 msgid "Start working!"
 msgstr ""
 
-#: sections/pomodoro.js:396
+#: sections/pomodoro.js:399
 msgid "Take a short break!"
 msgstr ""
 
-#: sections/pomodoro.js:397
+#: sections/pomodoro.js:400
 msgid "Take long break!"
 msgstr ""
 
@@ -99,7 +100,7 @@ msgstr ""
 msgid "Stopwatch"
 msgstr ""
 
-#: sections/stopwatch.js:92 sections/todo.js:2425
+#: sections/stopwatch.js:92 sections/todo.js:2473
 msgid "Reset"
 msgstr ""
 
@@ -119,340 +120,467 @@ msgstr ""
 msgid "Timer message..."
 msgstr ""
 
-#: sections/todo.js:257
+#: sections/todo.js:258
 msgid "Todo"
 msgstr ""
 
-#: sections/todo.js:289
+#: sections/todo.js:290
 msgid "Loading..."
 msgstr ""
 
-#: sections/todo.js:296
+#: sections/todo.js:297
 msgid "Select todo file in settings..."
 msgstr ""
 
-#: sections/todo.js:316
+#: sections/todo.js:317
 msgid "Add New Task..."
 msgstr ""
 
-#: sections/todo.js:1436
-msgid "The todo file has changed. Clicking \"Ok\" now will add a new task."
-msgstr ""
-
-#: sections/todo.js:1446
+#: sections/todo.js:1488
 msgid "Task..."
 msgstr ""
 
-#: sections/todo.js:1967
+#: sections/todo.js:1533
+msgid "Archive"
+msgstr ""
+
+#: sections/todo.js:2015
 msgid "completed:"
 msgstr ""
 
-#: sections/todo.js:1972 sections/todo.js:1988 sections/todo.js:1996
+#: sections/todo.js:2020 sections/todo.js:2036 sections/todo.js:2044
 msgid "created:"
 msgstr ""
 
-#: sections/todo.js:2026 sections/todo.js:2262
+#: sections/todo.js:2074 sections/todo.js:2310
 msgid "due:"
 msgstr ""
 
-#: sections/todo.js:2256 sections/todo.js:2940
+#: sections/todo.js:2304 sections/todo.js:3034
 msgid "today"
 msgstr ""
 
-#: sections/todo.js:2257
+#: sections/todo.js:2305
 #, javascript-format
 msgid "%d day ago"
 msgstr ""
 
-#: sections/todo.js:2258
+#: sections/todo.js:2306
 #, javascript-format
 msgid "%d days ago"
 msgstr ""
 
-#: sections/todo.js:2259
+#: sections/todo.js:2307
 #, javascript-format
 msgid "in %d day"
 msgstr ""
 
-#: sections/todo.js:2260
+#: sections/todo.js:2308
 #, javascript-format
 msgid "in %d days"
 msgstr ""
 
-#: sections/todo.js:2327
+#: sections/todo.js:2375
 msgid "No Priority"
 msgstr ""
 
-#: sections/todo.js:2328
+#: sections/todo.js:2376
 msgid "Completed"
 msgstr ""
 
-#: sections/todo.js:2359
+#: sections/todo.js:2407
 msgid "Add custom filter..."
 msgstr ""
 
-#: sections/todo.js:2393
+#: sections/todo.js:2441
 msgid "Show only hidden tasks"
 msgstr ""
 
-#: sections/todo.js:2409
+#: sections/todo.js:2457
 msgid "Invert filters"
 msgstr ""
 
-#: sections/todo.js:2680
+#: sections/todo.js:2728
 msgid "Sort by Priority"
 msgstr ""
 
-#: sections/todo.js:2681
+#: sections/todo.js:2729
 msgid "Sort by Creation Date"
 msgstr ""
 
-#: sections/todo.js:2682
+#: sections/todo.js:2730
 msgid "Sort by Completion Date"
 msgstr ""
 
-#: sections/todo.js:2683
+#: sections/todo.js:2731
 msgid "Sort by Due Date"
 msgstr ""
 
-#: sections/todo.js:2710
+#: sections/todo.js:2758
 msgid "Ascending"
 msgstr ""
 
-#: sections/todo.js:2723
+#: sections/todo.js:2771
 msgid "Descending"
 msgstr ""
 
-#: sections/todo.js:2858
-msgid "Are you sure you want to delete all completed tasks?"
+#: sections/todo.js:2917
+msgid "Delete all completed tasks"
 msgstr ""
 
-#: sections/todo.js:2925
+#: sections/todo.js:2930
+msgid "Archive all complete tasks to done.txt and delete them"
+msgstr ""
+
+#: sections/todo.js:3019
 msgid "Nothing found..."
 msgstr ""
 
-#: sections/todo.js:2942
+#: sections/todo.js:3036
 msgid "last 3 days"
 msgstr ""
 
-#: sections/todo.js:2944
+#: sections/todo.js:3038
 msgid "this week"
 msgstr ""
 
-#: sections/todo.js:2946
+#: sections/todo.js:3040
 msgid "this month"
 msgstr ""
 
-#: sections/todo.js:2948
+#: sections/todo.js:3042
 msgid "this year"
 msgstr ""
 
-#: sections/todo.js:3347
+#: sections/todo.js:3448
 msgid "To track time, select a dir for csv files in the settings."
 msgstr ""
-#
-msgid ""
-msgstr ""
+{
+    "layout1": {
+        "type": "layout",
+        "pages": ["page1", "page2", "page3", "page4", "page5", "page6"],
 
-#. timepp@zagortenay333->settings-
-#. schema.json->todo_key_open_to_search->description
-msgid "Open this section and search tasks."
-msgstr ""
+        "page1": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section1"]
+        },
 
-#. timepp@zagortenay333->settings-
-#. schema.json->todo_key_open_to_add->description
-msgid "Open this section and add task."
-msgstr ""
+        "page2": {
+            "type": "page",
+            "title": "Timer",
+            "sections": ["section2"]
+        },
 
-#. timepp@zagortenay333->settings-
-#. schema.json->stopwatch_panel_mode->description
-#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->description
-#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->description
-#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->description
-msgid "Panel Item Mode"
-msgstr ""
+        "page3": {
+            "type": "page",
+            "title": "Stopwatch",
+            "sections": ["section3"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->stopwatch_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->options
-msgid "Icon and label"
-msgstr ""
+        "page4": {
+            "type": "page",
+            "title": "Pomodoro",
+            "sections": ["section4"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->stopwatch_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->options
-msgid "Label only"
-msgstr ""
+        "page5": {
+            "type": "page",
+            "title": "Alarms",
+            "sections": ["section5"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->stopwatch_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->timer_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->todo_panel_mode->options
-#. timepp@zagortenay333->settings-schema.json->pomo_panel_mode->options
-msgid "Icon only"
-msgstr ""
+        "page6": {
+            "type": "page",
+            "title": "Todo/Time Tracker",
+            "sections": ["section6", "section7", "section8"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->todo_txt_file_path->description
-msgid "Path to todo.txt file"
-msgstr ""
+        "section1": {
+            "type": "section",
+            "title": "General Settings",
+            "keys": ["unicon_mode", "unicon"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->alarm_icon->description
-msgid "Alarms Panel Icon"
-msgstr ""
+        "section2": {
+            "type": "section",
+            "title": "Timer Settings",
+            "keys": ["timer_icon", "timer_separate_menu", "timer_panel_mode", "timer_show_secs", "timer_key_open"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->alarm_icon->tooltip
-#. timepp@zagortenay333->settings-schema.json->timer_icon->tooltip
-#. timepp@zagortenay333->settings-schema.json->pomo_icon->tooltip
-#. timepp@zagortenay333->settings-schema.json->stopwatch_icon->tooltip
-#. timepp@zagortenay333->settings-schema.json->todo_icon->tooltip
-#. timepp@zagortenay333->settings-schema.json->unicon->tooltip
-msgid ""
-"Icon name, absolute path, or path relative to this applet's dir.\n"
-"To use a symbolic icon, add '-symbolic' to it's name."
-msgstr ""
+        "section3": {
+            "type": "section",
+            "title": "Stopwatch Settings",
+            "keys": ["stopwatch_icon", "stopwatch_separate_menu", "stopwatch_panel_mode", "stopwatch_show_secs", "stopwatch_key_open"]
+        },
 
-#. timepp@zagortenay333->settings-
-#. schema.json->stopwatch_separate_menu->description
-#. timepp@zagortenay333->settings-schema.json->pomo_separate_menu->description
-#. timepp@zagortenay333->settings-
-#. schema.json->alarm_separate_menu->description
-#. timepp@zagortenay333->settings-schema.json->todo_separate_menu->description
-#. timepp@zagortenay333->settings-
-#. schema.json->timer_separate_menu->description
-msgid "Show in separate menu"
-msgstr ""
+        "section4": {
+            "type": "section",
+            "title": "Pomodoro Settings",
+            "keys": ["pomo_icon", "pomo_separate_menu", "pomo_panel_mode", "pomo_show_secs", "pomo_key_open", "pomo_stop_time_tracking", "pomo_script_path"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->timer_icon->description
-msgid "Timer Panel Icon"
-msgstr ""
+        "section5": {
+            "type": "section",
+            "title": "Alarms Settings",
+            "keys": ["alarm_icon", "alarm_separate_menu", "alarm_key_open", "alarm_snooze_duration"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->timer_key_open->description
-#. timepp@zagortenay333->settings-schema.json->alarm_key_open->description
-#. timepp@zagortenay333->settings-schema.json->stopwatch_key_open->description
-#. timepp@zagortenay333->settings-schema.json->pomo_key_open->description
-msgid "Menu shortcut key"
-msgstr ""
+        "section6": {
+            "type": "section",
+            "title": "Misc",
+            "keys": ["todo_icon", "todo_separate_menu", "todo_panel_mode", "todo_task_width"]
+        },
 
-#. timepp@zagortenay333->settings-schema.json->pomo_show_secs->description
-#. timepp@zagortenay333->settings-
-#. schema.json->stopwatch_show_secs->description
-#. timepp@zagortenay333->settings-schema.json->timer_show_secs->description
-msgid "Show seconds"
-msgstr ""
+        "section7": {
+            "type": "section",
+            "title": "File paths",
+            "keys": ["todo_txt_file_path", "done_txt_file_path", "time_tracker_csv_dir"]
+        },
 
-#. timepp@zagortenay333->settings-
-#. schema.json->time_tracker_csv_dir->description
-msgid "Dir in which to store the time-tracker csv files"
-msgstr ""
+        "section8": {
+            "type": "section",
+            "title": "Keybindings",
+            "keys": ["todo_key_open", "todo_key_open_to_add", "todo_key_open_to_search"]
+        }
+    },
 
-#. timepp@zagortenay333->settings-schema.json->pomo_script_path->description
-msgid "Execute custom script when pomo starts or pauses"
-msgstr ""
+    "unicon_mode": {
+        "type": "switch",
+        "description": "Show single icon in panel",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->pomo_icon->description
-msgid "Pomodoro Panel Icon"
-msgstr ""
+    "unicon": {
+        "dependency": "unicon_mode",
+        "type": "iconfilechooser",
+        "indent": true,
+        "description": "Icon when using one panel item",
+        "default": "/img/unicon-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
 
-#. timepp@zagortenay333->settings-schema.json->stopwatch_icon->description
-msgid "Stopwatch Panel Icon"
-msgstr ""
+    "timer_icon": {
+        "type": "iconfilechooser",
+        "description": "Timer Panel Icon",
+        "default": "/img/timer-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
 
-#. timepp@zagortenay333->settings-schema.json->todo_key_open->description
-msgid "Open this section."
-msgstr ""
+    "timer_separate_menu": {
+        "type": "switch",
+        "description": "Show in separate menu",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section4->title
-msgid "Pomodoro Settings"
-msgstr ""
+    "timer_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 2,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section2->title
-msgid "Timer Settings"
-msgstr ""
+    "timer_show_secs": {
+        "type": "switch",
+        "description": "Show seconds",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section3->title
-msgid "Stopwatch Settings"
-msgstr ""
+    "timer_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section5->title
-msgid "Alarms Settings"
-msgstr ""
+    "stopwatch_icon": {
+        "type": "iconfilechooser",
+        "description": "Stopwatch Panel Icon",
+        "default": "/img/stopwatch-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section7->title
-msgid "File paths"
-msgstr ""
+    "stopwatch_separate_menu": {
+        "type": "switch",
+        "description": "Show in separate menu",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section8->title
-msgid "Keybindings"
-msgstr ""
+    "stopwatch_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 2,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
 
-#. timepp@zagortenay333->settings-schema.json->page6->title
-msgid "Todo/Time Tracker"
-msgstr ""
+    "stopwatch_show_secs": {
+        "type": "switch",
+        "description": "Show seconds",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section6->title
-msgid "Misc"
-msgstr ""
+    "stopwatch_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
 
-#. timepp@zagortenay333->settings-schema.json->page4->title
-msgid "Pomodoro"
-msgstr ""
+    "pomo_icon": {
+        "type": "iconfilechooser",
+        "description": "Pomodoro Panel Icon",
+        "default": "/img/pomodoro-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
 
-#. timepp@zagortenay333->settings-schema.json->page5->title
-msgid "Alarms"
-msgstr ""
+    "pomo_separate_menu": {
+        "type": "switch",
+        "description": "Show in separate menu",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->page2->title
-msgid "Timer"
-msgstr ""
+    "pomo_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 2,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
 
-#. timepp@zagortenay333->settings-schema.json->page3->title
-msgid "Stopwatch"
-msgstr ""
+    "pomo_show_secs": {
+        "type": "switch",
+        "description": "Show seconds",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->section1->title
-msgid "General Settings"
-msgstr ""
+    "pomo_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
 
-#. timepp@zagortenay333->settings-schema.json->page1->title
-msgid "General"
-msgstr ""
+    "pomo_stop_time_tracking": {
+        "type": "switch",
+        "description": "Stop time tracking when pomo is paused",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-
-#. schema.json->alarm_snooze_duration->description
-msgid "Snooze duration"
-msgstr ""
+    "pomo_script_path": {
+        "type": "filechooser",
+        "description": "Execute custom script when pomo starts or pauses",
+        "select-dir": false,
+        "default": "",
+        "tooltip": ""
+    },
 
-#. timepp@zagortenay333->settings-schema.json->alarm_snooze_duration->units
-msgid "sec"
-msgstr ""
+    "alarm_icon": {
+        "type": "iconfilechooser",
+        "description": "Alarms Panel Icon",
+        "default": "/img/alarms-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
 
-#. timepp@zagortenay333->settings-schema.json->todo_icon->description
-msgid "Todo Panel Icon"
-msgstr ""
+    "alarm_separate_menu": {
+        "type": "switch",
+        "description": "Show in separate menu",
+        "default": false
+    },
 
-#. timepp@zagortenay333->settings-schema.json->unicon->description
-msgid "Icon when using one panel item"
-msgstr ""
+    "alarm_key_open": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
 
-#. timepp@zagortenay333->settings-schema.json->todo_task_width->description
-msgid "Task width"
-msgstr ""
+    "alarm_snooze_duration": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 1,
+        "max": 81420,
+        "units": "sec",
+        "step": 1,
+        "description": "Snooze duration"
+    },
 
-#. timepp@zagortenay333->settings-schema.json->todo_task_width->units
-msgid "px"
-msgstr ""
+    "todo_icon": {
+        "type": "iconfilechooser",
+        "description": "Todo Panel Icon",
+        "default": "/img/todo-symbolic.svg",
+        "tooltip": "Icon name, absolute path, or path relative to this applet's dir.\nTo use a symbolic icon, add '-symbolic' to it's name."
+    },
 
-#. timepp@zagortenay333->settings-schema.json->unicon_mode->description
-msgid "Show single icon in panel"
-msgstr ""
+    "todo_separate_menu": {
+        "type": "checkbox",
+        "description": "Show in separate menu",
+        "default": true
+    },
 
-#. timepp@zagortenay333->metadata.json->description
-msgid ""
-"A todo.txt manager, time tracker, timer, stopwatch, pomodoro, and alarm "
-"applet"
-msgstr ""
+    "todo_panel_mode": {
+        "type": "combobox",
+        "description": "Panel Item Mode",
+        "default": 0,
+        "options": {
+            "Icon only": 0,
+            "Label only": 1,
+            "Icon and label": 2
+        }
+    },
 
-#. timepp@zagortenay333->metadata.json->name
-msgid "Time ++"
-msgstr ""
+    "todo_task_width": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 100,
+        "max": 81420,
+        "units": "px",
+        "step": 1,
+        "description": "Task width"
+    },
+
+    "todo_key_open": {
+        "type": "keybinding",
+        "description": "Open this section.",
+        "default": ""
+    },
+
+    "todo_key_open_to_add": {
+        "type": "keybinding",
+        "description": "Open this section and add task.",
+        "default": ""
+    },
+
+    "todo_key_open_to_search": {
+        "type": "keybinding",
+        "description": "Open this section and search tasks.",
+        "default": ""
+    },
+
+    "todo_txt_file_path": {
+        "type": "filechooser",
+        "description": "Path to todo.txt file",
+        "select-dir": false,
+        "default": ""
+    },
+
+    "done_txt_file_path": {
+        "type": "filechooser",
+        "description": "Path to done.txt file",
+        "select-dir": false,
+        "default": ""
+    },
+
+    "time_tracker_csv_dir": {
+        "type": "filechooser",
+        "description": "Dir in which to store the time-tracker csv files",
+        "select-dir": true,
+        "default": ""
+    }
+}
