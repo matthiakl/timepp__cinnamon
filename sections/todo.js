@@ -3186,9 +3186,8 @@ TimeTracker.prototype = {
             return;
         }
 
-        this._write_daily_csv_file();
-
         this.timer_minutes_proc_id = Mainloop.timeout_add_seconds(60, () => {
+            this._write_daily_csv_file();
             this._timer_minutes();
         });
     },
