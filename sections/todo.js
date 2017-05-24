@@ -2500,7 +2500,8 @@ TaskFiltersWindow.prototype = {
                 if (this.filter_register.custom[i].label.text === this.entry.entry.text)
                     return;
 
-            let item = this._new_filter_item(this.custom_filters, true, this.entry.entry.text, null, true);
+            let item = this._new_filter_item(true, this.entry.entry.text, null, true);
+            this.custom_filters.add_child(item.actor);
             this.filter_register.custom.push(item);
         });
         this.show_hidden_tasks_toggle.actor.connect('button-release-event', () => {
@@ -2540,7 +2541,8 @@ TaskFiltersWindow.prototype = {
         while (i--) {
             value = this.delegate.cache.filters.custom_filters[i];
             check = this.active_filters.custom.indexOf(value) === -1 ? false : true;
-            item  = this._new_filter_item(this.custom_filters, check, value, null, true);
+            item  = this._new_filter_item(check, value, null, true);
+            this.custom_filters.add_child(item.actor);
             this.filter_register.custom.push(item);
         }
 
@@ -2551,13 +2553,17 @@ TaskFiltersWindow.prototype = {
 
         for ([key, value] of this.delegate.priorities.entries()) {
             check = this.active_filters.priorities.indexOf(key) === -1 ? false : true;
-            item = this._new_filter_item(this.priorities, check, key, value);
+            item = this._new_filter_item(check, key, value);
             this.filter_register.priorities.push(item);
         }
 
         this.filter_register.priorities.sort((a, b) => {
-            return +(a.label.text > b.label.text) || +(a.label.text === b.label.text) - 1;
+            return +(a.label.text > b.label.text) ||
+                   +(a.label.text === b.label.text) - 1;
         });
+
+        for (i = 0; i < this.filter_register.priorities.length; i++)
+            this.priorities.add_child(this.filter_register.priorities[i].actor);
 
         //
         // contexts
@@ -2566,7 +2572,8 @@ TaskFiltersWindow.prototype = {
 
         for ([key, value] of this.delegate.contexts.entries()) {
             check = this.active_filters.contexts.indexOf(key) === -1 ? false : true;
-            item  = this._new_filter_item(this.contexts, check, key, value);
+            item  = this._new_filter_item(check, key, value);
+            this.contexts.add_child(item.actor);
             this.filter_register.contexts.push(item);
         }
 
@@ -2577,7 +2584,8 @@ TaskFiltersWindow.prototype = {
 
         for ([key, value] of this.delegate.projects.entries()) {
             check = this.active_filters.projects.indexOf(key) === -1 ? false : true;
-            item  = this._new_filter_item(this.projects, check, key, value);
+            item  = this._new_filter_item(check, key, value);
+            this.projects.add_child(item.actor);
             this.filter_register.projects.push(item);
         }
 
@@ -2596,11 +2604,10 @@ TaskFiltersWindow.prototype = {
         }
     },
 
-    _new_filter_item: function (sector, is_checked, val, stat_label, is_deletable) {
+    _new_filter_item: function (is_checked, val, stat_label, is_deletable) {
         let item = {};
 
         item.actor = new St.BoxLayout({ reactive: true });
-        sector.add_child(item.actor);
 
         item.value = val;
 
