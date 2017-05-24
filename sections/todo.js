@@ -505,7 +505,8 @@ Todo.prototype = {
 
     _update_panel_item_label: function () {
         let n_complete   = this.priorities.get('(x)') || 0;
-        let n_incomplete = this.tasks.length - n_complete;
+        let n_hidden     = this.priorities.get('(~)') || 0;
+        let n_incomplete = this.tasks.length - n_complete - n_hidden;
         this.panel_item.set_label('' + n_incomplete);
 
         if (n_incomplete) this.panel_item.actor.remove_style_class_name('done');
@@ -917,11 +918,8 @@ Todo.prototype = {
             this.contexts.set(task.contexts[i], it ? ++it : 1);
         }
 
-        // We don't want to add the priority if the task is hidden.
-        if (! task.hidden) {
-            it = this.priorities.get(task.priority);
-            this.priorities.set(task.priority, it ? ++it : 1);
-        }
+        it = this.priorities.get(task.priority);
+        this.priorities.set(task.priority, it ? ++it : 1);
     },
 
     // Create objects from the todo_txt file, and add them to the task_objects
@@ -2083,7 +2081,7 @@ TaskItem.prototype = {
                     this.actor.add_style_class_name('hidden');
                     this.completion_checkbox.checked = false;
                     this.completion_checkbox.hide();
-                    this.priority = '(_)';
+                    this.priority = '(~)';
                     this.prio_label.hide();
                     this.due_date_label.hide();
                     this.date_labels.hide();
@@ -2441,9 +2439,15 @@ TaskFiltersWindow.prototype = {
         let show_hidden_tasks_label = new St.Label({ text: _('Show only hidden tasks'), y_align: St.Align.END });
         this.show_hidden_tasks_item.add(show_hidden_tasks_label, {expand: true});
 
+        let hidden_count_label = new St.Label({ y_align: Clutter.ActorAlign.CENTER, style_class: 'popup-inactive-menu-item' });
+        this.show_hidden_tasks_item.add_child(hidden_count_label);
+
+        let n = this.delegate.priorities.get('(~)') || 0;
+        if (n === 1) hidden_count_label.text = _('%d hidden task').format(n);
+        else hidden_count_label.text         = _('%d hidden tasks').format(n);
+
         this.show_hidden_tasks_toggle = new PopupMenu.Switch();
         this.show_hidden_tasks_item.add_actor(this.show_hidden_tasks_toggle.actor);
-
         this.show_hidden_tasks_toggle.actor.can_focus = true;
         this.show_hidden_tasks_toggle.actor.reactive  = true;
 
@@ -2552,6 +2556,7 @@ TaskFiltersWindow.prototype = {
         this._add_separator(this.priorities);
 
         for ([key, value] of this.delegate.priorities.entries()) {
+            if (key === '(~)') continue; // skip hidden tasks here
             check = this.active_filters.priorities.indexOf(key) === -1 ? false : true;
             item = this._new_filter_item(check, key, value);
             this.filter_register.priorities.push(item);
@@ -2589,7 +2594,6 @@ TaskFiltersWindow.prototype = {
             this.filter_register.projects.push(item);
         }
 
-
         // hide the sections that don't have any items
         let arr = [this.priorities, this.contexts, this.projects];
         arr.forEach((it) => it.get_n_children() === 1 && it.hide());
@@ -2619,7 +2623,11 @@ TaskFiltersWindow.prototype = {
         item.actor.add(item.label, {expand: true});
 
         if (stat_label) {
-            stat_label = '(' + stat_label + ' tasks)   ';
+            if (stat_label === 1)
+                stat_label =  _('%d task').format(stat_label) + '   ';
+            else
+                stat_label =  _('%d tasks').format(stat_label) + '   ';
+
             item.stat_label = new St.Label({ text: stat_label, y_align: Clutter.ActorAlign.CENTER, style_class: 'popup-inactive-menu-item' });
             item.actor.add_child(item.stat_label);
         }
