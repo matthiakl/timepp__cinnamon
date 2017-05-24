@@ -2299,11 +2299,12 @@ TaskItem.prototype = {
         let diff = Math.ceil((due - Date.now()) / 86400000);
         let abs  = Math.abs(diff);
 
-        if      (diff === 0)  abs = _('today');
-        else if (diff === -1) abs = _('%d day ago').format(abs);
-        else if (diff < 0)    abs = _('%d days ago').format(abs);
-        else if (diff === 1)  abs = _('in %d day').format(abs);
-        else                  abs = _('in %d days').format(abs);
+        if (diff === 0)
+            abs = _('today');
+        else if (diff < 0)
+            abs = ngettext('%d day ago', '%d days ago', abs).format(abs);
+        else
+            abs = ngettext('in %d day', 'in %d days', abs).format(abs);
 
         this.due_date_label.text = _('due:') + this.due_date + ' (' + abs + ')';
     },
@@ -2356,6 +2357,7 @@ function TaskFiltersWindow(applet, delegate) {
 
 TaskFiltersWindow.prototype = {
     _init: function(applet, delegate) {
+        try {
         this.applet         = applet;
         this.delegate       = delegate;
         this.active_filters = delegate.cache.filters.active_filters;
@@ -2443,8 +2445,8 @@ TaskFiltersWindow.prototype = {
         this.show_hidden_tasks_item.add_child(hidden_count_label);
 
         let n = this.delegate.priorities.get('(~)') || 0;
-        if (n === 1) hidden_count_label.text = _('%d hidden task').format(n);
-        else hidden_count_label.text         = _('%d hidden tasks').format(n);
+        hidden_count_label.text =
+            ngettext('%d hidden task', '%d hidden tasks', n).format(n);
 
         this.show_hidden_tasks_toggle = new PopupMenu.Switch();
         this.show_hidden_tasks_item.add_actor(this.show_hidden_tasks_toggle.actor);
@@ -2529,6 +2531,7 @@ TaskFiltersWindow.prototype = {
         this.button_ok.connect('clicked', () => {
             this._on_ok_clicked();
         });
+        }catch(e){global.logError(e);}
     },
 
     _load_filters: function () {
@@ -2564,8 +2567,8 @@ TaskFiltersWindow.prototype = {
         }
 
         this.filter_register.priorities.sort((a, b) => {
-            return +(a.label.text > b.label.text) ||
-                   +(a.label.text === b.label.text) - 1;
+            return +(a.prio_label.text > b.prio_label.text) ||
+                   +(a.prio_label.text === b.prio_label.text) - 1;
         });
 
         for (i = 0; i < this.filter_register.priorities.length; i++)
@@ -2609,35 +2612,37 @@ TaskFiltersWindow.prototype = {
         }
     },
 
-    _new_filter_item: function (is_checked, val, stat_label, is_deletable) {
+    _new_filter_item: function (is_checked, prio_label, count, is_deletable) {
         let item = {};
+
 
         item.actor = new St.BoxLayout({ reactive: true });
 
-        item.value = val;
 
-        if (val === '(_)' || val === '(x)')
-            item.label = new St.Label({ text: this.text_map[val], y_align: Clutter.ActorAlign.CENTER });
+        item.prio = prio_label; // in case we need to map, we keep the old value
+
+
+        item.prio_label = new St.Label({ y_align: Clutter.ActorAlign.CENTER });
+        item.actor.add(item.prio_label, {expand: true});
+        if (prio_label === '(_)' || prio_label === '(x)')
+            item.prio_label.text = this.text_map[prio_label];
         else
-            item.label = new St.Label({ text: val, y_align: Clutter.ActorAlign.CENTER });
+            item.prio_label.text = prio_label;
 
-        item.actor.add(item.label, {expand: true});
 
-        if (stat_label) {
-            if (stat_label === 1)
-                stat_label =  _('%d task').format(stat_label) + '   ';
-            else
-                stat_label =  _('%d tasks').format(stat_label) + '   ';
+        item.count_label = new St.Label({ y_align: Clutter.ActorAlign.CENTER, style_class: 'popup-inactive-menu-item' });
+        item.actor.add_child(item.count_label);
+        item.count_label.text =
+            ngettext('%d task', '%d tasks', count).format(count) + '   ';
 
-            item.stat_label = new St.Label({ text: stat_label, y_align: Clutter.ActorAlign.CENTER, style_class: 'popup-inactive-menu-item' });
-            item.actor.add_child(item.stat_label);
-        }
 
         item.option_box = new St.BoxLayout({ style_class: 'option-box' });
         item.actor.add_child(item.option_box);
 
+
         item.checkbox = new CheckBox.CheckButton(is_checked);
         item.option_box.add_actor(item.checkbox.actor);
+
 
         let close_button;
 
@@ -2706,14 +2711,21 @@ TaskFiltersWindow.prototype = {
         for (k in this.filter_register) {
             if (this.filter_register.hasOwnProperty(k)) {
                 i = this.filter_register[k].length;
-                while (i--)
-                    if (this.filter_register[k][i].checkbox.actor.checked)
-                        res.active_filters[k].push(this.filter_register[k][i].value);
+
+                while (i--) {
+                    if (this.filter_register[k][i].checkbox.actor.checked) {
+                        res.active_filters[k].push(
+                            this.filter_register[k][i].prio);
+                    }
+                }
             }
         }
 
         i = this.filter_register.custom.length;
-        while (i--) res.custom_filters.push(this.filter_register.custom[i].label.text);
+        while (i--) {
+            res.custom_filters.push(
+                this.filter_register.custom[i].prio);
+        }
 
         this.emit('update-filters', res);
     },

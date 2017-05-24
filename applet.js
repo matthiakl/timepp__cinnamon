@@ -22,12 +22,18 @@ const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
 const Gettext = imports.gettext;
 let UUID;
 
-
 function _(str) {
    let custom_translation = Gettext.dgettext(UUID, str);
-   if (custom_translation != str) return custom_translation;
+   if (custom_translation !== str) return custom_translation;
    return Gettext.gettext(str);
-};
+}
+
+function ngettext(str1, str2, n) {
+   let custom_translation = Gettext.dngettext(UUID, str1, str2, n);
+   if (custom_translation !== str1 && custom_translation !== str2)
+        return custom_translation;
+   return Gettext.ngettext(str1, str2, n);
+}
 
 
 // =====================================================================
