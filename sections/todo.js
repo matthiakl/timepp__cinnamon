@@ -170,7 +170,7 @@ Todo.prototype = {
         // @value: natural (number of tasks that have that @key)
         //
         // The values of a priority can be:
-        // '(x)' if task is completed, '(_)' if no priority, else '(A-Z)'.
+        // (~) if hidden (x) if completed, (_) if no priority, else (A-Z).
         this.priorities = new Map();
         this.contexts   = new Map();
         this.projects   = new Map();
@@ -1776,7 +1776,7 @@ TaskItem.prototype = {
 
 
         // The values of this.priority are:
-        // (x) if task is completed, (_) if no priority, else (A-Z).
+        // (~) if hidden (x) if completed, (_) if no priority, else (A-Z).
         this.priority        = '(_)';
         this.projects        = [];
         this.contexts        = [];
