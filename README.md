@@ -118,5 +118,5 @@ The xdotool command can be enabled to open the applet on change.
 
 ---
 
-![preview](https://i.imgur.com/DGN2eo7.png)
+![preview](https://i.imgur.com/GssjcSH.png)
 <sup>**Preview info:** [Cinnamon theme](https://github.com/zagortenay333/ciliora-tertia-cinnamon)</sup>
