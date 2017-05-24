@@ -2507,6 +2507,7 @@ TaskFiltersWindow.prototype = {
             let item = this._new_filter_item(true, this.entry.entry.text, null, true);
             this.custom_filters.add_child(item.actor);
             this.filter_register.custom.push(item);
+            this.entry.entry.text = '';
         });
         this.show_hidden_tasks_toggle.actor.connect('button-release-event', () => {
             this.show_hidden_tasks_toggle.toggle();
