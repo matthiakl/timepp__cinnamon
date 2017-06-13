@@ -3575,21 +3575,23 @@ TimeTracker.prototype = {
 
     // @needle: string (a task_str or a project keyword)
     get_stats: function (needle) {
-        if (this.csv_dir === '') return null;
+        if (!this.csv_dir) return null;
 
         let yearly_records = this.yearly_csv_map.get(needle);
         yearly_records     = yearly_records ? yearly_records.records : null;
+
         let todays_record  = this.daily_csv_map.get(needle);
+        todays_record      = todays_record ? todays_record.time : 0;
 
         if (! yearly_records && ! todays_record) return null;
 
         let stats = {
             name            : needle,
-            today           : todays_record ? todays_record.time : 0,
-            last_three_days : 0,
-            this_week       : 0,
-            this_month      : 0,
-            this_year       : 0,
+            today           : todays_record,
+            last_three_days : todays_record,
+            this_week       : todays_record,
+            this_month      : todays_record,
+            this_year       : todays_record,
         };
 
         if (! yearly_records) return stats;
@@ -3601,10 +3603,9 @@ TimeTracker.prototype = {
             ['this_year',       new Date().getFullYear() + '-01-01'],
         ];
 
-        let acc = todays_record ? todays_record.time : 0;
+        let acc = todays_record;
         let i   = yearly_records.length;
         let j, it;
-
 
         while (i--) {
             it   = yearly_records[i];
@@ -3612,9 +3613,10 @@ TimeTracker.prototype = {
 
             j = dates.length;
 
-            while (j--)
+            while (j--) {
                 if (dates[j][1] <= it.date) stats[ dates[j][0] ] = acc;
                 else dates.splice(j, 1);
+            }
         }
 
         return stats;
