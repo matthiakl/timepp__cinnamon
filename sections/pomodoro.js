@@ -12,11 +12,13 @@ const Mainloop    = imports.mainloop;
 const Signals     = imports.signals;
 const Lang        = imports.lang;
 
+const EXTENSION_UUID = "timepp@zagortenay333";
+const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
 
-const PANEL_ITEM    = imports.applet.lib.panel_item;
-const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
-const NUM_PICKER    = imports.applet.lib.num_picker;
-const LPAD          = imports.applet.lib.leftpad;
+const PANEL_ITEM    = AppletDir.lib.panel_item;
+const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
+const NUM_PICKER    = AppletDir.lib.num_picker;
+const LPAD          = AppletDir.lib.leftpad;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_pomodoro.json';

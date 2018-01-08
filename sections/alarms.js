@@ -15,11 +15,13 @@ const Signals     = imports.signals;
 
 
 // local imports
-const PANEL_ITEM    = imports.applet.lib.panel_item;
-const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
-const MULTIL_ENTRY  = imports.applet.lib.multiline_entry;
-const NUM_PICKER    = imports.applet.lib.num_picker;
-const DAY_CHOOSER   = imports.applet.lib.day_chooser;
+const EXTENSION_UUID = "timepp@zagortenay333";
+const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+const PANEL_ITEM    = AppletDir.lib.panel_item;
+const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
+const MULTIL_ENTRY  = AppletDir.lib.multiline_entry;
+const NUM_PICKER    = AppletDir.lib.num_picker;
+const DAY_CHOOSER   = AppletDir.lib.day_chooser;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_alarms.json';

@@ -1,3 +1,4 @@
+
 const Applet    = imports.ui.applet;
 const St        = imports.gi.St;
 const Lang      = imports.lang;
@@ -6,16 +7,17 @@ const Settings  = imports.ui.settings;
 const GLib      = imports.gi.GLib;
 const Signals   = imports.signals;
 
+const EXTENSION_UUID = "timepp@zagortenay333";
+const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+const Timer     = AppletDir.sections.timer;
+const Stopwatch = AppletDir.sections.stopwatch;
+const Pomodoro  = AppletDir.sections.pomodoro;
+const Alarms    = AppletDir.sections.alarms;
+const Todo      = AppletDir.sections.todo;
 
-const Timer     = imports.applet.sections.timer;
-const Stopwatch = imports.applet.sections.stopwatch;
-const Pomodoro  = imports.applet.sections.pomodoro;
-const Alarms    = imports.applet.sections.alarms;
-const Todo      = imports.applet.sections.todo;
 
-
-const PANEL_ITEM    = imports.applet.lib.panel_item;
-const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
+const PANEL_ITEM    = AppletDir.lib.panel_item;
+const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
 
 
 // l10n/translation

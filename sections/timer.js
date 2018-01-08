@@ -15,11 +15,13 @@ const Signals     = imports.signals;
 
 
 // local imports
-const PANEL_ITEM    = imports.applet.lib.panel_item;
-const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
-const NUM_PICKER    = imports.applet.lib.num_picker;
-const MULTIL_ENTRY  = imports.applet.lib.multiline_entry;
-const LPAD          = imports.applet.lib.leftpad;
+const EXTENSION_UUID = "timepp@zagortenay333";
+AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+const PANEL_ITEM    = AppletDir.lib.panel_item;
+const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
+const NUM_PICKER    = AppletDir.lib.num_picker;
+const MULTIL_ENTRY  = AppletDir.lib.multiline_entry;
+const LPAD          = AppletDir.lib.leftpad;
 
 
 
