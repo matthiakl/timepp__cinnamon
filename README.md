@@ -1,6 +1,5 @@
-This project is no longer maintained.
+**This project is no longer maintained.**
 
-# Time ++ ![icon banner](img/banner.png)
 
 A [todo.txt manager](https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format),
 time tracker, timer, stopwatch, pomodoro, and alarms applet for 
