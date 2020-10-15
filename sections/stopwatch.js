@@ -12,9 +12,11 @@ const Signals   = imports.signals;
 
 
 // local imports
-const PANEL_ITEM    = imports.applet.lib.panel_item;
-const ICON_FROM_URI = imports.applet.lib.icon_from_uri;
-const LPAD          = imports.applet.lib.leftpad;
+const EXTENSION_UUID = "timepp@zagortenay333";
+AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+const PANEL_ITEM    = AppletDir.lib.panel_item;
+const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
+const LPAD          = AppletDir.lib.leftpad;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_stopwatch.json';

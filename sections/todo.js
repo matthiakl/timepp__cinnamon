@@ -15,14 +15,15 @@ const Lang        = imports.lang;
 const Signals     = imports.signals;
 const Mainloop    = imports.mainloop;
 
-
-const FUZZ           = imports.applet.lib.fuzzy_search;
-const LPAD           = imports.applet.lib.leftpad;
-const NUM_PICKER     = imports.applet.lib.num_picker;
-const PANEL_ITEM     = imports.applet.lib.panel_item;
-const MULTIL_ENTRY   = imports.applet.lib.multiline_entry;
-const ICON_FROM_URI  = imports.applet.lib.icon_from_uri;
-const SCROLL_TO_ITEM = imports.applet.lib.scroll_to_item;
+const EXTENSION_UUID = "timepp@zagortenay333";
+const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+const FUZZ           = AppletDir.lib.fuzzy_search;
+const LPAD           = AppletDir.lib.leftpad;
+const NUM_PICKER     = AppletDir.lib.num_picker;
+const PANEL_ITEM     = AppletDir.lib.panel_item;
+const MULTIL_ENTRY   = AppletDir.lib.multiline_entry;
+const ICON_FROM_URI  = AppletDir.lib.icon_from_uri;
+const SCROLL_TO_ITEM = AppletDir.lib.scroll_to_item;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_todo.json';
