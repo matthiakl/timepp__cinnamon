@@ -12,7 +12,7 @@ const Signals   = imports.signals;
 
 
 // local imports
-const EXTENSION_UUID = "timepp@zagortenay333";
+const EXTENSION_UUID = "timepp@matthiakl";
 AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
 const PANEL_ITEM    = AppletDir.lib.panel_item;
 const ICON_FROM_URI = AppletDir.lib.icon_from_uri;

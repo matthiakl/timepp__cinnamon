@@ -12,7 +12,7 @@ const Mainloop    = imports.mainloop;
 const Signals     = imports.signals;
 const Lang        = imports.lang;
 
-const EXTENSION_UUID = "timepp@zagortenay333";
+const EXTENSION_UUID = "timepp@matthiakl";
 const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
 
 const PANEL_ITEM    = AppletDir.lib.panel_item;
@@ -332,7 +332,7 @@ Pomodoro.prototype = {
     },
 
     _timer_expired: function () {
-        if (this.pomo_phase === PomoPhase.LONG_BREAK || this.pomo_phase === PomoPhase.LONG_BREAK) {
+        if (this.pomo_phase === PomoPhase.SHORT_BREAK || this.pomo_phase === PomoPhase.LONG_BREAK) {
             this._start_new_pomo();
             this._send_notif();
         } else {
@@ -398,7 +398,7 @@ Pomodoro.prototype = {
     _send_notif: function () {
         switch (this.pomo_phase) {
             case PomoPhase.POMO:       msg = _('Start working!');      break;
-            case PomoPhase.LONG_BREAK: msg = _('Take a short break!'); break;
+            case PomoPhase.SHORT_BREAK: msg = _('Take a short break!'); break;
             case PomoPhase.LONG_BREAK: msg = _('Take long break!');    break;
             default: return;
         }

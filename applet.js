@@ -7,7 +7,7 @@ const Settings  = imports.ui.settings;
 const GLib      = imports.gi.GLib;
 const Signals   = imports.signals;
 
-const EXTENSION_UUID = "timepp@zagortenay333";
+const EXTENSION_UUID = "timepp@matthiakl";
 const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
 const Timer     = AppletDir.sections.timer;
 const Stopwatch = AppletDir.sections.stopwatch;

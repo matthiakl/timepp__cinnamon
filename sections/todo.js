@@ -15,7 +15,7 @@ const Lang        = imports.lang;
 const Signals     = imports.signals;
 const Mainloop    = imports.mainloop;
 
-const EXTENSION_UUID = "timepp@zagortenay333";
+const EXTENSION_UUID = "timepp@matthiakl";
 const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
 const FUZZ           = AppletDir.lib.fuzzy_search;
 const LPAD           = AppletDir.lib.leftpad;
