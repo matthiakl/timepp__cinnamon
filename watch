@@ -39,7 +39,7 @@ toggle_menu() {
 while
     reload_applet
 	sleep 1
-    toggle_menu
+    #toggle_menu
 
     # test
     inotifywait --format '%e %w%f' -qre modify "${watch_dirs[@]}"

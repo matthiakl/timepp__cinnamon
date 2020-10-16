@@ -1,0 +1,42 @@
+#!/bin/bash
+script_dir="$(readlink -f $(dirname $0))"
+basedir="$script_dir/.."
+template_file="$script_dir/template.pot"
+
+print_usage()
+{
+	echo "Usage: $0"
+	echo "                    update pot file"
+	echo "      -i|--install: install translations"
+	echo "      -m|--merge:   merge template with existing translations"
+}
+
+merge()
+{
+	pofiles=$(find "$script_dir" -name "*.po")
+	for po_file in $pofiles; do
+		msgmerge -U "$po_file" --backup="none" "$template_file"
+		msgattrib --output-file="$po_file" --no-obsolete "$po_file"
+	done
+}
+
+pushd $basedir > /dev/null
+
+case $1 in
+	-h|--help)
+		print_usage
+	;;
+	-i|--install)
+		cinnamon-json-makepot -i
+	;;
+	-m|--merge)
+		merge
+	;;
+	*)
+		cinnamon-json-makepot --js $template_file
+	;;
+esac
+		
+popd > /dev/null
+
+
