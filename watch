@@ -3,7 +3,7 @@
 # ======================================
 #  Constants
 # ======================================
-uuid='timepp@zagortenay333'
+uuid='timepp@matthiakl'
 
 type='APPLET'
 
@@ -28,7 +28,7 @@ reload_applet() {
 
 # useful for opening the menu automatically too
 toggle_menu() {
-    xdotool mousemove 1280 7
+    xdotool mousemove 1695 7
     xdotool click 1
 }
 
@@ -38,6 +38,7 @@ toggle_menu() {
 # ======================================
 while
     reload_applet
+	sleep 1
     toggle_menu
 
     # test

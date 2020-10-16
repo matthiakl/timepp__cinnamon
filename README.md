@@ -1,26 +1,22 @@
-**This project is no longer maintained.**
-
----
-
 A [todo.txt manager](https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format),
 time tracker, timer, stopwatch, pomodoro, and alarms applet for 
 [cinnamon](https://github.com/linuxmint/Cinnamon/tree/master/js/ui).
 
-Gnome-shell extension version: https://github.com/zagortenay333/timepp__gnome
+The Gnome-shell extension version is still maintained by the original author: https://github.com/zagortenay333/timepp__gnome
 
 ---
 
 ### Installation
 
 Clone/download this repo into your `~/.local/share/cinnamon/applets` dir and
-rename the downloaded folder to `timepp@zagortenay333`.
+rename the downloaded folder to `timepp@matthiakl`.
 
 ---
 
 ### Compatibility
 
 The latest version of this applet is on the master branch, and it supports
-cinnamon version `3.2`.
+cinnamon version `4.6`.
 
 ---
 
