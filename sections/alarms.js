@@ -22,6 +22,7 @@ const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
 const MULTIL_ENTRY  = AppletDir.lib.multiline_entry;
 const NUM_PICKER    = AppletDir.lib.num_picker;
 const DAY_CHOOSER   = AppletDir.lib.day_chooser;
+const I18N           = AppletDir.lib.gettext;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_alarms.json';
@@ -92,7 +93,7 @@ Alarms.prototype = {
             //
             // add new alarm item
             //
-            this.add_alarm_item = new PopupMenu.PopupIconMenuItem(_('Add New Alarm...'), 'list-add', St.IconType.SYMBOLIC, {style_class: 'add-alarm'});
+            this.add_alarm_item = new PopupMenu.PopupIconMenuItem(I18N._('Add New Alarm...'), 'list-add', St.IconType.SYMBOLIC, {style_class: 'add-alarm'});
             this.alarms_pane.addMenuItem(this.add_alarm_item);
 
 
@@ -347,7 +348,7 @@ Alarms.prototype = {
         this.notif = new AlarmNotif(this._source, alarm.time_str, null, { body: alarm.msg, customContent: true, icon: icon });
         this.notif.setUrgency(MessageTray.Urgency.CRITICAL);
 
-        this.notif.addButton('snooze', _('Snooze'));
+        this.notif.addButton('snooze', I18N._('Snooze'));
 
         // listen
         this.notif.connect('action-invoked', Lang.bind(this, function (n, action_id) {
@@ -504,7 +505,7 @@ AlarmSettings.prototype = {
             //
             this.alarm_entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
             this.content_box.add_actor(this.alarm_entry_container);
-            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Alarm Message...'), scrollable_entry, false);
+            this.entry = new MULTIL_ENTRY.MultiLineEntry(I18N._('Alarm Message...'), scrollable_entry, false);
 
             this.alarm_entry_container.add_actor(this.entry.actor);
 
@@ -526,7 +527,7 @@ AlarmSettings.prototype = {
             this.content_box.add_actor(alarms_settings_btn_box);
 
             if (alarm) {
-                this.button_delete = new St.Button({ can_focus: true, label: _('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
+                this.button_delete = new St.Button({ can_focus: true, label: I18N._('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
                 alarms_settings_btn_box.add(this.button_delete, {expand: true});
 
                 this.button_delete.connect('clicked', Lang.bind(this, function () {
@@ -534,8 +535,8 @@ AlarmSettings.prototype = {
                 }));
             };
 
-            this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
-            this.button_ok     = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_cancel = new St.Button({ can_focus: true, label: I18N._('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_ok     = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
             alarms_settings_btn_box.add(this.button_cancel, {expand: true });
             alarms_settings_btn_box.add(this.button_ok, {expand: true });
 

@@ -17,6 +17,7 @@ AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
 const PANEL_ITEM    = AppletDir.lib.panel_item;
 const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
 const LPAD          = AppletDir.lib.leftpad;
+const I18N           = AppletDir.lib.gettext;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_stopwatch.json';
@@ -59,7 +60,7 @@ Stopwatch.prototype = {
             //
             // panel item
             //
-            this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Stopwatch'));
+            this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, I18N._('Stopwatch'));
 
             this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
             this.panel_item.actor.add_style_class_name('stopwatch-panel-item');
@@ -81,7 +82,7 @@ Stopwatch.prototype = {
             //
             // timer label
             //
-            this.time_display = new PopupMenu.PopupMenuItem(_('Stopwatch'), {reactive: false, style_class: 'time-label'});
+            this.time_display = new PopupMenu.PopupMenuItem(I18N._('Stopwatch'), {reactive: false, style_class: 'time-label'});
             this.stopwatch_pane.addMenuItem(this.time_display);
 
 
@@ -91,10 +92,10 @@ Stopwatch.prototype = {
             this.stopwatch_button_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
             this.stopwatch_pane.addActor(this.stopwatch_button_box);
 
-            this.button_reset = new St.Button({ can_focus: true, label: _('Reset'), style_class: 'button notification-icon-button modal-dialog-button btn-reset', x_expand: true, visible: false });
-            this.button_lap   = new St.Button({ can_focus: true, label: _('Lap'),   style_class: 'button notification-icon-button modal-dialog-button btn-lap',   x_expand: true, visible: false });
-            this.button_start = new St.Button({ can_focus: true, label: _('Start'), style_class: 'button notification-icon-button modal-dialog-button btn-start', x_expand: true });
-            this.button_pause = new St.Button({ can_focus: true, label: _('Pause'), style_class: 'button notification-icon-button modal-dialog-button btn-stop',  x_expand: true, visible: false });
+            this.button_reset = new St.Button({ can_focus: true, label: I18N._('Reset'), style_class: 'button notification-icon-button modal-dialog-button btn-reset', x_expand: true, visible: false });
+            this.button_lap   = new St.Button({ can_focus: true, label: I18N._('Lap'),   style_class: 'button notification-icon-button modal-dialog-button btn-lap',   x_expand: true, visible: false });
+            this.button_start = new St.Button({ can_focus: true, label: I18N._('Start'), style_class: 'button notification-icon-button modal-dialog-button btn-start', x_expand: true });
+            this.button_pause = new St.Button({ can_focus: true, label: I18N._('Pause'), style_class: 'button notification-icon-button modal-dialog-button btn-stop',  x_expand: true, visible: false });
             this.stopwatch_button_box.add(this.button_reset, {expand: true});
             this.stopwatch_button_box.add(this.button_lap, {expand: true});
             this.stopwatch_button_box.add(this.button_start, {expand: true});

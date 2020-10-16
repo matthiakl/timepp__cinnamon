@@ -24,6 +24,7 @@ const PANEL_ITEM     = AppletDir.lib.panel_item;
 const MULTIL_ENTRY   = AppletDir.lib.multiline_entry;
 const ICON_FROM_URI  = AppletDir.lib.icon_from_uri;
 const SCROLL_TO_ITEM = AppletDir.lib.scroll_to_item;
+const I18N           = AppletDir.lib.gettext;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_todo.json';
@@ -256,7 +257,7 @@ Todo.prototype = {
         //
         // add panel item
         //
-        this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Todo'));
+        this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, I18N._('Todo'));
         this.panel_item.actor.add_style_class_name('todo-panel-item off');
         this._update_panel_icon_name();
         this._toggle_panel_mode();
@@ -288,14 +289,14 @@ Todo.prototype = {
         //
         // loading message
         //
-        this.loading_msg = new St.Label({ can_focus: true, visible: false, text: _('Loading...'), style_class: 'loading-msg popup-menu-item' });
+        this.loading_msg = new St.Label({ can_focus: true, visible: false, text: I18N._('Loading...'), style_class: 'loading-msg popup-menu-item' });
         this.todo_pane.addActor(this.loading_msg);
 
 
         //
         // no todo filej message
         //
-        this.no_todo_file_msg = new St.Label({ can_focus: true, visible: false, text: _('Select todo file in settings...'), style_class: 'no-todo-file-msg popup-menu-item' });
+        this.no_todo_file_msg = new St.Label({ can_focus: true, visible: false, text: I18N._('Select todo file in settings...'), style_class: 'no-todo-file-msg popup-menu-item' });
         this.todo_pane.addActor(this.no_todo_file_msg);
 
 
@@ -315,7 +316,7 @@ Todo.prototype = {
         this.add_task_icon = new St.Icon({ icon_name: 'list-add', y_align: Clutter.ActorAlign.CENTER });
         this.add_task_bin.add_actor(this.add_task_icon);
 
-        this.add_task_label = new St.Label({ text: _('Add New Task...'), y_align: Clutter.ActorAlign.CENTER });
+        this.add_task_label = new St.Label({ text: I18N._('Add New Task...'), y_align: Clutter.ActorAlign.CENTER });
         this.add_task_bin.add_actor(this.add_task_label);
 
 
@@ -1484,7 +1485,7 @@ TaskEditor.prototype = {
         this.entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
         this.content_box.add_child(this.entry_container);
 
-        this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Task...'), true, true);
+        this.entry = new MULTIL_ENTRY.MultiLineEntry(I18N._('Task...'), true, true);
         this.entry_container.add_actor(this.entry.actor);
         // enable scrolling by grabbing handle with the mouse
         this.entry.scroll_box.vscroll.connect('scroll-start', () => { applet.menu.passEvents = true; });
@@ -1523,21 +1524,21 @@ TaskEditor.prototype = {
         this.content_box.add_actor(this.btn_box);
 
         if (this.mode === 'edit-task') {
-            this.button_delete = new St.Button({ can_focus: true, label: _('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_delete = new St.Button({ can_focus: true, label: I18N._('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
             this.btn_box.add(this.button_delete, {expand: true});
             this.button_delete.connect('clicked', () => this.emit('delete-task'));
         }
 
         if (this.mode === 'edit-task' && task.priority === '(x)') {
-            this.button_archive = new St.Button({ can_focus: true, label: _('Archive'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_archive = new St.Button({ can_focus: true, label: I18N._('Archive'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
             this.btn_box.add(this.button_archive, {expand: true});
             this.button_archive.connect('clicked', () => this.emit('delete-task', true));
         }
 
-        this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
+        this.button_cancel = new St.Button({ can_focus: true, label: I18N._('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
         this.btn_box.add(this.button_cancel, {expand: true});
 
-        this.button_ok = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
+        this.button_ok = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
         this.btn_box.add(this.button_ok, {expand: true});
 
 
@@ -2011,12 +2012,12 @@ TaskItem.prototype = {
 
             if (REG_DATE.test(words[1])) {
                 this.completion_date = words[1];
-                this.date_labels.text += _('completed:') + words[1] + ' ';
+                this.date_labels.text += I18N._('completed:') + words[1] + ' ';
                 this.date_labels.visible = true;
 
                 if (REG_DATE.test(words[2])) {
                     this.creation_date = words[2];
-                    this.date_labels.text += _('created:') + words[2] + ' ';
+                    this.date_labels.text += I18N._('created:') + words[2] + ' ';
                     this.date_labels.visible = true;
                     desc_pos = 3;
                 }
@@ -2032,7 +2033,7 @@ TaskItem.prototype = {
 
             if (REG_DATE.test(words[1])) {
                 this.creation_date = words[1];
-                this.date_labels.text += _('created:') + words[1] + ' ';
+                this.date_labels.text += I18N._('created:') + words[1] + ' ';
                 this.date_labels.visible = true;
                 desc_pos = 2;
             }
@@ -2040,7 +2041,7 @@ TaskItem.prototype = {
         }
         else if (REG_DATE.test(words[0])) {
             this.creation_date = words[0];
-            this.date_labels.text += _('created:') + words[0] + ' ';
+            this.date_labels.text += I18N._('created:') + words[0] + ' ';
             this.date_labels.visible = true;
             desc_pos = 1;
         }
@@ -2070,7 +2071,7 @@ TaskItem.prototype = {
 
                 if (REG_DUE_TAG.test(words[i]) && !this.hidden) {
                     this.due_date = words[i].slice(4);
-                    this.due_date_label.text += _('due:') + words[i].slice(4);
+                    this.due_date_label.text += I18N._('due:') + words[i].slice(4);
                     this.due_date_label.visible = true;
                     this.update_due_date();
 
@@ -2301,13 +2302,13 @@ TaskItem.prototype = {
         let abs  = Math.abs(diff);
 
         if (diff === 0)
-            abs = _('today');
+            abs = I18N._('today');
         else if (diff < 0)
-            abs = ngettext('%d day ago', '%d days ago', abs).format(abs);
+            abs = I18N.ngettext('%d day ago', '%d days ago', abs).format(abs);
         else
-            abs = ngettext('in %d day', 'in %d days', abs).format(abs);
+            abs = I18N.ngettext('in %d day', 'in %d days', abs).format(abs);
 
-        this.due_date_label.text = _('due:') + this.due_date + ' (' + abs + ')';
+        this.due_date_label.text = I18N._('due:') + this.due_date + ' (' + abs + ')';
     },
 
     update_task: function (task_str) {
@@ -2373,8 +2374,8 @@ TaskFiltersWindow.prototype = {
         };
 
         this.text_map = {
-            '(_)' : _('No Priority'),
-            '(x)' : _('Completed'),
+            '(_)' : I18N._('No Priority'),
+            '(x)' : I18N._('Completed'),
         };
 
         //
@@ -2405,7 +2406,7 @@ TaskFiltersWindow.prototype = {
         this.custom_filters = new St.BoxLayout({ vertical: true, x_expand: true, style_class: 'filter-settings-sector popup-menu-item' });
         this.filter_sectors_scroll_box.add_actor(this.custom_filters);
 
-        this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Add custom filter...'), false, true);
+        this.entry = new MULTIL_ENTRY.MultiLineEntry(I18N._('Add custom filter...'), false, true);
         this.custom_filters.add_child(this.entry.actor);
 
 
@@ -2439,7 +2440,7 @@ TaskFiltersWindow.prototype = {
         this.show_hidden_tasks_item = new St.BoxLayout({ style_class: 'popup-menu-item' });
         this.content_box.add_child(this.show_hidden_tasks_item);
 
-        let show_hidden_tasks_label = new St.Label({ text: _('Show only hidden tasks'), y_align: St.Align.END });
+        let show_hidden_tasks_label = new St.Label({ text: I18N._('Show only hidden tasks'), y_align: St.Align.END });
         this.show_hidden_tasks_item.add(show_hidden_tasks_label, {expand: true});
 
         let hidden_count_label = new St.Label({ y_align: Clutter.ActorAlign.CENTER, style_class: 'popup-inactive-menu-item' });
@@ -2447,7 +2448,7 @@ TaskFiltersWindow.prototype = {
 
         let n = this.delegate.priorities.get('(~)') || 0;
         hidden_count_label.text =
-            ngettext('%d hidden task', '%d hidden tasks', n).format(n);
+            I18N.ngettext('%d hidden task', '%d hidden tasks', n).format(n);
 
         this.show_hidden_tasks_toggle = new PopupMenu.Switch();
         this.show_hidden_tasks_item.add_actor(this.show_hidden_tasks_toggle.actor);
@@ -2461,7 +2462,7 @@ TaskFiltersWindow.prototype = {
         this.invert_switch_item = new St.BoxLayout({ style_class: 'popup-menu-item' });
         this.content_box.add_child(this.invert_switch_item);
 
-        let invert_label = new St.Label({ text: _('Invert filters'), y_align: St.Align.END });
+        let invert_label = new St.Label({ text: I18N._('Invert filters'), y_align: St.Align.END });
         this.invert_switch_item.add(invert_label, {expand: true});
 
         this.invert_toggle = new PopupMenu.Switch();
@@ -2477,8 +2478,8 @@ TaskFiltersWindow.prototype = {
         this.btn_box = new St.BoxLayout({ x_expand: true, style_class: 'popup-menu-item btn-box' });
         this.content_box.add_child(this.btn_box);
 
-        this.button_reset = new St.Button({ can_focus: true, label: _('Reset'), style_class: 'button notification-icon-button modal-dialog-button' });
-        this.button_ok    = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
+        this.button_reset = new St.Button({ can_focus: true, label: I18N._('Reset'), style_class: 'button notification-icon-button modal-dialog-button' });
+        this.button_ok    = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
 
         this.btn_box.add(this.button_reset, {expand: true});
         this.btn_box.add(this.button_ok, {expand: true});
@@ -2634,7 +2635,7 @@ TaskFiltersWindow.prototype = {
         item.count_label = new St.Label({ y_align: Clutter.ActorAlign.CENTER, style_class: 'popup-inactive-menu-item' });
         item.actor.add_child(item.count_label);
         item.count_label.text =
-            ngettext('%d task', '%d tasks', count).format(count) + '   ';
+            I18N.ngettext('%d task', '%d tasks', count).format(count) + '   ';
 
 
         item.option_box = new St.BoxLayout({ style_class: 'option-box' });
@@ -2753,10 +2754,10 @@ TaskSortWindow.prototype = {
         this.delegate = delegate;
 
         this.text_map = {};
-        this.text_map[SortType.PRIORITY]        = _('Sort by Priority');
-        this.text_map[SortType.CREATION_DATE]   = _('Sort by Creation Date');
-        this.text_map[SortType.COMPLETION_DATE] = _('Sort by Completion Date');
-        this.text_map[SortType.DUE_DATE]        = _('Sort by Due Date');
+        this.text_map[SortType.PRIORITY]        = I18N._('Sort by Priority');
+        this.text_map[SortType.CREATION_DATE]   = I18N._('Sort by Creation Date');
+        this.text_map[SortType.COMPLETION_DATE] = I18N._('Sort by Completion Date');
+        this.text_map[SortType.DUE_DATE]        = I18N._('Sort by Due Date');
 
         this.current_sort_order = '';
         this.checked_sort_item  = null;
@@ -2783,7 +2784,7 @@ TaskSortWindow.prototype = {
         this.ascending_item = new St.BoxLayout({ reactive: true, style_class: 'popup-menu-item' });
         this.content_box.add_child(this.ascending_item);
 
-        this.ascending_label = new St.Label ({ text: _('Ascending'), y_align: Clutter.ActorAlign.CENTER });
+        this.ascending_label = new St.Label ({ text: I18N._('Ascending'), y_align: Clutter.ActorAlign.CENTER });
         this.ascending_item.add(this.ascending_label, {expand: true});
 
         this.ascending_radiobutton = new St.Button({ style_class: 'radiobutton', toggle_mode: true, can_focus: true, y_align: St.Align.MIDDLE });
@@ -2796,7 +2797,7 @@ TaskSortWindow.prototype = {
         this.descending_item = new St.BoxLayout({ reactive: true, style_class: 'popup-menu-item' });
         this.content_box.add_child(this.descending_item);
 
-        this.descending_label = new St.Label ({ text: _('Descending'), y_align: Clutter.ActorAlign.CENTER });
+        this.descending_label = new St.Label ({ text: I18N._('Descending'), y_align: Clutter.ActorAlign.CENTER });
         this.descending_item.add(this.descending_label, {expand: true});
 
         this.descending_radiobutton = new St.Button({ style_class: 'radiobutton', toggle_mode: true, can_focus: true, y_align: St.Align.MIDDLE });
@@ -2828,7 +2829,7 @@ TaskSortWindow.prototype = {
         //
         this.btn_box = new St.BoxLayout({ x_expand: true, style_class: 'popup-menu-item btn-box' });
         this.content_box.add_child(this.btn_box);
-        this.button_ok    = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
+        this.button_ok    = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
         this.btn_box.add(this.button_ok, {expand: true});
 
 
@@ -2941,7 +2942,7 @@ ClearCompletedTasks.prototype = {
         this.delete_all_item = new St.BoxLayout({ reactive: true, style_class: 'popup-menu-item' });
         this.content_box.add_child(this.delete_all_item);
 
-        this.delete_all_label = new St.Label ({ text: _('Delete all completed tasks'), y_align: Clutter.ActorAlign.CENTER, style_class: 'delete-complete-tasks-label' });
+        this.delete_all_label = new St.Label ({ text: I18N._('Delete all completed tasks'), y_align: Clutter.ActorAlign.CENTER, style_class: 'delete-complete-tasks-label' });
         this.delete_all_item.add(this.delete_all_label, {expand: true});
 
         this.delete_all_radiobutton = new St.Button({ style_class: 'radiobutton', toggle_mode: true, can_focus: true, y_align: St.Align.MIDDLE });
@@ -2954,7 +2955,7 @@ ClearCompletedTasks.prototype = {
         this.archive_all_item = new St.BoxLayout({ reactive: true, style_class: 'popup-menu-item' });
         this.content_box.add_child(this.archive_all_item);
 
-        this.archive_all_label = new St.Label ({ text: _('Archive all complete tasks to done.txt and delete them'), y_align: Clutter.ActorAlign.CENTER, style_class: 'archive-all-complete-tasks-label' });
+        this.archive_all_label = new St.Label ({ text: I18N._('Archive all complete tasks to done.txt and delete them'), y_align: Clutter.ActorAlign.CENTER, style_class: 'archive-all-complete-tasks-label' });
         this.archive_all_item.add(this.archive_all_label, {expand: true});
 
         this.archive_all_radiobutton = new St.Button({ style_class: 'radiobutton', checked: true, toggle_mode: true, can_focus: true, y_align: St.Align.MIDDLE });
@@ -2974,10 +2975,10 @@ ClearCompletedTasks.prototype = {
         this.btn_box = new St.BoxLayout({ x_expand: true, style_class: 'popup-menu-item btn-box' });
         this.content_box.add_child(this.btn_box);
 
-        this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button' });
+        this.button_cancel = new St.Button({ can_focus: true, label: I18N._('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button' });
         this.btn_box.add(this.button_cancel, {expand: true});
 
-        this.button_ok = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
+        this.button_ok = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button' });
         this.btn_box.add(this.button_ok, {expand: true});
 
 
@@ -3042,7 +3043,7 @@ TimeTrackerStatView.prototype = {
         scroll_view.add_actor(scroll_content);
 
         if (! stats) {
-            let label = new St.Label({ text : _('Nothing found...'), style: 'font-weight: bold;', style_class: 'popup-menu-item' });
+            let label = new St.Label({ text : I18N._('Nothing found...'), style: 'font-weight: bold;', style_class: 'popup-menu-item' });
             scroll_content.add_child(label);
 
             return;
@@ -3057,15 +3058,15 @@ TimeTrackerStatView.prototype = {
             markup +=
                 '<b>' + it.name + '</b>:' +
                 '\n\n    ' +
-                '<b>'+_('today')+'</b>        :  ' + this._format(it.today) +
+                '<b>'+I18N._('today')+'</b>        :  ' + this._format(it.today) +
                 '\n    ' +
-                '<b>'+_('last 3 days')+'</b>  :  ' + this._format(it.last_three_days) +
+                '<b>'+I18N._('last 3 days')+'</b>  :  ' + this._format(it.last_three_days) +
                 '\n    ' +
-                '<b>'+_('this week')+'</b>    :  ' + this._format(it.this_week) +
+                '<b>'+I18N._('this week')+'</b>    :  ' + this._format(it.this_week) +
                 '\n    ' +
-                '<b>'+_('this month')+'</b>   :  ' + this._format(it.this_month) +
+                '<b>'+I18N._('this month')+'</b>   :  ' + this._format(it.this_month) +
                 '\n    ' +
-                '<b>'+_('this year')+'</b>    :  ' + this._format(it.this_year);
+                '<b>'+I18N._('this year')+'</b>    :  ' + this._format(it.this_year);
 
             if (i !== len - 1 && len > 1) markup += '\n\n\n\n';
         }
@@ -3468,7 +3469,7 @@ TimeTracker.prototype = {
 
     start_tracking: function (task) {
         if (this.csv_dir === '') {
-            Main.notify(_('To track time, select a dir for csv files in the ' +
+            Main.notify(I18N._('To track time, select a dir for csv files in the ' +
                           'settings.'));
             return null;
         }

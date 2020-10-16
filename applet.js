@@ -20,24 +20,6 @@ const PANEL_ITEM    = AppletDir.lib.panel_item;
 const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
 
 
-// l10n/translation
-const Gettext = imports.gettext;
-let UUID;
-
-function _(str) {
-   let custom_translation = Gettext.dgettext(UUID, str);
-   if (custom_translation !== str) return custom_translation;
-   return Gettext.gettext(str);
-}
-
-function ngettext(str1, str2, n) {
-   let custom_translation = Gettext.dngettext(UUID, str1, str2, n);
-   if (custom_translation !== str1 && custom_translation !== str2)
-        return custom_translation;
-   return Gettext.ngettext(str1, str2, n);
-}
-
-
 // =====================================================================
 // @@@ Applet
 // =====================================================================
@@ -53,13 +35,6 @@ MyApplet.prototype = {
 
         this.actor.style_class = 'timepp-panel-box';
         this.setAllowedLayout(Applet.AllowedLayout.BOTH); // enable vert panel
-
-
-        //
-        // l10n/translation
-        //
-        UUID = metadata.uuid;
-        Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 
         this.metadata     = metadata;

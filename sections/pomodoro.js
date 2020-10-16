@@ -19,6 +19,7 @@ const PANEL_ITEM    = AppletDir.lib.panel_item;
 const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
 const NUM_PICKER    = AppletDir.lib.num_picker;
 const LPAD          = AppletDir.lib.leftpad;
+const I18N           = AppletDir.lib.gettext;
 
 
 const CACHE_FILE = GLib.get_home_dir() + '/.cache/timepp_pomodoro.json';
@@ -74,7 +75,7 @@ Pomodoro.prototype = {
         //
         // add panel item
         //
-        this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Pomodoro'));
+        this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, I18N._('Pomodoro'));
 
         this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
         this.panel_item.actor.add_style_class_name('pomo-panel-item');
@@ -131,10 +132,10 @@ Pomodoro.prototype = {
         this.button_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
         this.pomodoro_pane.addActor(this.button_box);
 
-        this.button_new_pomo = new St.Button({can_focus:  true, label: _('New Pomo'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-new'});
-        this.button_take_break = new St.Button({can_focus: true, label: _('Take Break'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-break'});
-        this.button_start = new St.Button({can_focus: true, label: _('Start'), x_expand: true, style_class: 'button notification-icon-button modal-dialog-button btn-start'});
-        this.button_stop = new St.Button({can_focus: true, label: _('Stop'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-stop'});
+        this.button_new_pomo = new St.Button({can_focus:  true, label: I18N._('New Pomo'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-new'});
+        this.button_take_break = new St.Button({can_focus: true, label: I18N._('Take Break'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-break'});
+        this.button_start = new St.Button({can_focus: true, label: I18N._('Start'), x_expand: true, style_class: 'button notification-icon-button modal-dialog-button btn-start'});
+        this.button_stop = new St.Button({can_focus: true, label: I18N._('Stop'), x_expand: true, visible: false, style_class: 'button notification-icon-button modal-dialog-button btn-stop'});
 
         this.button_box.add(this.button_new_pomo, {expand: true});
         this.button_box.add(this.button_take_break, {expand: true});
@@ -197,7 +198,7 @@ Pomodoro.prototype = {
 
         this._toggle_keybinding();
         this._update_time_display();
-        this.label.set_text(_('Pomodoro'));
+        this.label.set_text(I18N._('Pomodoro'));
     },
 
     _store_cache: function () {
@@ -397,9 +398,9 @@ Pomodoro.prototype = {
 
     _send_notif: function () {
         switch (this.pomo_phase) {
-            case PomoPhase.POMO:       msg = _('Start working!');      break;
-            case PomoPhase.SHORT_BREAK: msg = _('Take a short break!'); break;
-            case PomoPhase.LONG_BREAK: msg = _('Take long break!');    break;
+            case PomoPhase.POMO:       msg = I18N._('Start working!');      break;
+            case PomoPhase.SHORT_BREAK: msg = I18N._('Take a short break!'); break;
+            case PomoPhase.LONG_BREAK: msg = I18N._('Take long break!');    break;
             default: return;
         }
 
@@ -499,7 +500,7 @@ PomodoroSettings.prototype = {
         this.clear_all_item = new St.BoxLayout({style_class: 'popup-menu-item settings-item'});
         this.content_box.add_actor(this.clear_all_item);
 
-        this.clear_item_label = new St.Label({text: _('Clear all pomodoros?'), y_align: St.Align.END});
+        this.clear_item_label = new St.Label({text: I18N._('Clear all pomodoros?'), y_align: St.Align.END});
         this.clear_all_item.add_actor(this.clear_item_label);
 
         this.clear_checkbox_bin = new St.Bin({x_align: St.Align.END});
@@ -515,7 +516,7 @@ PomodoroSettings.prototype = {
         this.pomo_duration = new St.BoxLayout({style_class: 'popup-menu-item settings-item'});
         this.content_box.add_actor(this.pomo_duration);
 
-        this.pomo_label = new St.Label({text: _('Pomodoro (min):'), y_align: Clutter.ActorAlign.CENTER});
+        this.pomo_label = new St.Label({text: I18N._('Pomodoro (min):'), y_align: Clutter.ActorAlign.CENTER});
         this.pomo_duration.add(this.pomo_label, {expand: true});
 
         this.pomo_dur_mm_picker = new NUM_PICKER.NumPicker(1, null);
@@ -530,7 +531,7 @@ PomodoroSettings.prototype = {
         this.short_break = new St.BoxLayout({style_class: 'popup-menu-item settings-item'});
         this.content_box.add_actor(this.short_break);
 
-        this.short_break_label = new St.Label({text: _('Short break (min):'), y_align: Clutter.ActorAlign.CENTER});
+        this.short_break_label = new St.Label({text: I18N._('Short break (min):'), y_align: Clutter.ActorAlign.CENTER});
         this.short_break.add(this.short_break_label, {expand: true});
 
         this.short_break_mm_picker = new NUM_PICKER.NumPicker(1, null);
@@ -545,7 +546,7 @@ PomodoroSettings.prototype = {
         this.long_break = new St.BoxLayout({style_class: 'popup-menu-item settings-item'});
         this.content_box.add_actor(this.long_break);
 
-        this.long_break_label = new St.Label({text: _('Long break (min):'), y_align: Clutter.ActorAlign.CENTER});
+        this.long_break_label = new St.Label({text: I18N._('Long break (min):'), y_align: Clutter.ActorAlign.CENTER});
         this.long_break.add(this.long_break_label, {expand: true});
 
         this.long_break_mm_picker = new NUM_PICKER.NumPicker(1, null);
@@ -560,7 +561,7 @@ PomodoroSettings.prototype = {
         this.long_break_rate = new St.BoxLayout({style_class: 'popup-menu-item settings-item'});
         this.content_box.add_actor(this.long_break_rate);
 
-        this.long_break_rate_label = new St.Label({text: _('Num of pomos until long break:'), y_align: Clutter.ActorAlign.CENTER});
+        this.long_break_rate_label = new St.Label({text: I18N._('Num of pomos until long break:'), y_align: Clutter.ActorAlign.CENTER});
         this.long_break_rate.add(this.long_break_rate_label, {expand: true});
 
         this.long_break_rate_picker = new NUM_PICKER.NumPicker(1, null);
@@ -575,8 +576,8 @@ PomodoroSettings.prototype = {
         this.button_box = new St.BoxLayout({ style_class: 'popup-menu-item settings-item' });
         this.content_box.add(this.button_box, {expand: true});
 
-        this.button_ok      = new St.Button({can_focus: true, label: _('Ok'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
-        this.button_cancel = new St.Button({can_focus: true, label: _('Cancel'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
+        this.button_ok      = new St.Button({can_focus: true, label: I18N._('Ok'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
+        this.button_cancel = new St.Button({can_focus: true, label: I18N._('Cancel'), y_expand: true, x_expand: true, style_class: 'button notification-icon-button modal-dialog-button'});
 
         this.button_box.add(this.button_cancel, {expand: true});
         this.button_box.add(this.button_ok, {expand: true});

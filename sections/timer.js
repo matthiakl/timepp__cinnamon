@@ -22,6 +22,7 @@ const ICON_FROM_URI = AppletDir.lib.icon_from_uri;
 const NUM_PICKER    = AppletDir.lib.num_picker;
 const MULTIL_ENTRY  = AppletDir.lib.multiline_entry;
 const LPAD          = AppletDir.lib.leftpad;
+const I18N           = AppletDir.lib.gettext;
 
 
 
@@ -65,7 +66,7 @@ Timer.prototype = {
             //
             // add panel item
             //
-            this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, _('Timer'));
+            this.panel_item = new PANEL_ITEM.PanelItem(applet, metadata, orientation, I18N._('Timer'));
 
             this.panel_item.set_label(this.show_secs ? '00:00:00' : '00:00');
             this.panel_item.actor.add_style_class_name('timer-panel-item');
@@ -89,7 +90,7 @@ Timer.prototype = {
             this.header = new St.BoxLayout({style_class: 'timer-header popup-menu-item'});
             this.timer_pane.addActor(this.header);
 
-            this.time_label = new St.Label({ text: _('Timer'), y_align: St.Align.END, x_align: St.Align.START, style_class: 'time-label' });
+            this.time_label = new St.Label({ text: I18N._('Timer'), y_align: St.Align.END, x_align: St.Align.START, style_class: 'time-label' });
             this.header.add(this.time_label, {expand: true});
 
             this.option_box = new St.BoxLayout({y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER, style_class: 'option-box'});
@@ -472,7 +473,7 @@ SettingsWindow.prototype = {
             this.entry_container = new St.BoxLayout({ vertical: true, style_class: 'popup-menu-item entry-container' });
             this.content_box.add_actor(this.entry_container);
 
-            this.entry = new MULTIL_ENTRY.MultiLineEntry(_('Timer message...'), true);
+            this.entry = new MULTIL_ENTRY.MultiLineEntry(I18N._('Timer message...'), true);
             this.entry_container.add_actor(this.entry.actor);
 
             // Enable scrolling the entry by grabbing handle with mouse.
@@ -496,8 +497,8 @@ SettingsWindow.prototype = {
             let alarms_settings_btn_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
             this.content_box.add_actor(alarms_settings_btn_box);
 
-            this.button_cancel = new St.Button({ can_focus: true, label: _('Cancel'), style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
-            this.button_ok      = new St.Button({ can_focus: true, label: _('Ok'), style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_cancel = new St.Button({ can_focus: true, label: I18N._('Cancel'), style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_ok      = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'button notification-icon-button modal-dialog-button', x_expand: true });
             alarms_settings_btn_box.add(this.button_cancel, {expand: true});
             alarms_settings_btn_box.add(this.button_ok, {expand: true});
 
