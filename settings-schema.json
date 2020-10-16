@@ -222,7 +222,7 @@
         "description": "Execute custom script when pomo starts or pauses",
         "select-dir": false,
         "default": "",
-        "tooltip": ""
+        "tooltip": " "
     },
 
     "alarm_icon": {

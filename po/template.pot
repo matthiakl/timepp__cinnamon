@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-16 13:53+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sections/stopwatch.js:62 sections/stopwatch.js:84
+msgid "Stopwatch"
+msgstr ""
+
+#: sections/stopwatch.js:94 sections/todo.js:2480
+msgid "Reset"
+msgstr ""
+
+#: sections/stopwatch.js:95
+msgid "Lap"
+msgstr ""
+
+#: sections/stopwatch.js:96 sections/pomodoro.js:136
+msgid "Start"
+msgstr ""
+
+#: sections/stopwatch.js:97
+msgid "Pause"
+msgstr ""
+
+#: sections/pomodoro.js:77 sections/pomodoro.js:200
+msgid "Pomodoro"
+msgstr ""
+
+#: sections/pomodoro.js:134
+msgid "New Pomo"
+msgstr ""
+
+#: sections/pomodoro.js:135
+msgid "Take Break"
+msgstr ""
+
+#: sections/pomodoro.js:137
+msgid "Stop"
+msgstr ""
+
+#: sections/pomodoro.js:400
+msgid "Start working!"
+msgstr ""
+
+#: sections/pomodoro.js:401
+msgid "Take a short break!"
+msgstr ""
+
+#: sections/pomodoro.js:402
+msgid "Take long break!"
+msgstr ""
+
+#: sections/pomodoro.js:502
+msgid "Clear all pomodoros?"
+msgstr ""
+
+#: sections/pomodoro.js:518
+msgid "Pomodoro (min):"
+msgstr ""
+
+#: sections/pomodoro.js:533
+msgid "Short break (min):"
+msgstr ""
+
+#: sections/pomodoro.js:548
+msgid "Long break (min):"
+msgstr ""
+
+#: sections/pomodoro.js:563
+msgid "Num of pomos until long break:"
+msgstr ""
+
+#: sections/pomodoro.js:578 sections/alarms.js:538 sections/timer.js:500
+#: sections/todo.js:1540 sections/todo.js:2481 sections/todo.js:2831
+#: sections/todo.js:2980
+msgid "Ok"
+msgstr ""
+
+#: sections/pomodoro.js:579 sections/alarms.js:537 sections/timer.js:499
+#: sections/todo.js:1537 sections/todo.js:2977
+msgid "Cancel"
+msgstr ""
+
+#: sections/alarms.js:95
+msgid "Add New Alarm..."
+msgstr ""
+
+#: sections/alarms.js:350
+msgid "Snooze"
+msgstr ""
+
+#: sections/alarms.js:507
+msgid "Alarm Message..."
+msgstr ""
+
+#: sections/alarms.js:529 sections/todo.js:1526
+msgid "Delete"
+msgstr ""
+
+#: sections/timer.js:68 sections/timer.js:92
+msgid "Timer"
+msgstr ""
+
+#: sections/timer.js:475
+msgid "Timer message..."
+msgstr ""
+
+#: sections/todo.js:259
+msgid "Todo"
+msgstr ""
+
+#: sections/todo.js:291
+msgid "Loading..."
+msgstr ""
+
+#: sections/todo.js:298
+msgid "Select todo file in settings..."
+msgstr ""
+
+#: sections/todo.js:318
+msgid "Add New Task..."
+msgstr ""
+
+#: sections/todo.js:1487
+msgid "Task..."
+msgstr ""
+
+#: sections/todo.js:1532
+msgid "Archive"
+msgstr ""
+
+#: sections/todo.js:2014
+msgid "completed:"
+msgstr ""
+
+#: sections/todo.js:2019 sections/todo.js:2035 sections/todo.js:2043
+msgid "created:"
+msgstr ""
+
+#: sections/todo.js:2073 sections/todo.js:2310
+msgid "due:"
+msgstr ""
+
+#: sections/todo.js:2304 sections/todo.js:3060
+msgid "today"
+msgstr ""
+
+#: sections/todo.js:2306
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sections/todo.js:2308
+#, javascript-format
+msgid "in %d day"
+msgid_plural "in %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sections/todo.js:2376
+msgid "No Priority"
+msgstr ""
+
+#: sections/todo.js:2377
+msgid "Completed"
+msgstr ""
+
+#: sections/todo.js:2408
+msgid "Add custom filter..."
+msgstr ""
+
+#: sections/todo.js:2442
+msgid "Show only hidden tasks"
+msgstr ""
+
+#: sections/todo.js:2450
+#, javascript-format
+msgid "%d hidden task"
+msgid_plural "%d hidden tasks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sections/todo.js:2464
+msgid "Invert filters"
+msgstr ""
+
+#: sections/todo.js:2637
+#, javascript-format
+msgid "%d task"
+msgid_plural "%d tasks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sections/todo.js:2756
+msgid "Sort by Priority"
+msgstr ""
+
+#: sections/todo.js:2757
+msgid "Sort by Creation Date"
+msgstr ""
+
+#: sections/todo.js:2758
+msgid "Sort by Completion Date"
+msgstr ""
+
+#: sections/todo.js:2759
+msgid "Sort by Due Date"
+msgstr ""
+
+#: sections/todo.js:2786
+msgid "Ascending"
+msgstr ""
+
+#: sections/todo.js:2799
+msgid "Descending"
+msgstr ""
+
+#: sections/todo.js:2944
+msgid "Delete all completed tasks"
+msgstr ""
+
+#: sections/todo.js:2957
+msgid "Archive all complete tasks to done.txt and delete them"
+msgstr ""
+
+#: sections/todo.js:3045
+msgid "Nothing found..."
+msgstr ""
+
+#: sections/todo.js:3062
+msgid "last 3 days"
+msgstr ""
+
+#: sections/todo.js:3064
+msgid "this week"
+msgstr ""
+
+#: sections/todo.js:3066
+msgid "this month"
+msgstr ""
+
+#: sections/todo.js:3068
+msgid "this year"
+msgstr ""
+
+#: sections/todo.js:3471
+msgid "To track time, select a dir for csv files in the settings."
+msgstr ""

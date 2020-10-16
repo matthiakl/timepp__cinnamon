@@ -1,0 +1,28 @@
+#!/bin/bash
+set -eu
+
+transform_json()
+{
+	in=$1
+	tmp=$in.tmp
+	sed -e 's@\(\"title\": \)\"\(.*\)\"@\1#\2#@' \
+	    -e 's@\(\"description\": \)\"\(.*\)\"@\1#\2#@' \
+	    -e 's@\(\"tooltip\": \)\"\(.*\)\"@\1#\2#@' \
+	    $in \
+	    | tr \" \' \
+	    | tr \# \" > $tmp
+	    
+	intltool-extract --type=gettext/quoted $tmp
+	sed -i 's@N_@_@' $tmp.h
+	mv $tmp.h $in.js
+	rm $tmp
+}
+
+cd ..
+
+#find . -type f -name "*.json" | while read file; do transform_json "$file"; done
+
+find . -type f -name "*.js" |
+xgettext --add-comments="TRANSLATORS:" -o "po/template.pot" -f -
+
+#find . -type f -name "*.json.js" -delete
