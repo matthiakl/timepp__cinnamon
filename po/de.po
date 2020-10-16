@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-16 14:35+0200\n"
-"PO-Revision-Date: 2020-10-16 14:38+0200\n"
+"PO-Revision-Date: 2020-10-16 15:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -273,6 +273,8 @@ msgid ""
 "A todo.txt manager, time tracker, timer, stopwatch, pomodoro, and alarm "
 "applet"
 msgstr ""
+"Ein todo.txt Manager, Zeit-Tracker, Timer, Stoppuhr, Pomodoro und Alarm "
+"Applet"
 
 #. metadata.json->name
 msgid "Time ++"
@@ -308,15 +310,15 @@ msgstr "Pomodoro Einstellungen"
 
 #. settings-schema.json->section5->title
 msgid "Alarms Settings"
-msgstr ""
+msgstr "Alarm Einstellungen"
 
 #. settings-schema.json->section6->title
 msgid "Misc"
-msgstr ""
+msgstr "Sonstiges"
 
 #. settings-schema.json->section7->title
 msgid "File paths"
-msgstr ""
+msgstr "Dateipfad"
 
 #. settings-schema.json->section8->title
 msgid "Keybindings"
@@ -324,11 +326,11 @@ msgstr "Tastenbelegungen"
 
 #. settings-schema.json->unicon_mode->description
 msgid "Show single icon in panel"
-msgstr ""
+msgstr "Zeige nur ein Icon im Panel"
 
 #. settings-schema.json->unicon->description
 msgid "Icon when using one panel item"
-msgstr ""
+msgstr "Icon, wenn nur ein Panel Item benutzt wird"
 
 #. settings-schema.json->unicon->tooltip
 #. settings-schema.json->timer_icon->tooltip
@@ -340,10 +342,12 @@ msgid ""
 "Icon name, absolute path, or path relative to this applet's dir.\n"
 "To use a symbolic icon, add '-symbolic' to it's name."
 msgstr ""
+"Icon Name, absoluter Pfad oder relativer Pfad zum Applet.\n"
+"'-symbolic' an den Namen anhängen, um ein Symbol Icon zu benutzen."
 
 #. settings-schema.json->timer_icon->description
 msgid "Timer Panel Icon"
-msgstr ""
+msgstr "Timer Panel Icon"
 
 #. settings-schema.json->timer_separate_menu->description
 #. settings-schema.json->stopwatch_separate_menu->description
@@ -351,48 +355,48 @@ msgstr ""
 #. settings-schema.json->alarm_separate_menu->description
 #. settings-schema.json->todo_separate_menu->description
 msgid "Show in separate menu"
-msgstr ""
+msgstr "In separatem Menü anzeigen"
 
 #. settings-schema.json->timer_panel_mode->description
 #. settings-schema.json->stopwatch_panel_mode->description
 #. settings-schema.json->pomo_panel_mode->description
 #. settings-schema.json->todo_panel_mode->description
 msgid "Panel Item Mode"
-msgstr ""
+msgstr "Panel Item Modus"
 
 #. settings-schema.json->timer_panel_mode->options
 #. settings-schema.json->stopwatch_panel_mode->options
 #. settings-schema.json->pomo_panel_mode->options
 #. settings-schema.json->todo_panel_mode->options
 msgid "Icon only"
-msgstr ""
+msgstr "Nur Icon"
 
 #. settings-schema.json->timer_panel_mode->options
 #. settings-schema.json->stopwatch_panel_mode->options
 #. settings-schema.json->pomo_panel_mode->options
 #. settings-schema.json->todo_panel_mode->options
 msgid "Label only"
-msgstr ""
+msgstr "Nur Text"
 
 #. settings-schema.json->timer_panel_mode->options
 #. settings-schema.json->stopwatch_panel_mode->options
 #. settings-schema.json->pomo_panel_mode->options
 #. settings-schema.json->todo_panel_mode->options
 msgid "Icon and label"
-msgstr ""
+msgstr "Icon und Text"
 
 #. settings-schema.json->timer_show_secs->description
 #. settings-schema.json->stopwatch_show_secs->description
 #. settings-schema.json->pomo_show_secs->description
 msgid "Show seconds"
-msgstr ""
+msgstr "Zeige Sekunden"
 
 #. settings-schema.json->timer_key_open->description
 #. settings-schema.json->stopwatch_key_open->description
 #. settings-schema.json->pomo_key_open->description
 #. settings-schema.json->alarm_key_open->description
 msgid "Menu shortcut key"
-msgstr ""
+msgstr "Menü Tastenkürzel"
 
 #. settings-schema.json->stopwatch_icon->description
 msgid "Stopwatch Panel Icon"
@@ -400,60 +404,60 @@ msgstr "Stoppuhr Panel Icon"
 
 #. settings-schema.json->pomo_icon->description
 msgid "Pomodoro Panel Icon"
-msgstr ""
+msgstr "Pomodoro Panel Icon"
 
 #. settings-schema.json->pomo_stop_time_tracking->description
 msgid "Stop time tracking when pomo is paused"
-msgstr ""
+msgstr "Zeit-Tracking stoppen, wenn Pomo pausiert"
 
 #. settings-schema.json->pomo_script_path->description
 msgid "Execute custom script when pomo starts or pauses"
-msgstr ""
+msgstr "Eigenes Skript bei Pomo Start oder Pause ausführen"
 
 #. settings-schema.json->alarm_icon->description
 msgid "Alarms Panel Icon"
-msgstr ""
+msgstr "Alarm Panel Icon"
 
 #. settings-schema.json->alarm_snooze_duration->units
 msgid "sec"
-msgstr ""
+msgstr "s"
 
 #. settings-schema.json->alarm_snooze_duration->description
 msgid "Snooze duration"
-msgstr ""
+msgstr "Snooze-Dauer"
 
 #. settings-schema.json->todo_icon->description
 msgid "Todo Panel Icon"
-msgstr ""
+msgstr "Aufgaben Panel Icon"
 
 #. settings-schema.json->todo_task_width->units
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. settings-schema.json->todo_task_width->description
 msgid "Task width"
-msgstr ""
+msgstr "Aufgaben Breite"
 
 #. settings-schema.json->todo_key_open->description
 msgid "Open this section."
-msgstr ""
+msgstr "Sektion öffnen."
 
 #. settings-schema.json->todo_key_open_to_add->description
 msgid "Open this section and add task."
-msgstr ""
+msgstr "Sektion öffnen und Aufgabe hinzufügen."
 
 #. settings-schema.json->todo_key_open_to_search->description
 msgid "Open this section and search tasks."
-msgstr ""
+msgstr "Sektion öffnen und Aufgabe suchen."
 
 #. settings-schema.json->todo_txt_file_path->description
 msgid "Path to todo.txt file"
-msgstr ""
+msgstr "Pfad zur todo.txt Datei"
 
 #. settings-schema.json->done_txt_file_path->description
 msgid "Path to done.txt file"
-msgstr ""
+msgstr "Pfad zur done.txt Datei"
 
 #. settings-schema.json->time_tracker_csv_dir->description
 msgid "Dir in which to store the time-tracker csv files"
-msgstr ""
+msgstr "Ordner, um csv Dateien des Zeit-Trackers zu speichern"
