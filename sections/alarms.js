@@ -345,7 +345,7 @@ Alarms.prototype = {
         let icon = new St.Icon({ icon_size: 32});
         ICON_FROM_URI.icon_from_uri(icon, this.alarm_icon, this.metadata);
 
-        this.notif = new AlarmNotif(this._source, alarm.time_str, null, { body: alarm.msg, customContent: true, icon: icon });
+        this.notif = new MessageTray.Notification(this._source, alarm.time_str, alarm.msg, { icon: icon, bodyMarkup: true});
         this.notif.setUrgency(MessageTray.Urgency.CRITICAL);
 
         this.notif.addButton('snooze', I18N._('Snooze'));
@@ -523,11 +523,11 @@ AlarmSettings.prototype = {
             //
             // buttons
             //
-            let alarms_settings_btn_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box' });
+            let alarms_settings_btn_box = new St.BoxLayout({ style_class: 'popup-menu-item btn-box', width: 350 });
             this.content_box.add_actor(alarms_settings_btn_box);
 
             if (alarm) {
-                this.button_delete = new St.Button({ can_focus: true, label: I18N._('Delete'), style_class: 'btn-delete button notification-icon-button modal-dialog-button', x_expand: true });
+                this.button_delete = new St.Button({ can_focus: true, label: I18N._('Delete'), style_class: 'btn-delete button notification-icon-button', x_expand: true });
                 alarms_settings_btn_box.add(this.button_delete, {expand: true});
 
                 this.button_delete.connect('clicked', Lang.bind(this, function () {
@@ -535,8 +535,8 @@ AlarmSettings.prototype = {
                 }));
             };
 
-            this.button_cancel = new St.Button({ can_focus: true, label: I18N._('Cancel'), style_class: 'btn-cancel button notification-icon-button modal-dialog-button', x_expand: true });
-            this.button_ok     = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button modal-dialog-button', x_expand: true });
+            this.button_cancel = new St.Button({ can_focus: true, label: I18N._('Cancel'), style_class: 'btn-cancel button notification-icon-button', x_expand: true });
+            this.button_ok     = new St.Button({ can_focus: true, label: I18N._('Ok'), style_class: 'btn-ok button notification-icon-button', x_expand: true });
             alarms_settings_btn_box.add(this.button_cancel, {expand: true });
             alarms_settings_btn_box.add(this.button_ok, {expand: true });
 
@@ -741,37 +741,3 @@ AlarmItem.prototype = {
     },
 };
 Signals.addSignalMethods(AlarmItem.prototype);
-
-
-
-// =====================================================================
-// @@@ Alarm Notification
-//
-// We need to override the addBody method in order to have full pango
-// markup.
-// =====================================================================
-function AlarmNotif (source, title, banner, params) {
-   this._init(source, title, banner, params);
-};
-
-AlarmNotif.prototype = {
-    __proto__: MessageTray.Notification.prototype,
-
-   _init: function(source, title, banner, params) {
-      MessageTray.Notification.prototype._init.call(this, source, title, banner, params);
-   },
-
-    // override the default addBody to allow for full pango markup
-    addBody: function(text, markup, style) {
-        let label = new St.Label({text: text});
-        this.addActor(label);
-
-        label.clutter_text.set_single_line_mode(false);
-        label.clutter_text.set_line_wrap(true);
-        label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        label.clutter_text.use_markup = true;
-
-        return label;
-    }
-}
-Signals.addSignalMethods(AlarmNotif.prototype);

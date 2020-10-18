@@ -332,10 +332,10 @@ Timer.prototype = {
             if (Main.messageTray) Main.messageTray.add(this._source);
         }
 
-        let icon = new St.Icon({icon_size: 32});
-        ICON_FROM_URI.icon_from_uri(icon, this.timer_icon, this.metadata);
+        let tim_icon = new St.Icon({icon_size: 32});
+        ICON_FROM_URI.icon_from_uri(tim_icon, this.timer_icon, this.metadata);
 
-        this.notif = new TimerNotif(this._source, 'Timer expired!', null, { body: this.cache.notif_msg, customContent: true, icon: icon });
+        this.notif = new MessageTray.Notification(this._source, I18N._('Timer expired!'), this.cache.notif_msg, { icon: tim_icon, bodyMarkup: true });
         this.notif.setUrgency(MessageTray.Urgency.CRITICAL);
 
 
@@ -527,36 +527,3 @@ SettingsWindow.prototype = {
     },
 }
 Signals.addSignalMethods(SettingsWindow.prototype);
-
-
-
-// =====================================================================
-// @@@ Alarm Notification
-//
-// We need to override the addBody method in order to have full pango
-// markup.
-// =====================================================================
-function TimerNotif (source, title, banner, params) {
-   this._init(source, title, banner, params);
-};
-
-TimerNotif.prototype = {
-    __proto__: MessageTray.Notification.prototype,
-
-   _init: function(source, title, banner, params) {
-      MessageTray.Notification.prototype._init.call(this, source, title, banner, params);
-   },
-
-    // override the default addBody to allow for full pango markup
-    addBody: function(text, markup, style) {
-        let label = new St.Label({text: text});
-        this.addActor(label);
-
-        label.clutter_text.set_single_line_mode(false);
-        label.clutter_text.set_line_wrap(true);
-        label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        label.clutter_text.use_markup = true;
-
-        return label;
-    }
-}

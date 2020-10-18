@@ -11,6 +11,8 @@ The Gnome-shell extension version is still maintained by the original author: ht
 Clone/download this repo into your `~/.local/share/cinnamon/applets` dir and
 rename the downloaded folder to `timepp@matthiakl`.
 
+If a translation for your language exists in `po`, but the applet isn't translated, run `cinnamon-json-makepot -i` in the base folder to install the translation files manually. (Also see `po/makepot`)
+
 ---
 
 ### Compatibility
@@ -41,6 +43,7 @@ Some of the features of the todo.txt manager are:
 * Autoupdating when the todo.txt file changes.
 * Deleting all completed tasks and optionally storing them into a done.txt file.
 * Switching between different views via keyboard shortcuts.
+* Coloring by priority (A-E)
 
 The todo.txt manager also supports the `h:1` extension for hiding a task and the
 `due|DUE:yyyy-mm-dd` extension.
@@ -97,7 +100,7 @@ date, time spent (hh:mm), type ('++' = project, '()' = task), task or project
 
 ### Pango markup
 
-The todo.txt manager, timer and alarm support [pango markup](https://developer.gnome.org/pango/stable/PangoMarkupFormat.html).
+The todo.txt manager, timer and alarm support [pango markup](https://developer.gnome.org/pygtk/stable/pango-markup-language.html).
 
 
 > **NOTE:**  
@@ -115,6 +118,8 @@ The xdotool command can be enabled to open the applet on change.
 > **Script dependencies:**
 > * inotifywait
 > * xdotools _(if enabled in the script)_
+
+Run `po/makepot` to regenerate `po/template.pot` and `po/makepot -m` to update translation files with new strings.
 
 ---
 
