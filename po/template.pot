@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-18 22:03+0200\n"
+"POT-Creation-Date: 2020-10-19 12:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Stopwatch"
 msgstr ""
 
-#: sections/stopwatch.js:95 sections/todo.js:2481
+#: sections/stopwatch.js:95 sections/todo.js:2489
 msgid "Reset"
 msgstr ""
 
@@ -89,13 +89,13 @@ msgid "Num of pomos until long break:"
 msgstr ""
 
 #: sections/pomodoro.js:579 sections/alarms.js:539 sections/timer.js:501
-#: sections/todo.js:1541 sections/todo.js:2482 sections/todo.js:2832
-#: sections/todo.js:2981
+#: sections/todo.js:1543 sections/todo.js:2490 sections/todo.js:2840
+#: sections/todo.js:2989
 msgid "Ok"
 msgstr ""
 
 #: sections/pomodoro.js:580 sections/alarms.js:538 sections/timer.js:500
-#: sections/todo.js:1538 sections/todo.js:2978
+#: sections/todo.js:1540 sections/todo.js:2986
 msgid "Cancel"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Alarm Message..."
 msgstr ""
 
-#: sections/alarms.js:530 sections/todo.js:1527
+#: sections/alarms.js:530 sections/todo.js:1529
 msgid "Delete"
 msgstr ""
 
@@ -128,147 +128,147 @@ msgstr ""
 msgid "Timer message..."
 msgstr ""
 
-#: sections/todo.js:260
+#: sections/todo.js:262
 msgid "Todo"
 msgstr ""
 
-#: sections/todo.js:292
+#: sections/todo.js:294
 msgid "Loading..."
 msgstr ""
 
-#: sections/todo.js:299
+#: sections/todo.js:301
 msgid "Select todo file in settings..."
 msgstr ""
 
-#: sections/todo.js:319
+#: sections/todo.js:321
 msgid "Add New Task..."
 msgstr ""
 
-#: sections/todo.js:1488
+#: sections/todo.js:1490
 msgid "Task..."
 msgstr ""
 
-#: sections/todo.js:1533
+#: sections/todo.js:1535
 msgid "Archive"
 msgstr ""
 
-#: sections/todo.js:2015
+#: sections/todo.js:2023
 msgid "completed:"
 msgstr ""
 
-#: sections/todo.js:2020 sections/todo.js:2036 sections/todo.js:2044
+#: sections/todo.js:2028 sections/todo.js:2044 sections/todo.js:2052
 msgid "created:"
 msgstr ""
 
-#: sections/todo.js:2074 sections/todo.js:2311
+#: sections/todo.js:2082 sections/todo.js:2319
 msgid "due:"
 msgstr ""
 
-#: sections/todo.js:2305 sections/todo.js:3061
+#: sections/todo.js:2313 sections/todo.js:3069
 msgid "today"
 msgstr ""
 
-#: sections/todo.js:2307
+#: sections/todo.js:2315
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: sections/todo.js:2309
+#: sections/todo.js:2317
 #, javascript-format
 msgid "in %d day"
 msgid_plural "in %d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: sections/todo.js:2377
+#: sections/todo.js:2385
 msgid "No Priority"
 msgstr ""
 
-#: sections/todo.js:2378
+#: sections/todo.js:2386
 msgid "Completed"
 msgstr ""
 
-#: sections/todo.js:2409
+#: sections/todo.js:2417
 msgid "Add custom filter..."
 msgstr ""
 
-#: sections/todo.js:2443
+#: sections/todo.js:2451
 msgid "Show only hidden tasks"
 msgstr ""
 
-#: sections/todo.js:2451
+#: sections/todo.js:2459
 #, javascript-format
 msgid "%d hidden task"
 msgid_plural "%d hidden tasks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: sections/todo.js:2465
+#: sections/todo.js:2473
 msgid "Invert filters"
 msgstr ""
 
-#: sections/todo.js:2638
+#: sections/todo.js:2646
 #, javascript-format
 msgid "%d task"
 msgid_plural "%d tasks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: sections/todo.js:2757
+#: sections/todo.js:2765
 msgid "Sort by Priority"
 msgstr ""
 
-#: sections/todo.js:2758
+#: sections/todo.js:2766
 msgid "Sort by Creation Date"
 msgstr ""
 
-#: sections/todo.js:2759
+#: sections/todo.js:2767
 msgid "Sort by Completion Date"
 msgstr ""
 
-#: sections/todo.js:2760
+#: sections/todo.js:2768
 msgid "Sort by Due Date"
 msgstr ""
 
-#: sections/todo.js:2787
+#: sections/todo.js:2795
 msgid "Ascending"
 msgstr ""
 
-#: sections/todo.js:2800
+#: sections/todo.js:2808
 msgid "Descending"
 msgstr ""
 
-#: sections/todo.js:2945
+#: sections/todo.js:2953
 msgid "Delete all completed tasks"
 msgstr ""
 
-#: sections/todo.js:2958
+#: sections/todo.js:2966
 msgid "Archive all complete tasks to done.txt and delete them"
 msgstr ""
 
-#: sections/todo.js:3046
+#: sections/todo.js:3054
 msgid "Nothing found..."
 msgstr ""
 
-#: sections/todo.js:3063
+#: sections/todo.js:3071
 msgid "last 3 days"
 msgstr ""
 
-#: sections/todo.js:3065
+#: sections/todo.js:3073
 msgid "this week"
 msgstr ""
 
-#: sections/todo.js:3067
+#: sections/todo.js:3075
 msgid "this month"
 msgstr ""
 
-#: sections/todo.js:3069
+#: sections/todo.js:3077
 msgid "this year"
 msgstr ""
 
-#: sections/todo.js:3472
+#: sections/todo.js:3480
 msgid "To track time, select a dir for csv files in the settings."
 msgstr ""
 
@@ -436,6 +436,34 @@ msgstr ""
 
 #. settings-schema.json->todo_task_width->description
 msgid "Task width"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->description
+msgid "Default priority"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->options
+msgid "A (highest)"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->options
+msgid "B"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->options
+msgid "C"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->options
+msgid "D"
+msgstr ""
+
+#. settings-schema.json->todo_def_prio->options
+msgid "E (lowest)"
 msgstr ""
 
 #. settings-schema.json->todo_key_open->description

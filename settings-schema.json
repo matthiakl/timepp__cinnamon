@@ -72,7 +72,7 @@
         "section6": {
             "type": "section",
             "title": "Misc",
-            "keys": ["todo_icon", "todo_separate_menu", "todo_panel_mode", "todo_task_width"]
+            "keys": ["todo_icon", "todo_separate_menu", "todo_panel_mode", "todo_task_width", "todo_def_prio"]
         },
 
         "section7": {
@@ -286,6 +286,20 @@
         "units": "px",
         "step": 1,
         "description": "Task width"
+    },
+    
+    "todo_def_prio": {
+        "type": "combobox",
+        "description": "Default priority",
+        "default": 0,
+        "options": {
+            "None": 0,
+            "A (highest)": 1,
+            "B": 2,
+            "C": 3,
+            "D": 4,
+            "E (lowest)": 5
+        }
     },
 
     "todo_key_open": {

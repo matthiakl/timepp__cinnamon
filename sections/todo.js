@@ -69,6 +69,7 @@ const View = {
     SELECT_FILTER : 'SELECT_FILTER',
 };
 
+const Priorities = ['_', 'A', 'B', 'C', 'D', 'E', 'x', '~'];
 
 const REG_CONTEXT  = /^@.+$/;
 const REG_PROJ     = /^\+.+$/;
@@ -118,6 +119,7 @@ Todo.prototype = {
         settings.bindWithObject(this, 'todo_separate_menu', 'separate_menu');
         settings.bindWithObject(this, 'todo_panel_mode', 'panel_mode', this._toggle_panel_mode);
         settings.bindWithObject(this, 'todo_task_width', 'task_width', this._update_task_width);
+        settings.bindWithObject(this, 'todo_def_prio', 'default_prio');
 
         settings.bindWithObject(this, 'todo_txt_file_path', 'todo_txt_file_path', this._on_todo_file_changed);
         settings.bindWithObject(this, 'done_txt_file_path', 'done_txt_file_path');
@@ -1748,8 +1750,14 @@ TaskEditor.prototype = {
             if (! REG_DATE.test(words[1]))
                 words.splice(1, 0, date_yyyymmdd());
         }
-        else if (! REG_DATE.test(words[0])) {
-            words.splice(0, 0, date_yyyymmdd());
+        else {
+            if (! REG_DATE.test(words[0])) {
+                words.splice(0, 0, date_yyyymmdd());
+            }
+            if (this.delegate.default_prio > 0 && this.delegate.default_prio <= 5) {
+                let default_prio_str = '(' + Priorities[this.delegate.default_prio] + ')';
+                words.splice(0, 0, default_prio_str);
+            }
         }
 
         return words.join(' ');
