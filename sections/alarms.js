@@ -56,7 +56,7 @@ function Alarms(applet, settings, metadata, instance_id, orientation) {
 Alarms.prototype = {
     _init: function(applet, settings, metadata, instance_id, orientation) {
         try {
-            this.section_name = 'Alarms';
+            this.section_name = I18N._('Alarms');
 
             this.applet   = applet;
             this.metadata = metadata;

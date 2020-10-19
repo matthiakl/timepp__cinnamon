@@ -104,7 +104,7 @@ function Todo(applet, settings, metadata, instance_id, orientation) {
 
 Todo.prototype = {
     _init: function (applet, settings, metadata, instance_id, orientation) {
-        this.section_name = 'Todo';
+        this.section_name = I18N._('Todo');
 
         this.applet   = applet;
         this.metadata = metadata;

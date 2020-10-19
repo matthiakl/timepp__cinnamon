@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-19 12:14+0200\n"
+"POT-Creation-Date: 2020-10-19 13:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #. settings-schema.json->page3->title
-#: sections/stopwatch.js:63 sections/stopwatch.js:85
+#: sections/stopwatch.js:42 sections/stopwatch.js:63 sections/stopwatch.js:85
 msgid "Stopwatch"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgid "Pause"
 msgstr ""
 
 #. settings-schema.json->page4->title
-#: sections/pomodoro.js:78 sections/pomodoro.js:201
+#: sections/pomodoro.js:49 sections/pomodoro.js:78 sections/pomodoro.js:201
 msgid "Pomodoro"
 msgstr ""
 
@@ -99,6 +99,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#. settings-schema.json->page5->title
+#: sections/alarms.js:59
+msgid "Alarms"
+msgstr ""
+
 #: sections/alarms.js:96
 msgid "Add New Alarm..."
 msgstr ""
@@ -116,7 +121,7 @@ msgid "Delete"
 msgstr ""
 
 #. settings-schema.json->page2->title
-#: sections/timer.js:69 sections/timer.js:93
+#: sections/timer.js:44 sections/timer.js:69 sections/timer.js:93
 msgid "Timer"
 msgstr ""
 
@@ -128,7 +133,7 @@ msgstr ""
 msgid "Timer message..."
 msgstr ""
 
-#: sections/todo.js:262
+#: sections/todo.js:107 sections/todo.js:262
 msgid "Todo"
 msgstr ""
 
@@ -284,10 +289,6 @@ msgstr ""
 
 #. settings-schema.json->page1->title
 msgid "General"
-msgstr ""
-
-#. settings-schema.json->page5->title
-msgid "Alarms"
 msgstr ""
 
 #. settings-schema.json->page6->title

@@ -39,7 +39,7 @@ function Stopwatch(applet, settings, metadata, instance_id, orientation) {
 Stopwatch.prototype = {
     _init: function (applet, settings, metadata, instance_id, orientation) {
         try {
-            this.section_name = 'Stopwatch';
+            this.section_name = I18N._('Stopwatch');
 
 
             this.applet   = applet;

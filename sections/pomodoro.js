@@ -46,7 +46,7 @@ function Pomodoro(applet, settings, metadata, instance_id, orientation) {
 
 Pomodoro.prototype = {
     _init: function(applet, settings, metadata, instance_id, orientation) {
-        this.section_name = 'Pomodoro';
+        this.section_name = I18N._('Pomodoro');
 
 
         this.applet        = applet;

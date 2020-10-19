@@ -41,7 +41,7 @@ function Timer(applet, settings, metadata, instance_id, orientation) {
 Timer.prototype = {
     _init: function (applet, settings, metadata, instance_id, orientation) {
         try {
-            this.section_name = 'Timer';
+            this.section_name = I18N._('Timer');
 
             this.applet   = applet;
             this.metadata = metadata;
